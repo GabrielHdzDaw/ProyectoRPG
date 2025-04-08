@@ -85,6 +85,30 @@ namespace ProyectoRPG
             }
         }
 
+        public void DrawTextCentered()
+        {
+            Console.CursorVisible = false;
+            if (y >= 0 && y < Console.WindowHeight)
+            {
+                x = (Console.WindowWidth - texto.Length) / 2;
+                if (x >= 0 && x + texto.Length <= Console.WindowWidth)
+                {
+                    Console.SetCursorPosition(x, y);
+                    for (int i = 0; i < texto.Length; i++)
+                    {
+                        Console.Write(texto[i]);
+
+                        if (tiempoEntrePulsaciones > 0)
+                        {
+                            Thread.Sleep(tiempoEntrePulsaciones);
+                            
+                        }
+
+                    }
+                }
+            }
+        }
+
         public override string ToString()
         {
             return $"Texto: {texto} en ({x}, {y})";
