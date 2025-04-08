@@ -29,11 +29,13 @@ namespace ProyectoRPG
             int x_marco = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2;
             int y_marco = (Console.WindowHeight - ALTURA_RECTANGULO) / 2;
 
-            Dibujar.DibujarRectangulo(x_marco, y_marco, ANCHURA_RECTANGULO, ALTURA_RECTANGULO, '▓');
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Lenteja");
 
-            Texto texto = new Texto(Console.WindowWidth / 2, Console.WindowHeight / 2, 15, "Me cago en la puta");
-            texto.DrawTextCentered();
-            Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Lenteja");
+
         }
     }
 }
