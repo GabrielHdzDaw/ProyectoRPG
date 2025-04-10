@@ -24,17 +24,16 @@ namespace ProyectoRPG
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             IntPtr consoleWindow = GetConsoleWindow();
             ShowWindow(consoleWindow, SW_MAXIMIZE);
-            const int ANCHURA_RECTANGULO = 175;
-            const int ALTURA_RECTANGULO = 61;
-            int x_marco = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2;
-            int y_marco = (Console.WindowHeight - ALTURA_RECTANGULO) / 2;
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Lenteja");
+            //Todo el juego se mostrará dentro de 174 - 70
 
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Lenteja");
+            int anchuraRectangulo = 175;
+            int alturaRectangulo = 71;
+
+            int x = (Console.WindowWidth - anchuraRectangulo) / 2;
+            int y = (Console.WindowHeight - alturaRectangulo) / 2;
+
+            Dibujar.DibujarRectangulo(x, y, anchuraRectangulo, alturaRectangulo, '▓');
 
         }
     }
