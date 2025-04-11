@@ -1,12 +1,10 @@
 ﻿/* AUTORES:
  * 
- * [ IMPORTANTE ] Poner los apellidos
- * 
- * Gabriel
- * Lucía
- * Álvaro
- * Dayron
- * Carlos
+ * Gabriel Hernandez Collado
+ * Lucía Navarro Cruz
+ * Álvaro Martí Cerdán
+ * Dayron Alexis Lucero Cortez
+ * Carlos Rodrigo Beltrá
  */
 
 using System;
@@ -17,8 +15,8 @@ namespace ProyectoRPG
 {
     internal class Program
     {
-        public const int ANCHURA_RECTANGULO = 176; // Dentro el ancho es de 175
-        public const int ALTURA_RECTANGULO = 44; // Dentro el ancho es de 43
+        const int ANCHURA_RECTANGULO = 176; // Dentro el ancho es de 175
+        const int ALTURA_RECTANGULO = 44; // Dentro el ancho es de 43
 
         // Ajustes para la pantalla
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -38,12 +36,12 @@ namespace ProyectoRPG
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
-        public static int Menu(int x, int y) // [ IMPORTANTE ] Versión gráfica y lógica del menú, tocará cambiarla de sitio y demás
+        public static int Menu(int x, int y, int maxAnchura, int maxAltura) // [ IMPORTANTE ] Versión gráfica y lógica del menú, tocará cambiarla de sitio y demás
         {
             Console.CursorVisible = false;
 
-            int centroX = x + (ANCHURA_RECTANGULO / 2) - 1;
-            int centroY = y + (ALTURA_RECTANGULO / 2) - 1;
+            int centroX = x + (maxAnchura / 2) - 1;
+            int centroY = y + (maxAltura / 2) - 1;
 
             Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
                                                                 "\r\n█▀▄ █▀▀ █▄█");
@@ -104,14 +102,14 @@ namespace ProyectoRPG
             int x = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2 + 1;
             int y = (Console.WindowHeight - ALTURA_RECTANGULO) / 2 + 1;
 
-            Dibujar.DibujarRectangulo(x - 1, y - 1, '▓');
+            Dibujar.DibujarRectangulo(x - 1, y - 1, ANCHURA_RECTANGULO, ALTURA_RECTANGULO, '▓');
 
-            Dibujar.Inicio(x, y);
+            Dibujar.Inicio(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
 
             int opcion = 0;
             while (opcion != 4)
             {
-                opcion = Menu(x, y);
+                opcion = Menu(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
                 // Arranca todo aquí
             }
         }

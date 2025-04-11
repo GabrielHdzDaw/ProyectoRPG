@@ -61,16 +61,16 @@ namespace ProyectoRPG
             }
         }
 
-        public static void DibujarRectangulo(int x, int y, char caracter)
+        public static void DibujarRectangulo(int x, int y, int anchuraMax, int alturaMax, char caracter)
         {
-            for (int i = 0; i <= Program.ALTURA_RECTANGULO; i++)
+            for (int i = 0; i <= alturaMax; i++)
             {
-                for (int j = 0; j <= Program.ANCHURA_RECTANGULO; j++)
+                for (int j = 0; j <= anchuraMax; j++)
                 {
                     Console.SetCursorPosition(x + j, y + i);
-                    if (i == 0 || i == Program.ALTURA_RECTANGULO || j == 0 || j == Program.ANCHURA_RECTANGULO)
+                    if (i == 0 || i == alturaMax || j == 0 || j == anchuraMax)
                     {
-                        if (j == Program.ANCHURA_RECTANGULO || i == Program.ALTURA_RECTANGULO)
+                        if (j == anchuraMax || i == alturaMax)
                         {
                             Console.Write(caracter);
                         }
@@ -143,10 +143,10 @@ namespace ProyectoRPG
             }
         }
 
-        public static void Inicio(int inicioX, int inicioY)
+        public static void Inicio(int inicioX, int inicioY, int anchuraMax, int alturaMax)
         {
-            int x = inicioX + (Program.ANCHURA_RECTANGULO / 2);
-            int y = inicioY + (Program.ALTURA_RECTANGULO / 2);
+            int x = inicioX + (anchuraMax / 2);
+            int y = inicioY + (alturaMax / 2);
 
             Console.CursorVisible = false;
 
@@ -167,7 +167,7 @@ namespace ProyectoRPG
             }
             Console.CursorVisible = true;
 
-            Dibujar.LimpiarPantalla(inicioX, inicioY, Program.ANCHURA_RECTANGULO - 1, Program.ALTURA_RECTANGULO + inicioY - 1);
+            Dibujar.LimpiarPantalla(inicioX, inicioY, anchuraMax - 1, alturaMax + inicioY - 1);
 
             string titulo = "\r\n██████╗░██████╗░░██████╗░" +
                             "\r\n██╔══██╗██╔══██╗██╔════╝░" +
@@ -198,7 +198,7 @@ namespace ProyectoRPG
                 }
             }
 
-            Dibujar.LimpiarPantalla(inicioX, inicioY, Program.ANCHURA_RECTANGULO - 1, Program.ALTURA_RECTANGULO + inicioY - 1);
+            Dibujar.LimpiarPantalla(inicioX, inicioY, anchuraMax - 1, alturaMax + inicioY - 1);
             Console.CursorVisible = true;
         }
     }
