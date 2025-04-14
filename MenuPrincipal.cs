@@ -8,13 +8,12 @@ namespace ProyectoRPG
 {
     internal abstract class MenuPrincipal
     {
-        public static int Menu(int x, int y, int maxAnchura, int maxAltura) // [ IMPORTANTE ] Versión gráfica y lógica del menú, tocará cambiarla de sitio y demás
+        public static int Menu()
         {
             Console.CursorVisible = false;
 
-
-            int centroX = x + (maxAnchura / 2) - 1;
-            int centroY = y + (maxAltura / 2) - 1;
+            int centroX = Dibujar.X + (Dibujar.AnchuraRectangulo / 2) - 1;
+            int centroY = Dibujar.Y + (Dibujar.AlturaRectangulo / 2) - 1;
 
             Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
                                                                 "\r\n█▀▄ █▀▀ █▄█");
@@ -22,9 +21,9 @@ namespace ProyectoRPG
             string[] opciones = ["Continuar", "Nueva partida", "Records", "Créditos", "Salir"];
             int opcion = 0;
 
-            // Repetir este for hasta que se pulse enter
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
-
+            
+            // Repetir este bucle hasta que se pulse enter
             while (tecla.Key != ConsoleKey.Enter)
             {
                 int espaciadoVertical = 0;
@@ -67,69 +66,112 @@ namespace ProyectoRPG
 
             return opcion;
         }
-        public static int Salir(int x, int y, int maxAnchura, int maxAltura, int opcion)
-        {            
-            if (opcion == 4)
+
+        public static int OpcionSeleccionada(int opcion)
+        {
+            int resultado = opcion;
+            switch(opcion)
             {
-                Dibujar.LimpiarPantalla(x, y, maxAnchura - 1, maxAltura + y - 1);
-                Console.CursorVisible = false;
+                case 0: // Continuar
+                    break;
+                case 1:
+                    Partida partida = Partida.NuevaPartida();
+                    // ···
+                    break;
+                case 2:
+                    Records();
+                    break;
+                case 3:
+                    Creditos();
+                    break;
+                case 4:
+                    resultado = Salir();
+                    break;
+            }
 
+            return resultado;
+        }
 
-                int centroX = x + (maxAnchura / 2) - 1;
-                int centroY = y + (maxAltura / 2) - 1;
+        private static void Records()
+        {
+            // Por hacer
+        }
 
-                Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
-                                                                    "\r\n█▀▄ █▀▀ █▄█");
+        private static void Creditos()
+        {
+            // Por hacer
+        }
 
-                string[] opciones = ["SÍ", "NO"];
-                int indice = 0;
+        private static int Salir()
+        {
+            Dibujar.LimpiarPantalla();
+            Console.CursorVisible = false;
 
-                // Repetir este for hasta que se pulse enter
-                ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+            int centroX = Dibujar.X + (Dibujar.AnchuraRectangulo / 2) - 1;
+            int centroY = Dibujar.Y + (Dibujar.AlturaRectangulo / 2) - 1;
 
-                while (tecla.Key != ConsoleKey.Enter)
+            Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
+                                                                "\r\n█▀▄ █▀▀ █▄█");
+            
+            Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - 0, "¿Seguro que deseas salir sin ver a los creadores? Son muy majos.");
+
+            string[] opciones = ["SÍ", "NO"];
+            int indice = 0;
+
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+
+            // Repetir este bucle hasta que se pulse enter
+            while (tecla.Key != ConsoleKey.Enter)
+            {
+                int espaciadoVertical = -2;
+                for (int i = 0; i < opciones.Length; i++)
                 {
-                    int espaciadoVertical = 0;
-                    for (int i = 0; i < opciones.Length; i++)
+                    if (indice == i)
                     {
-                        if (indice == i)
-                        {
-                            Console.BackgroundColor = ConsoleColor.White;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                        }
-
-                        Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, opciones[i]);
-                        espaciadoVertical -= 1;
-
-                        if (indice == i)
-                        {
-                            Console.ResetColor();
-                        }
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    if (Console.KeyAvailable)
-                    {
-                        tecla = Console.ReadKey();
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, opciones[i]);
+                    espaciadoVertical -= 1;
 
-                        switch (tecla.Key)
-                        {
-                            case ConsoleKey.UpArrow:
-                                if (indice - 1 >= 0)
-                                    indice--;
-                                break;
-                            case ConsoleKey.DownArrow:
-                                if (indice + 1 < opciones.Length)
-                                    indice++;
-                                break;
-                        }
+                    if (indice == i)
+                    {
+                        Console.ResetColor();
                     }
                 }
 
-                Console.CursorVisible = true;
+                if (Console.KeyAvailable)
+                {
+                    tecla = Console.ReadKey();
 
-                opcion = indice == 0 ? 4 : 0;
+                    switch (tecla.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (indice - 1 >= 0)
+                                indice--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (indice + 1 < opciones.Length)
+                                indice++;
+                            break;
+                    }
+                }
             }
-            return opcion;
+
+            if(indice == 0)
+            {
+                Console.Clear();
+                Thread.Sleep(500);
+            }
+            else
+            {
+                Dibujar.LimpiarPantallaSimple();
+            }
+
+            Console.CursorVisible = true;
+
+            return indice == 0 ? 4 : 0;
         }
     }
 }

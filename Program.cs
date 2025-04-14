@@ -15,9 +15,6 @@ namespace ProyectoRPG
 {
     internal class Program
     {
-        const int ANCHURA_RECTANGULO = 176; // Dentro el ancho es de 175
-        const int ALTURA_RECTANGULO = 44; // Dentro el ancho es de 43
-
         // Ajustes para la pantalla
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern IntPtr GetConsoleWindow();
@@ -40,22 +37,16 @@ namespace ProyectoRPG
         {
             PrepararVentanaInicio();
 
-            int x = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2 + 1;
-            int y = (Console.WindowHeight - ALTURA_RECTANGULO) / 2 + 1;
+            Dibujar.DibujarRectanguloPrincipal();
 
-            Dibujar.DibujarRectangulo(x - 1, y - 1, ANCHURA_RECTANGULO, ALTURA_RECTANGULO, '▓');
-
-            Dibujar.Inicio(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
+            Dibujar.Inicio();
 
             int opcion = 0;
             while (opcion != 4)
             {
-                opcion = MenuPrincipal.Menu(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
-                opcion = MenuPrincipal.Salir(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO, opcion);
+                opcion = MenuPrincipal.Menu();
+                opcion = MenuPrincipal.OpcionSeleccionada(opcion);
             }
-
-            Console.Clear();
-            Thread.Sleep(500);
         }
     }
 }

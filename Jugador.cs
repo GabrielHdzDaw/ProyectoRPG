@@ -8,11 +8,15 @@ namespace ProyectoRPG
 {
     internal class Jugador:Personaje
     {
-        int puntuacion;
-        bool terminado;
-        public Jugador(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad, int puntuacion, bool terminado) : base(nombre, sprite, vida, ataque, defensa, velocidad)
-        {
-        }
+        string nombre { get; set; }
+        string sprite { get; set; }
+        int vida { get; set; }
+        int ataque { get; set; }
+        int defensa { get; set; }
+        int velocidad { get; set; }
+
+        public Jugador(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad) : base(nombre, sprite, vida, ataque, defensa, velocidad)
+        { }
 
         public override string ToString()
         {

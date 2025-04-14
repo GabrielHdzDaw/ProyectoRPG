@@ -8,6 +8,18 @@ namespace ProyectoRPG
 {
     internal class Dibujar
     {
+        static int anchuraRectangulo = 176; // Dentro el ancho es de 175
+        static int alturaRectangulo = 44; // Dentro el ancho es de 43
+        static int x = (Console.WindowWidth - AnchuraRectangulo) / 2 + 1;
+        static int y = (Console.WindowHeight - alturaRectangulo) / 2 + 1;
+        static char caracter = '▓';
+
+        public static int AnchuraRectangulo { get => anchuraRectangulo; }
+        public static int AlturaRectangulo { get => alturaRectangulo; }
+        public static int X { get => x; }
+        public static int Y { get => y; }
+        public static char Caracter { get => caracter; }
+
         private static int GetAnchuraDibujo(string dibujo)
         {
             string[] lineas = dibujo.Split('\n');
@@ -20,14 +32,14 @@ namespace ProyectoRPG
             return anchuraMaxima;
         }
 
-        public static void DibujarSpriteNormal(int x, int y, string dibujo)
+        public static void DibujarSpriteNormal(int posicionX, int posicionY, string dibujo)
         {
             int anchuraDibujo = GetAnchuraDibujo(dibujo);
 
             string[] lineas = dibujo.Split('\n');
             for (int i = 0; i < lineas.Length; i++)
             {
-                Console.SetCursorPosition(x, y + i);
+                Console.SetCursorPosition(posicionX, posicionY + i);
 
                 if (i == lineas.Length - 1)
                 {
@@ -40,15 +52,15 @@ namespace ProyectoRPG
             }
         }
 
-        public static void DibujarSpriteCentrado(int x, int y, string dibujo)
+        public static void DibujarSpriteCentrado(int posicionX, int posicionY, string dibujo)
         {
             int anchuraDibujo = GetAnchuraDibujo(dibujo);
-            int comienzoX = x - (anchuraDibujo / 2);
+            int comienzoX = posicionX - (anchuraDibujo / 2);
 
             string[] lineas = dibujo.Split('\n');
             for (int i = 0; i < lineas.Length; i++)
             {
-                Console.SetCursorPosition(comienzoX, y + i);
+                Console.SetCursorPosition(comienzoX, posicionY + i);
 
                 if (i == lineas.Length - 1)
                 {
@@ -61,16 +73,16 @@ namespace ProyectoRPG
             }
         }
 
-        public static void DibujarRectangulo(int x, int y, int anchuraMax, int alturaMax, char caracter)
+        public static void DibujarRectanguloPrincipal()
         {
-            for (int i = 0; i <= alturaMax; i++)
+            for (int i = 0; i <= alturaRectangulo; i++)
             {
-                for (int j = 0; j <= anchuraMax; j++)
+                for (int j = 0; j <= anchuraRectangulo; j++)
                 {
                     Console.SetCursorPosition(x + j, y + i);
-                    if (i == 0 || i == alturaMax || j == 0 || j == anchuraMax)
+                    if (i == 0 || i == alturaRectangulo || j == 0 || j == anchuraRectangulo)
                     {
-                        if (j == anchuraMax || i == alturaMax)
+                        if (j == anchuraRectangulo || i == alturaRectangulo)
                         {
                             Console.Write(caracter);
                         }
@@ -83,11 +95,29 @@ namespace ProyectoRPG
             }
         }
 
-        private static void LimpiarPantallaSimple(int x, int y, int maxAncho, int maxAlto)
+        public static void DibujarRectangulo(int posicionX, int posicionY, int anchuraMax, int alturaMax, char caracter)
         {
-            for (int i = x; i < x + maxAncho; i++)
+            for (int i = 0; i <= alturaMax; i++)
             {
-                for (int j = y; j < maxAlto; j++)
+                for (int j = 0; j <= anchuraMax; j++)
+                {
+                    Console.SetCursorPosition(posicionX + j, posicionY + i);
+                    if (i == 0 || i == alturaMax || j == 0 || j == anchuraMax)
+                    {
+                        if (j == anchuraMax || i == alturaMax)
+                        {
+                            Console.Write(caracter);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void LimpiarPantallaSimple()
+        {
+            for (int i = x+1; i < x + anchuraRectangulo; i++)
+            {
+                for (int j = y+1; j < alturaRectangulo + y; j++)
                 {
                     Console.SetCursorPosition(i, j);
                     Console.Write(" ");
@@ -95,12 +125,12 @@ namespace ProyectoRPG
             }
         }
 
-        public static void LimpiarPantalla(int x, int y, int maxAncho, int maxAlto)
+        public static void LimpiarPantalla()
         {
             Console.BackgroundColor = ConsoleColor.Gray;
-            LimpiarPantallaSimple(x, y, maxAncho, maxAlto);
+            LimpiarPantallaSimple();
             Console.ResetColor();
-            LimpiarPantallaSimple(x, y, maxAncho, maxAlto);
+            LimpiarPantallaSimple();
         }
 
         public static int ContarSaltos(string cadena)
@@ -143,19 +173,19 @@ namespace ProyectoRPG
             }
         }
 
-        public static void Inicio(int inicioX, int inicioY, int anchuraMax, int alturaMax)
+        public static void Inicio()
         {
-            int x = inicioX + (anchuraMax / 2);
-            int y = inicioY + (alturaMax / 2);
+            int inicioX = x + (anchuraRectangulo / 2);
+            int inicioY = y + (alturaRectangulo / 2);
 
             Console.CursorVisible = false;
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Dibujar.DibujarSpriteCentrado(x, y - 3, "¡ ADVERTENCIA !");
+            Dibujar.DibujarSpriteCentrado(inicioX, inicioY - 3, "¡ ADVERTENCIA !");
             Console.ResetColor();
 
-            Dibujar.DibujarSpriteCentrado(x, y - 1, "Se recomienda poner la pantalla completa (F11) para mejor expriencia");
-            Dibujar.DibujarSpriteCentrado(x, y + 1, "Para continuar pulse ENTER...");
+            Dibujar.DibujarSpriteCentrado(inicioX, inicioY - 1, "Se recomienda poner la pantalla completa (F11) para mejor expriencia");
+            Dibujar.DibujarSpriteCentrado(inicioX, inicioY + 1, "Para continuar pulse ENTER...");
 
             bool pantallaCompleta = false;
             while (!pantallaCompleta)
@@ -167,7 +197,7 @@ namespace ProyectoRPG
             }
             Console.CursorVisible = true;
 
-            Dibujar.LimpiarPantalla(inicioX, inicioY, anchuraMax - 1, alturaMax + inicioY - 1);
+            Dibujar.LimpiarPantalla();
 
             string titulo = "\r\n██████╗░██████╗░░██████╗░" +
                             "\r\n██╔══██╗██╔══██╗██╔════╝░" +
@@ -175,15 +205,15 @@ namespace ProyectoRPG
                             "\r\n██╔══██╗██╔═══╝░██║░░╚██╗" +
                             "\r\n██║░░██║██║░░░░░╚██████╔╝" +
                             "\r\n╚═╝░░╚═╝╚═╝░░░░░░╚═════╝░";
-            Dibujar.DibujarSpriteCentrado(x, y - Dibujar.ContarSaltos(titulo) - 2, titulo);
+            Dibujar.DibujarSpriteCentrado(inicioX, inicioY - Dibujar.ContarSaltos(titulo) - 2, titulo);
 
             string subtitulo1 = "En busca del demonio malo malísimo, MUY MUY malo";
-            Console.SetCursorPosition(x - (subtitulo1.Length / 2), y);
+            Console.SetCursorPosition(inicioX - (subtitulo1.Length / 2), inicioY);
             Dibujar.EscribirTexto(subtitulo1);
             Dibujar.EscribirTexto("...");
 
             string subtitulo2 = "Pulse ENTER para comenzar la aventura";
-            Console.SetCursorPosition(x - (subtitulo2.Length / 2), y + 2);
+            Console.SetCursorPosition(inicioX - (subtitulo2.Length / 2), inicioY + 2);
             Dibujar.EscribirTexto(subtitulo2);
 
             Console.CursorVisible = false;
@@ -198,7 +228,7 @@ namespace ProyectoRPG
                 }
             }
 
-            Dibujar.LimpiarPantalla(inicioX, inicioY, anchuraMax - 1, alturaMax + inicioY - 1);
+            Dibujar.LimpiarPantalla();
             Console.CursorVisible = true;
         }
     }
