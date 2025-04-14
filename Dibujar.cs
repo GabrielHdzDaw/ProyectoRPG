@@ -10,7 +10,7 @@ namespace ProyectoRPG
     {
         static int anchuraRectangulo = 176; // Dentro el ancho es de 175
         static int alturaRectangulo = 44; // Dentro el ancho es de 43
-        static int x = (Console.WindowWidth - AnchuraRectangulo) / 2 + 1;
+        static int x = (Console.WindowWidth - anchuraRectangulo) / 2 + 1;
         static int y = (Console.WindowHeight - alturaRectangulo) / 2 + 1;
         static char caracter = '▓';
 
@@ -75,6 +75,7 @@ namespace ProyectoRPG
 
         public static void DibujarRectanguloPrincipal()
         {
+            Console.CursorVisible = false;
             for (int i = 0; i <= alturaRectangulo; i++)
             {
                 for (int j = 0; j <= anchuraRectangulo; j++)
@@ -93,10 +94,12 @@ namespace ProyectoRPG
                     }
                 }
             }
+            Console.CursorVisible = true;
         }
 
         public static void DibujarRectangulo(int posicionX, int posicionY, int anchuraMax, int alturaMax, char caracter)
         {
+            Console.CursorVisible = false;
             for (int i = 0; i <= alturaMax; i++)
             {
                 for (int j = 0; j <= anchuraMax; j++)
@@ -111,18 +114,21 @@ namespace ProyectoRPG
                     }
                 }
             }
+            Console.CursorVisible = true;
         }
 
         public static void LimpiarPantallaSimple()
         {
+            Console.CursorVisible = false;
             for (int i = x+1; i < x + anchuraRectangulo; i++)
             {
-                for (int j = y+1; j < alturaRectangulo + y; j++)
+                for (int j = y+1; j < y + alturaRectangulo; j++)
                 {
                     Console.SetCursorPosition(i, j);
                     Console.Write(" ");
                 }
             }
+            Console.CursorVisible = true;
         }
 
         public static void LimpiarPantalla()
