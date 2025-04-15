@@ -46,7 +46,7 @@ namespace ProyectoRPG
 
                 if (Console.KeyAvailable)
                 {
-                    tecla = Console.ReadKey();
+                    tecla = Console.ReadKey(true);
 
                     switch (tecla.Key)
                     {
@@ -143,7 +143,7 @@ namespace ProyectoRPG
 
                 if (Console.KeyAvailable)
                 {
-                    tecla = Console.ReadKey();
+                    tecla = Console.ReadKey(true);
 
                     switch (tecla.Key)
                     {
@@ -162,7 +162,6 @@ namespace ProyectoRPG
             if(indice == 0)
             {
                 Console.Clear();
-                Thread.Sleep(500);
             }
             else
             {

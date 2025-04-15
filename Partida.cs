@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
@@ -25,45 +26,14 @@ namespace ProyectoRPG
             terminada = false;
         }
 
-        private static string PedirNombreUsuario(bool escritoMal)
+        private static string NombreElegido()
         {
-            if(escritoMal)
-            {
-                Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 - 1);
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("ERROR: El nombre debe estar entre 1 y 30 caracteres y no debe usar caracteres especiales.");
-                Console.ResetColor();
-            }
-
-            Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 + 1);
-            Console.Write("Nombre del jugador (30 caracteres): ");
-            return Console.ReadLine();
-        }
-
-        private static bool NombreUsuarioValido(string nombre)
-        {
-            string caracteresNoValidos = "ºª\\!|\"@·#$~%€&¬/()='?¡¿`^[+*]´¨{ç},;.:-_<>";
-            bool resultado = nombre.Length == 0 || nombre.Length > 30;
-
-            if(!resultado)
-            {
-                for(int i=0;i<caracteresNoValidos.Length && resultado;i++)
-                {
-                    resultado = nombre.Contains(caracteresNoValidos[i]);
-                }
-            }
-
-            return resultado;
-        }
-
-        public static Partida NuevaPartida()
-        {   
             string nombreUsuario = "";
             bool escritoMal = false;
 
             do
             {
-                if(escritoMal)
+                if (escritoMal)
                 {
                     Dibujar.LimpiarPantallaSimple();
                 }
@@ -78,6 +48,123 @@ namespace ProyectoRPG
             } while (escritoMal);
 
             Dibujar.LimpiarPantalla();
+
+            return nombreUsuario;
+        }
+
+        private static string PedirNombreUsuario(bool escritoMal)
+        {
+            if(escritoMal)
+            {
+                Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 - 1);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("ERROR: El nombre debe estar entre 1 y 30 caracteres y no debe usar caracteres especiales o estar ya registrado.");
+                Console.ResetColor();
+            }
+
+            Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 + 1);
+            Console.Write("Nombre del jugador (30 caracteres): ");
+            return Console.ReadLine();
+        }
+
+        private static bool NombreUsuarioValido(string nombre)
+        {
+            string cadenaCaracteresNoValidos = "ºª\\!|\"@·#$~%€&¬/()='?¡¿`^[+*]´¨{ç},;.:-_<>";
+
+            List<FileInfo> ficheros = new List<FileInfo>(new DirectoryInfo("./jugadores").GetFiles());
+            List<string> nombresArchivos = ficheros.Select(f => f.Name).ToList();
+
+            bool caracterNoValido = false;
+            for(int i=0;i<cadenaCaracteresNoValidos.Length && !caracterNoValido;i++)
+            {
+                caracterNoValido = nombre.Contains(cadenaCaracteresNoValidos[i]);
+            }
+
+            if(nombre.Length > 30)
+            {
+                Console.Clear();
+                Dibujar.DibujarRectanguloPrincipal();
+            }
+
+            return nombre.Length == 0 || nombre.Length > 30 || caracterNoValido || nombresArchivos.Contains($"{nombre}.json");
+        }
+
+        private static void ClaseElegida() // Debería devolver algo...
+        {
+            string[] opciones = ["Mago", "Barbaro", "Elfo", "Picaro"];
+            int indice = 0;
+
+            int xSprite = (int)(Dibujar.AnchuraRectangulo / 1.5) - 5;
+            int ySprite = Dibujar.Y + (Dibujar.AlturaRectangulo/4) - 5;
+
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+
+            while (tecla.Key != ConsoleKey.Enter)
+            {
+                int espaciadoVertical = -2;
+                Dibujar.DibujarRectangulo(Dibujar.X, Dibujar.Y, Dibujar.AlturaRectangulo, Dibujar.AnchuraRectangulo / 4, Dibujar.Caracter);
+                for (int i = 0; i < opciones.Length; i++)
+                {
+                    Console.CursorVisible = false;
+                    if (indice == i)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+
+                    Dibujar.DibujarSpriteCentrado(Dibujar.AnchuraRectangulo / 4 - 1, Dibujar.AlturaRectangulo / 4 - espaciadoVertical, opciones[i]);
+                    espaciadoVertical -= 8;
+
+                    if (indice == i)
+                    {
+                        Console.ResetColor();
+                    }
+
+                    switch(indice)
+                    {
+                        case 0:
+                            Dibujar.DibujarSpriteNormal(xSprite, ySprite, Sprites.Mago);
+                            break;
+                        case 1:
+                            Dibujar.DibujarSpriteNormal(xSprite - 5, ySprite + 2, Sprites.Barbaro);
+                            break;
+                    }
+                }
+
+                if (Console.KeyAvailable)
+                {
+                    tecla = Console.ReadKey(true);
+
+                    switch (tecla.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (indice - 1 >= 0)
+                            {
+                                indice--;
+                                Dibujar.LimpiarPantallaSimple();
+                            }
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (indice + 1 < opciones.Length)
+                            {
+                                indice++;
+                                Dibujar.LimpiarPantallaSimple();
+                            }
+                            break;
+                    }
+                }
+            }
+            Console.CursorVisible = true;
+        }
+
+        public static Partida NuevaPartida()
+        {
+            string nombreUsuario = NombreElegido();
+            ClaseElegida();
+            // Cinematica
+            // Minijuego
+            // Se crea el OBJETO personaje y se devuelve esta partida con ese personaje dentro
+
             return new Partida();
         }
 
