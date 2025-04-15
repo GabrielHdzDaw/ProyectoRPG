@@ -91,7 +91,11 @@ namespace ProyectoRPG
 
         private static void ClaseElegida() // Debería devolver algo...
         {
-            string[] opciones = ["Mago", "Barbaro", "Elfo", "Picaro"];
+            string[] opciones = ["Mago", "Caballero", "Elfo", "Picaro"];
+            string[] textosPersonajes = ["Un personaje que vive en una constante batalla mental",
+                                         "No conocerás a ser más noble, pero eso no quita que tenga sus vicios",
+                                         "El guardian de los bosques y el un gran guerrero a la distancia",
+                                         "Un humano con una afición por conseguir de formas inapropiadas cosas que no son suyas"];
             int indice = 0;
 
             int xSprite = (int)(Dibujar.AnchuraRectangulo / 1.5) - 5;
@@ -102,6 +106,7 @@ namespace ProyectoRPG
             while (tecla.Key != ConsoleKey.Enter)
             {
                 int espaciadoVertical = -2;
+                Dibujar.DibujarRectanguloPrincipal();
                 Dibujar.DibujarRectangulo(Dibujar.X, Dibujar.Y, Dibujar.AlturaRectangulo, Dibujar.AnchuraRectangulo / 4, Dibujar.Caracter);
                 for (int i = 0; i < opciones.Length; i++)
                 {
@@ -126,9 +131,17 @@ namespace ProyectoRPG
                             Dibujar.DibujarSpriteNormal(xSprite, ySprite, Sprites.Mago);
                             break;
                         case 1:
-                            Dibujar.DibujarSpriteNormal(xSprite - 5, ySprite + 2, Sprites.Barbaro);
+                            Dibujar.DibujarSpriteNormal(xSprite, ySprite + 2, Sprites.Caballero);
+                            break;
+                        case 2:
+                            Dibujar.DibujarSpriteNormal(xSprite + 8, ySprite + 1, Sprites.Elfo);
+                            break;
+                        case 3:
+                            Dibujar.DibujarSpriteNormal(xSprite + 3, ySprite + 1, Sprites.Picaro);
                             break;
                     }
+
+                    Dibujar.DibujarSpriteCentrado(xSprite + Dibujar.X, Dibujar.AlturaRectangulo + Dibujar.Y - 10, textosPersonajes[indice]);
                 }
 
                 if (Console.KeyAvailable)
@@ -141,14 +154,14 @@ namespace ProyectoRPG
                             if (indice - 1 >= 0)
                             {
                                 indice--;
-                                Dibujar.LimpiarPantallaSimple();
+                                Console.Clear();
                             }
                             break;
                         case ConsoleKey.DownArrow:
                             if (indice + 1 < opciones.Length)
                             {
                                 indice++;
-                                Dibujar.LimpiarPantallaSimple();
+                                Console.Clear();
                             }
                             break;
                     }

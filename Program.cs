@@ -39,7 +39,7 @@ namespace ProyectoRPG
 
             Dibujar.DibujarRectanguloPrincipal();
 
-            Dibujar.Inicio();
+            // Dibujar.Inicio();
 
             int opcion = 0;
             while (opcion != 4)
