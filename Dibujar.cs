@@ -97,7 +97,7 @@ namespace ProyectoRPG
             Console.CursorVisible = true;
         }
 
-        public static void DibujarRectangulo(int posicionX, int posicionY, int anchuraMax, int alturaMax, char caracter)
+        public static void DibujarRectangulo(int posicionX, int posicionY, int alturaMax, int anchuraMax, char caracter)
         {
             Console.CursorVisible = false;
             for (int i = 0; i <= alturaMax; i++)
