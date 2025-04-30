@@ -54,7 +54,7 @@ namespace ProyectoRPG
 
         private static string PedirNombreUsuario(bool escritoMal)
         {
-            if(escritoMal)
+            if (escritoMal)
             {
                 Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 - 1);
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -75,12 +75,12 @@ namespace ProyectoRPG
             List<string> nombresArchivos = ficheros.Select(f => f.Name).ToList();
 
             bool caracterNoValido = false;
-            for(int i=0;i<cadenaCaracteresNoValidos.Length && !caracterNoValido;i++)
+            for (int i = 0; i < cadenaCaracteresNoValidos.Length && !caracterNoValido; i++)
             {
                 caracterNoValido = nombre.Contains(cadenaCaracteresNoValidos[i]);
             }
 
-            if(nombre.Length > 30)
+            if (nombre.Length > 30)
             {
                 Console.Clear();
                 Dibujar.DibujarRectanguloPrincipal();
@@ -98,8 +98,8 @@ namespace ProyectoRPG
                                          "Un humano con una afición por conseguir de formas inapropiadas cosas que no son suyas"];
             int indice = 0;
 
-            int xSprite = (int)(Dibujar.AnchuraRectangulo / 1.5) - 5;
-            int ySprite = Dibujar.Y + (Dibujar.AlturaRectangulo/4) - 5;
+            int xSprite = (int)(Dibujar.AnchuraRectangulo / 1.40) - 5;
+            int ySprite = Dibujar.Y + (Dibujar.AlturaRectangulo / 4) - 5;
 
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
@@ -125,23 +125,23 @@ namespace ProyectoRPG
                         Console.ResetColor();
                     }
 
-                    switch(indice)
+                    switch (indice)
                     {
                         case 0:
-                            Dibujar.DibujarSpriteNormal(xSprite + 13, ySprite, Sprites.Mago);
+                            Dibujar.DibujarSpriteNormal(xSprite, ySprite + 1, Sprites.Mago);
                             break;
                         case 1:
-                            Dibujar.DibujarSpriteNormal(xSprite + 13, ySprite + 2, Sprites.Caballero);
+                            Dibujar.DibujarSpriteNormal(xSprite, ySprite + 2, Sprites.Caballero);
                             break;
                         case 2:
-                            Dibujar.DibujarSpriteNormal(xSprite + 21, ySprite + 1, Sprites.Elfo);
+                            Dibujar.DibujarSpriteNormal(xSprite + 6, ySprite + 1, Sprites.Elfo);
                             break;
                         case 3:
-                            Dibujar.DibujarSpriteNormal(xSprite + 17, ySprite + 1, Sprites.Picaro);
+                            Dibujar.DibujarSpriteNormal(xSprite + 2, ySprite + 1, Sprites.Picaro);
                             break;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(xSprite + Dibujar.X, Dibujar.AlturaRectangulo + Dibujar.Y - 10, textosPersonajes[indice]);
+                    Dibujar.DibujarSpriteCentrado(xSprite + (Dibujar.X - 14), Dibujar.AlturaRectangulo + Dibujar.Y - 10, textosPersonajes[indice]);
                 }
 
                 if (Console.KeyAvailable)
