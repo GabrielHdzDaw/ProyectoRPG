@@ -128,16 +128,16 @@ namespace ProyectoRPG
                     switch(indice)
                     {
                         case 0:
-                            Dibujar.DibujarSpriteNormal(xSprite, ySprite, Sprites.Mago);
+                            Dibujar.DibujarSpriteNormal(xSprite + 13, ySprite, Sprites.Mago);
                             break;
                         case 1:
-                            Dibujar.DibujarSpriteNormal(xSprite, ySprite + 2, Sprites.Caballero);
+                            Dibujar.DibujarSpriteNormal(xSprite + 13, ySprite + 2, Sprites.Caballero);
                             break;
                         case 2:
-                            Dibujar.DibujarSpriteNormal(xSprite + 8, ySprite + 1, Sprites.Elfo);
+                            Dibujar.DibujarSpriteNormal(xSprite + 21, ySprite + 1, Sprites.Elfo);
                             break;
                         case 3:
-                            Dibujar.DibujarSpriteNormal(xSprite + 3, ySprite + 1, Sprites.Picaro);
+                            Dibujar.DibujarSpriteNormal(xSprite + 17, ySprite + 1, Sprites.Picaro);
                             break;
                     }
 
