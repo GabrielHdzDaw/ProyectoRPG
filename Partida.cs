@@ -56,13 +56,13 @@ namespace ProyectoRPG
         {
             if (escritoMal)
             {
-                Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 - 1);
+                Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.Y + Dibujar.AlturaRectangulo / 2) - 2);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("ERROR: El nombre debe estar entre 1 y 30 caracteres y no debe usar caracteres especiales o estar ya registrado.");
                 Console.ResetColor();
             }
 
-            Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.AlturaRectangulo + Dibujar.Y) / 2 + 1);
+            Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.Y + Dibujar.AlturaRectangulo / 2));
             Console.Write("Nombre del jugador (30 caracteres): ");
             return Console.ReadLine();
         }
@@ -105,9 +105,10 @@ namespace ProyectoRPG
 
             while (tecla.Key != ConsoleKey.Enter)
             {
-                int espaciadoVertical = -2;
+                int espaciadoVertical = 1;
                 Dibujar.DibujarRectanguloPrincipal();
                 Dibujar.DibujarRectangulo(Dibujar.X, Dibujar.Y, Dibujar.AlturaRectangulo, Dibujar.AnchuraRectangulo / 4, Dibujar.Caracter);
+
                 for (int i = 0; i < opciones.Length; i++)
                 {
                     Console.CursorVisible = false;
@@ -117,7 +118,7 @@ namespace ProyectoRPG
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(Dibujar.AnchuraRectangulo / 4 - 1, Dibujar.AlturaRectangulo / 4 - espaciadoVertical, opciones[i]);
+                    Dibujar.DibujarSpriteCentrado(Dibujar.X + (Dibujar.AnchuraRectangulo / 4) / 2, Dibujar.Y + (Dibujar.AlturaRectangulo / 4) - espaciadoVertical, opciones[i]);
                     espaciadoVertical -= 8;
 
                     if (indice == i)
@@ -128,16 +129,16 @@ namespace ProyectoRPG
                     switch (indice)
                     {
                         case 0:
-                            Dibujar.DibujarSpriteNormal(xSprite, ySprite + 1, Sprites.Mago);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2), Dibujar.Y + (Dibujar.AlturaRectangulo / 4) / 2, Sprites.Mago);
                             break;
                         case 1:
-                            Dibujar.DibujarSpriteNormal(xSprite, ySprite + 2, Sprites.Caballero);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2), Dibujar.Y + 2 + (Dibujar.AlturaRectangulo / 4) / 2, Sprites.Caballero);
                             break;
                         case 2:
-                            Dibujar.DibujarSpriteNormal(xSprite + 6, ySprite + 1, Sprites.Elfo);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2) + 6, (Dibujar.Y + (Dibujar.AlturaRectangulo / 4) / 2) + 1, Sprites.Elfo);
                             break;
                         case 3:
-                            Dibujar.DibujarSpriteNormal(xSprite + 2, ySprite + 1, Sprites.Picaro);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2) + 2, (Dibujar.Y + (Dibujar.AlturaRectangulo / 4) / 2) + 1, Sprites.Picaro);
                             break;
                     }
 
