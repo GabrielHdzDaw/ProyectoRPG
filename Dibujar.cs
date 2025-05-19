@@ -104,18 +104,16 @@ namespace ProyectoRPG
             {
                 for (int j = 0; j <= anchuraMax; j++)
                 {
-                    Console.SetCursorPosition(posicionX + j, posicionY + i);
                     if (i == 0 || i == alturaMax || j == 0 || j == anchuraMax)
                     {
-                        if (j == anchuraMax || i == alturaMax)
-                        {
-                            Console.Write(caracter);
-                        }
+                        Console.SetCursorPosition(posicionX + j, posicionY + i);
+                        Console.Write(caracter);
                     }
                 }
             }
             Console.CursorVisible = true;
         }
+
 
         public static void LimpiarPantallaSimple()
         {
@@ -178,7 +176,14 @@ namespace ProyectoRPG
                 }
             }
         }
-
+        public static void DibujarCaracter(int x, int y, char c)
+        {
+            if (x >= 0 && y >= 0 && x < Console.WindowWidth && y < Console.WindowHeight)
+            {
+                Console.SetCursorPosition(x, y);
+                Console.Write(c);
+            }
+        }
         public static void Inicio()
         {
             int inicioX = x + (anchuraRectangulo / 2);
