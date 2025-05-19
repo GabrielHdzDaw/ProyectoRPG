@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG
 {
-    internal class PruebaMinijuegoTiroConArco
+    internal class PruebaMinijuegoAhorcado
     {
         const int ANCHURA_RECTANGULO = 176; // Dentro el ancho es de 175
         const int ALTURA_RECTANGULO = 44; // Dentro el ancho es de 43
@@ -29,12 +29,19 @@ namespace ProyectoRPG
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
-        //public static void Main(string[] args)
-        //{
-        //    PrepararVentanaInicio();
-        //    MinijuegoTiroConArco minijuego=new MinijuegoTiroConArco();
-        //    minijuego.Empezar();
-        //}
+        public static void Main(string[] args)
+        {
+            PrepararVentanaInicio();
+            List<string> palabras = new List<string> ();
+            palabras.Add("tomate");
+            palabras.Add("ballena");
+            palabras.Add("berenjena");
+            palabras.Add("hipopotamo");
+            palabras.Add("sandia");
+            palabras.Add("lechuga");
 
+            Ahorcado minijuego = new Ahorcado(palabras);
+            minijuego.Jugar();
+        }
     }
 }
