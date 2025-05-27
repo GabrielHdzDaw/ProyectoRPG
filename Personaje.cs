@@ -12,6 +12,7 @@ namespace ProyectoRPG
         string sprite;
         List<Item> inventario;
         int vida;
+        int vidaMaxima;
         int ataque;
         int defensa;
         int velocidad;
@@ -22,6 +23,7 @@ namespace ProyectoRPG
             this.sprite = sprite;
             inventario = new List<Item>();
             this.vida = vida;
+            this.vidaMaxima = vida;
             this.ataque = ataque;
             this.defensa = defensa;
             this.velocidad = velocidad;
@@ -45,6 +47,11 @@ namespace ProyectoRPG
         public int GetVida()
         {
             return vida;
+        }
+
+        public int GetVidaMaxima()
+        {
+            return vidaMaxima;
         }
 
         public int GetAtaque()
@@ -78,6 +85,11 @@ namespace ProyectoRPG
             this.vida = vida;
         }
 
+        public void SetVidaMaxima(int vidaMaxima)
+        {
+            this.vidaMaxima = vidaMaxima;
+        }
+
         public void SetAtaque(int ataque)
         {
             this.ataque = ataque;
@@ -104,12 +116,25 @@ namespace ProyectoRPG
             inventario.Remove(item);
         }
 
+        public void RecibirDaño(int daño)
+        {
+            vida = Math.Max(0, vida - daño);
+        }
 
+        public void Curar(int cantidad)
+        {
+            vida = Math.Min(vidaMaxima, vida + cantidad);
+        }
+
+        public bool EstaMuerto()
+        {
+            return vida <= 0;
+        }
 
 
         public override string ToString()
         {
-            return $"Nombre: {nombre}, Vida: {vida}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}";
+            return $"Nombre: {nombre}, Vida: {vida}/{vidaMaxima}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}";
         }
     }
 }

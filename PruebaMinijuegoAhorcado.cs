@@ -29,19 +29,19 @@ namespace ProyectoRPG
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
-        public static void Main(string[] args)
-        {
-            PrepararVentanaInicio();
-            List<string> palabras = new List<string> ();
-            palabras.Add("tomate");
-            palabras.Add("ballena");
-            palabras.Add("berenjena");
-            palabras.Add("hipopotamo");
-            palabras.Add("sandia");
-            palabras.Add("lechuga");
+        //public static void Main(string[] args)
+        //{
+        //    PrepararVentanaInicio();
+        //    List<string> palabras = new List<string> ();
+        //    palabras.Add("tomate");
+        //    palabras.Add("ballena");
+        //    palabras.Add("berenjena");
+        //    palabras.Add("hipopotamo");
+        //    palabras.Add("sandia");
+        //    palabras.Add("lechuga");
 
-            Ahorcado minijuego = new Ahorcado(palabras);
-            minijuego.Jugar();
-        }
+        //    Ahorcado minijuego = new Ahorcado(palabras);
+        //    minijuego.Jugar();
+        //}
     }
 }

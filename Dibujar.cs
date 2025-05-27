@@ -76,41 +76,44 @@ namespace ProyectoRPG
         public static void DibujarRectanguloPrincipal()
         {
             Console.CursorVisible = false;
-            for (int i = 0; i <= alturaRectangulo; i++)
+
+            for (int i = 0; i < alturaRectangulo; i++)
             {
-                for (int j = 0; j <= anchuraRectangulo; j++)
+                for (int j = 0; j < anchuraRectangulo; j++)
                 {
-                    Console.SetCursorPosition(x + j, y + i);
-                    if (i == 0 || i == alturaRectangulo || j == 0 || j == anchuraRectangulo)
+                    if (i == 0 || i == alturaRectangulo - 1 || j == 0 || j == anchuraRectangulo - 1)
                     {
-                        if (j == anchuraRectangulo || i == alturaRectangulo)
+                        if (x + j < Console.BufferWidth && y + i < Console.BufferHeight)
                         {
-                            Console.Write(caracter);
-                        }
-                        else
-                        {
+                            Console.SetCursorPosition(x + j, y + i);
                             Console.Write(caracter);
                         }
                     }
                 }
             }
+
             Console.CursorVisible = true;
         }
 
         public static void DibujarRectangulo(int posicionX, int posicionY, int alturaMax, int anchuraMax, char caracter)
         {
             Console.CursorVisible = false;
-            for (int i = 0; i <= alturaMax; i++)
+
+            for (int i = 0; i < alturaMax; i++)
             {
-                for (int j = 0; j <= anchuraMax; j++)
+                for (int j = 0; j < anchuraMax; j++)
                 {
-                    if (i == 0 || i == alturaMax || j == 0 || j == anchuraMax)
+                    if (i == 0 || i == alturaMax - 1 || j == 0 || j == anchuraMax - 1)
                     {
-                        Console.SetCursorPosition(posicionX + j, posicionY + i);
-                        Console.Write(caracter);
+                        if (posicionX + j < Console.BufferWidth && posicionY + i < Console.BufferHeight)
+                        {
+                            Console.SetCursorPosition(posicionX + j, posicionY + i);
+                            Console.Write(caracter);
+                        }
                     }
                 }
             }
+
             Console.CursorVisible = true;
         }
 

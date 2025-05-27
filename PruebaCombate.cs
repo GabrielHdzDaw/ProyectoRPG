@@ -88,30 +88,31 @@ namespace ProyectoRPG
 
             return opcion;
         }
-        //public static void Main(string[] args)
-        //{
-        //    PrepararVentanaInicio();
+        public static void Main(string[] args)
+        {
+            Console.CursorVisible  = false;
+            PrepararVentanaInicio();
 
-        //    int x = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2 + 1;
-        //    int y = (Console.WindowHeight - ALTURA_RECTANGULO) / 2 + 1;
+            int x = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2 + 1;
+            int y = (Console.WindowHeight - ALTURA_RECTANGULO) / 2 + 1;
+
+
             
 
-        //    Dibujar.DibujarRectangulo(x - 1, y - 1, ANCHURA_RECTANGULO, ALTURA_RECTANGULO, '▓');
+            //Dibujar.Inicio(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
 
-        //    //Dibujar.Inicio(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
+            //int opcion = 0;
+            //while (opcion != 4)
+            //{
+            //    opcion = Menu(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
 
-        //    //int opcion = 0;
-        //    //while (opcion != 4)
-        //    //{
-        //    //    opcion = Menu(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
-                
-        //    //}
+            //}
 
-        //    Jugador jugador = new Jugador("Jugador", "o.o", 100, 20, 20, 10, 0, false);
-        //    Enemigo enemigo = new Enemigo("Enemigo", "ò.ó", 100, 15, 8, 3);
+            Jugador jugador = new Jugador("Jugador", Sprites.Mago, 100, 20, 20, 10);
+            Enemigo enemigo = new Enemigo("Enemigo", Sprites.Caballero, 100, 15, 8, 3);
 
-        //    Combate combate = new Combate(jugador, enemigo);
-        //    combate.DibujarInterfazCombate();
-        //}
+            Combate combate = new Combate(jugador, enemigo);
+            combate.DibujarInterfazCombate();
+        }
     }
 }
