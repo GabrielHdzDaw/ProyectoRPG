@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProyectoRPG;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Minijuegos
 {
     
     internal class Ahorcado:Minijuego
@@ -68,22 +67,22 @@ namespace ProyectoRPG
 
         public void DibujarPalabra()
         {
-            Console.SetCursorPosition((Console.WindowWidth / 2), (Console.WindowHeight / 2) + 10);
+            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 10);
             Console.WriteLine("Palabra: " + estado);
         }
 
         public void DibujarAhorcado(string estado)
         {
-            Console.SetCursorPosition((Console.WindowWidth / 2) - 2, (Console.WindowHeight / 2) - 1);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 1);
 
             Console.WriteLine("____");
-            Console.SetCursorPosition((Console.WindowWidth / 2) - 2, (Console.WindowHeight / 2) + 1);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 1);
             Console.WriteLine("|");
-            Console.SetCursorPosition((Console.WindowWidth / 2) - 2, (Console.WindowHeight / 2) + 2);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 2);
             Console.WriteLine("|");
-            Console.SetCursorPosition((Console.WindowWidth / 2) - 2, (Console.WindowHeight / 2) + 3);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 3);
             Console.WriteLine("|");
-            Console.SetCursorPosition((Console.WindowWidth / 2) - 2, (Console.WindowHeight / 2) + 4);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 4);
             Console.WriteLine("_");
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
             switch (estado)
@@ -93,31 +92,31 @@ namespace ProyectoRPG
                     break;
                 case "torso":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
                     Console.Write("  |\n");
                     break;
                 case "brazoizq":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
                     Console.Write(" /|\n");
                     break;
                 case "brazoder":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
                     Console.Write(" /|\\\n");
                     break;
                 case "piernaizq":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
                     Console.Write(" /|\\\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 2);
                     Console.Write(" /\n");
                     break;
                 case "piernader":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
                     Console.Write(" /|\\\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2);
+                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 2);
                     Console.Write(" / \\\n");
                     break;
             }
@@ -136,7 +135,7 @@ namespace ProyectoRPG
         public void ActualizarPalabra()
         {
             bool acierto = false;
-            Console.SetCursorPosition((Console.WindowWidth / 2), (Console.WindowHeight / 2) + 15);
+            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 15);
             Console.Write("Introduce una letra: ");
             char letraUsuario = Convert.ToChar(Console.ReadLine());
             for (int i = 0; i < palabras[palabra].Length; i++)
@@ -180,12 +179,12 @@ namespace ProyectoRPG
             }
             if (HasGanado())
             {
-                Console.SetCursorPosition((Console.WindowWidth / 2), (Console.WindowHeight / 2) + 20);
+                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 20);
                 Console.WriteLine($"¡Has ganado! La palabra era: {palabras[palabra]}");
             }
             else
             {
-                Console.SetCursorPosition((Console.WindowWidth / 2), (Console.WindowHeight / 2) + 20);
+                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 20);
                 Console.WriteLine($"¡Has perdido! La palabra era: {palabras[palabra]}");
             }
         }

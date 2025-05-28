@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Interfaz
 {
     internal class Dibujar
     {
@@ -55,7 +55,7 @@ namespace ProyectoRPG
         public static void DibujarSpriteCentrado(int posicionX, int posicionY, string dibujo)
         {
             int anchuraDibujo = GetAnchuraDibujo(dibujo);
-            int comienzoX = posicionX - (anchuraDibujo / 2);
+            int comienzoX = posicionX - anchuraDibujo / 2;
 
             string[] lineas = dibujo.Split('\n');
             for (int i = 0; i < lineas.Length; i++)
@@ -189,17 +189,17 @@ namespace ProyectoRPG
         }
         public static void Inicio()
         {
-            int inicioX = x + (anchuraRectangulo / 2);
-            int inicioY = y + (alturaRectangulo / 2);
+            int inicioX = x + anchuraRectangulo / 2;
+            int inicioY = y + alturaRectangulo / 2;
 
             Console.CursorVisible = false;
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Dibujar.DibujarSpriteCentrado(inicioX, inicioY - 3, "¡ ADVERTENCIA !");
+            DibujarSpriteCentrado(inicioX, inicioY - 3, "¡ ADVERTENCIA !");
             Console.ResetColor();
 
-            Dibujar.DibujarSpriteCentrado(inicioX, inicioY - 1, "Se recomienda poner la pantalla completa (F11) para mejor expriencia");
-            Dibujar.DibujarSpriteCentrado(inicioX, inicioY + 1, "Para continuar pulse ENTER...");
+            DibujarSpriteCentrado(inicioX, inicioY - 1, "Se recomienda poner la pantalla completa (F11) para mejor expriencia");
+            DibujarSpriteCentrado(inicioX, inicioY + 1, "Para continuar pulse ENTER...");
 
             bool pantallaCompleta = false;
             while (!pantallaCompleta)
@@ -211,7 +211,7 @@ namespace ProyectoRPG
             }
             Console.CursorVisible = true;
 
-            Dibujar.LimpiarPantalla();
+            LimpiarPantalla();
 
             string titulo = "\r\n██████╗░██████╗░░██████╗░" +
                             "\r\n██╔══██╗██╔══██╗██╔════╝░" +
@@ -219,16 +219,16 @@ namespace ProyectoRPG
                             "\r\n██╔══██╗██╔═══╝░██║░░╚██╗" +
                             "\r\n██║░░██║██║░░░░░╚██████╔╝" +
                             "\r\n╚═╝░░╚═╝╚═╝░░░░░░╚═════╝░";
-            Dibujar.DibujarSpriteCentrado(inicioX, inicioY - Dibujar.ContarSaltos(titulo) - 2, titulo);
+            DibujarSpriteCentrado(inicioX, inicioY - ContarSaltos(titulo) - 2, titulo);
 
             string subtitulo1 = "En busca del demonio malo malísimo, MUY MUY malo";
-            Console.SetCursorPosition(inicioX - (subtitulo1.Length / 2), inicioY);
-            Dibujar.EscribirTexto(subtitulo1);
-            Dibujar.EscribirTexto("...");
+            Console.SetCursorPosition(inicioX - subtitulo1.Length / 2, inicioY);
+            EscribirTexto(subtitulo1);
+            EscribirTexto("...");
 
             string subtitulo2 = "Pulse ENTER para comenzar la aventura";
-            Console.SetCursorPosition(inicioX - (subtitulo2.Length / 2), inicioY + 2);
-            Dibujar.EscribirTexto(subtitulo2);
+            Console.SetCursorPosition(inicioX - subtitulo2.Length / 2, inicioY + 2);
+            EscribirTexto(subtitulo2);
 
             Console.CursorVisible = false;
 
@@ -242,7 +242,7 @@ namespace ProyectoRPG
                 }
             }
 
-            Dibujar.LimpiarPantalla();
+            LimpiarPantalla();
             Console.CursorVisible = true;
         }
     }

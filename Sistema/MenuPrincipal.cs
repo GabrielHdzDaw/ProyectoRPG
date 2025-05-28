@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Interfaz;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Sistema
 {
     internal abstract class MenuPrincipal
     {
@@ -12,8 +13,8 @@ namespace ProyectoRPG
         {
             Console.CursorVisible = false;
 
-            int centroX = Dibujar.X + (Dibujar.AnchuraRectangulo / 2) - 1;
-            int centroY = Dibujar.Y + (Dibujar.AlturaRectangulo / 2) - 1;
+            int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 1;
+            int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
 
             Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
                                                                 "\r\n█▀▄ █▀▀ █▄█");
@@ -107,8 +108,8 @@ namespace ProyectoRPG
             Dibujar.LimpiarPantalla();
             Console.CursorVisible = false;
 
-            int centroX = Dibujar.X + (Dibujar.AnchuraRectangulo / 2) - 1;
-            int centroY = Dibujar.Y + (Dibujar.AlturaRectangulo / 2) - 1;
+            int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 1;
+            int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
 
             Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
                                                                 "\r\n█▀▄ █▀▀ █▄█");

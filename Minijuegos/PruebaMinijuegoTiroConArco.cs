@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Minijuegos
 {
     internal class PruebaMinijuegoTiroConArco
     {
@@ -14,10 +14,10 @@ namespace ProyectoRPG
 
         // Ajustes para la pantalla
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern IntPtr GetConsoleWindow();
+        static extern nint GetConsoleWindow();
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        static extern bool ShowWindow(nint hWnd, int nCmdShow);
 
         const int SW_MAXIMIZE = 3;
         public static void PrepararVentanaInicio()
@@ -25,7 +25,7 @@ namespace ProyectoRPG
             Console.Title = "RPG";
             Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-            IntPtr consoleWindow = GetConsoleWindow();
+            nint consoleWindow = GetConsoleWindow();
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 

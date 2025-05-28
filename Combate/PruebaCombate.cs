@@ -4,8 +4,11 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Interfaz;
+using ProyectoRPG.Personajes;
+using ProyectoRPG.Recursos;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Combate
 {
     internal class PruebaCombate
     {
@@ -14,10 +17,10 @@ namespace ProyectoRPG
 
         // Ajustes para la pantalla
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern IntPtr GetConsoleWindow();
+        static extern nint GetConsoleWindow();
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        static extern bool ShowWindow(nint hWnd, int nCmdShow);
 
         const int SW_MAXIMIZE = 3;
 
@@ -27,7 +30,7 @@ namespace ProyectoRPG
             Console.Title = "RPG";
             Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-            IntPtr consoleWindow = GetConsoleWindow();
+            nint consoleWindow = GetConsoleWindow();
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
@@ -35,8 +38,8 @@ namespace ProyectoRPG
         {
             Console.CursorVisible = false;
 
-            int centroX = x + (maxAnchura / 2) - 1;
-            int centroY = y + (maxAltura / 2) - 1;
+            int centroX = x + maxAnchura / 2 - 1;
+            int centroY = y + maxAltura / 2 - 1;
 
             Dibujar.DibujarSpriteCentrado(centroX, centroY - 4, "\r\n█▀█ █▀█ █▀▀" +
                                                                 "\r\n█▀▄ █▀▀ █▄█");
@@ -92,27 +95,16 @@ namespace ProyectoRPG
         {
             Console.CursorVisible  = false;
             PrepararVentanaInicio();
+            Dibujar.DibujarRectanguloPrincipal();
 
-            int x = (Console.WindowWidth - ANCHURA_RECTANGULO) / 2 + 1;
-            int y = (Console.WindowHeight - ALTURA_RECTANGULO) / 2 + 1;
-
-
-            
-
-            //Dibujar.Inicio(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
-
-            //int opcion = 0;
-            //while (opcion != 4)
-            //{
-            //    opcion = Menu(x, y, ANCHURA_RECTANGULO, ALTURA_RECTANGULO);
-
-            //}
-
-            Jugador jugador = new Jugador("Jugador", Sprites.Mago, 100, 20, 20, 10);
-            Enemigo enemigo = new Enemigo("Enemigo", Sprites.Caballero, 100, 15, 8, 3);
+            Picaro jugador = new Picaro("Picaro");
+            Enemigo enemigo = new Enemigo("Fantasma", Sprites.Fantasma, 100, 18, 12, 3);
 
             Combate combate = new Combate(jugador, enemigo);
+
             combate.DibujarInterfazCombate();
+            combate.EmpezarCombate();
+
         }
     }
 }

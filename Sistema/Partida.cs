@@ -7,8 +7,11 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ProyectoRPG.Interfaz;
+using ProyectoRPG.Personajes;
+using ProyectoRPG.Recursos;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Sistema
 {
     class Partida
     {
@@ -56,13 +59,13 @@ namespace ProyectoRPG
         {
             if (escritoMal)
             {
-                Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.Y + Dibujar.AlturaRectangulo / 2) - 2);
+                Console.SetCursorPosition(Dibujar.X + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 2);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("ERROR: El nombre debe estar entre 1 y 30 caracteres y no debe usar caracteres especiales o estar ya registrado.");
                 Console.ResetColor();
             }
 
-            Console.SetCursorPosition(Dibujar.X + 2, (Dibujar.Y + Dibujar.AlturaRectangulo / 2));
+            Console.SetCursorPosition(Dibujar.X + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 2);
             Console.Write("Nombre del jugador (30 caracteres): ");
             return Console.ReadLine();
         }
@@ -99,7 +102,7 @@ namespace ProyectoRPG
             int indice = 0;
 
             int xSprite = (int)(Dibujar.AnchuraRectangulo / 1.40) - 5;
-            int ySprite = Dibujar.Y + (Dibujar.AlturaRectangulo / 4) - 5;
+            int ySprite = Dibujar.Y + Dibujar.AlturaRectangulo / 4 - 5;
 
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
@@ -118,7 +121,7 @@ namespace ProyectoRPG
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(Dibujar.X + (Dibujar.AnchuraRectangulo / 4) / 2, Dibujar.Y + (Dibujar.AlturaRectangulo / 4) - espaciadoVertical, opciones[i]);
+                    Dibujar.DibujarSpriteCentrado(Dibujar.X + Dibujar.AnchuraRectangulo / 4 / 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 - espaciadoVertical, opciones[i]);
                     espaciadoVertical -= 8;
 
                     if (indice == i)
@@ -129,16 +132,16 @@ namespace ProyectoRPG
                     switch (indice)
                     {
                         case 0:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2), Dibujar.Y + (Dibujar.AlturaRectangulo / 4) / 2, Sprites.Mago);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2, Sprites.Mago);
                             break;
                         case 1:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2), Dibujar.Y + 2 + (Dibujar.AlturaRectangulo / 4) / 2, Sprites.Caballero);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2, Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 4 / 2, Sprites.Caballero);
                             break;
                         case 2:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2) + 6, (Dibujar.Y + (Dibujar.AlturaRectangulo / 4) / 2) + 1, Sprites.Elfo);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 6, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 + 1, Sprites.Elfo);
                             break;
                         case 3:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + (Dibujar.AnchuraRectangulo / 2) + 2, (Dibujar.Y + (Dibujar.AlturaRectangulo / 4) / 2) + 1, Sprites.Picaro);
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 + 1, Sprites.Picaro);
                             break;
                     }
 
@@ -190,7 +193,7 @@ namespace ProyectoRPG
         public void GuardarPartida()
         {
             string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(this.NombreArchivo(), json);
+            File.WriteAllText(NombreArchivo(), json);
             Console.WriteLine("Catálogo guardado.");
         }
 

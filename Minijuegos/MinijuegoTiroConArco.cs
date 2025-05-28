@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Interfaz;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Minijuegos
 {
     internal class MinijuegoTiroConArco:Minijuego
     {
         int puntuacion = 0;
 
         int tiradas = 3;
-        int ancho = 80; // puedes ajustar esto o usar Console.WindowWidth
+        int ancho = 80; 
         int alto = 25;
         int top = 0;
 
@@ -54,7 +55,7 @@ namespace ProyectoRPG
                     direccion *= -1;
             }
 
-            Console.ReadKey(true); // consumir la tecla
+            Console.ReadKey(true);
             return y;
         }
 
@@ -116,7 +117,6 @@ namespace ProyectoRPG
             int anchoConsola = Console.WindowWidth;
             int altoConsola = Console.WindowHeight;
 
-            // Tamaños de los 3 cuadros (grande, medio, pequeño)
             int[] anchos = { 20, 14, 8 };
             int[] altos = { 10, 6, 2 };
             char[] caracteres = { Dibujar.Caracter, Dibujar.Caracter, Dibujar.Caracter };
@@ -139,9 +139,9 @@ namespace ProyectoRPG
 
             int[] anchos = { 20, 14, 8 };
             int[] altos = { 10, 6, 2 };
-            int[] puntos = { 20, 50, 100 }; // grande, medio, centro
+            int[] puntos = { 20, 50, 100 };
 
-            for (int i = 2; i >= 0; i--) // del centro hacia afuera
+            for (int i = 2; i >= 0; i--)
             {
                 int anchura = anchos[i];
                 int altura = altos[i];
@@ -155,7 +155,7 @@ namespace ProyectoRPG
                 }
             }
 
-            return 0; // fuera de la diana
+            return 0;
         }
 
 

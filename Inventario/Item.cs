@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Inventario
 {
-    internal abstract class Item // Habrá subclases como Arma, Armadura, Pocion, etc.
+    internal abstract class Item
     {
         string nombre;
         string descripcion;

@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Inventario;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Personajes
 {
     internal abstract class Personaje
     {
         string nombre;
         string sprite;
-        List<Item> inventario;
         int vida;
         int vidaMaxima;
         int ataque;
         int defensa;
         int velocidad;
+        InventarioPersonaje inventario;
+        Arma armaEquipada;
 
         public Personaje(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad)
         {
             this.nombre = nombre;
             this.sprite = sprite;
-            inventario = new List<Item>();
             this.vida = vida;
-            this.vidaMaxima = vida;
+            vidaMaxima = vida;
             this.ataque = ataque;
             this.defensa = defensa;
             this.velocidad = velocidad;
+            inventario = new InventarioPersonaje();
+            inventario.AgregarObjeto(new Pocion(20));
         }
 
         public string GetNombre()
@@ -39,7 +42,7 @@ namespace ProyectoRPG
             return sprite;
         }
 
-        public List<Item> GetInventario()
+        public InventarioPersonaje GetInventario()
         {
             return inventario;
         }
@@ -108,12 +111,12 @@ namespace ProyectoRPG
 
         public void AgregarItem(Item item)
         {
-            inventario.Add(item);
+            inventario.AgregarObjeto(item);
         }
 
         public void EliminarItem(Item item)
         {
-            inventario.Remove(item);
+            inventario.EliminarObjeto(item);
         }
 
         public void RecibirDaño(int daño)
@@ -134,7 +137,7 @@ namespace ProyectoRPG
 
         public override string ToString()
         {
-            return $"Nombre: {nombre}, Vida: {vida}/{vidaMaxima}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}";
+            return $"Nombre: {nombre}, Vida: {vida}/{vidaMaxima}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}, Inventario: {inventario}";
         }
     }
 }

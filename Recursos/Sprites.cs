@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoRPG
+namespace ProyectoRPG.Recursos
 {
     abstract class Sprites
     {
@@ -101,10 +101,86 @@ namespace ProyectoRPG
            /  /|\  \
           '--'   `--`
 ";
+        static string fantasma = @"
+     .-.
+   .'   `.
+   :0 0   :
+   : o    `.
+  :         ``.
+ :             `.
+:  :         .   `.
+:   :          ` . `.
+ `.. :            `. ``;
+    `:;             `:'
+       :              `.
+        `.              `.     .
+          `'`'`'`---..,___`;.-'";
 
+        static string fantasmicos = @"
+                      .-.
+         heehee      /aa \_
+                   __\-  / )                 .-.
+         .-.      (__/    /        haha    _/oo \
+       _/ ..\       /     \               ( \v  /__
+      ( \  u/__    /       \__             \/   ___)
+       \    \__)   \_.-._._   )  .-.       /     \
+       /     \             `-`  / ee\_    /       \_
+    __/       \               __\  o/ )   \_.-.__   )
+   (   _._.-._/     hoho     (___   \/           '-'
+    '-'                        /     \
+                             _/       \    teehee
+                            (   __.-._/";
+
+        static string esqueleto = @"
+      .-.
+     (o.o)
+      |=|
+     __|__
+   //.=|=.\\
+  // .=|=. \\
+  \\ .=|=. //
+   \\(_=_)//
+    (:| |:)
+     || ||
+     () ()
+     || ||
+     || ||
+l42 ==' '=='";
+        static string centauro = @"
+         =*===
+       $$- - $$$
+       $ <    D$$
+       $ -   $$$
+ ,     $$$$  |
+///; ,---' _ |----.
+ \ )(           /  )
+ | \/ \.   '  _.|  \              $
+ |  \ /(   /    /\_ \          $$$$$
+  \ /  (       / /  )         $$$ $$$
+       (  ,   /_/ ,`_,-----.,$$  $$$
+       |   <----|  \---##     \   $$
+       /         \\\           |    $
+      '   '                    |
+      |                 \      /
+      /  \_|    /______,/     /
+     /   / |   /    |   |    /
+    (   /--|  /.     \  (\  (_
+     `----,( ( _\     \ / / ,/
+           | /        /,_/,/
+          _|/        / / (
+         / (        ^-/, |
+        /, |          ^-  
+        ^-";
         public static string Mago { get => mago; }
         public static string Caballero { get => caballero; }
         public static string Elfo { get => elfo; }
         public static string Picaro { get => picaro; }
-    }
+        public static string Fantasma { get => fantasma; }
+        public static string Fantasmicos { get => fantasmicos; }
+        public static string Esqueleto { get => esqueleto; }
+        public static string Centauro { get => centauro; }
+
+
+
+        }
 }
