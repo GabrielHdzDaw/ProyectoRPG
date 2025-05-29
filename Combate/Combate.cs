@@ -22,7 +22,6 @@ namespace ProyectoRPG.Combate
 
         public void DibujarInterfazCombate()
         {
-
             Dibujar.DibujarRectanguloPrincipal();
             int alturaSubRect = 10;
             int yBase = Dibujar.Y + Dibujar.AlturaRectangulo - alturaSubRect;
@@ -46,7 +45,7 @@ namespace ProyectoRPG.Combate
         }
         public void AnimacionAtaqueSprite(bool esJugador)
         {
-            
+
             int anchoJugador = jugador.GetSprite().Split('\n').Max(line => line.Length);
             int altoJugador = jugador.GetSprite().Split('\n').Length;
             int anchoEnemigo = enemigo.GetSprite().Split('\n').Max(line => line.Length);
@@ -69,7 +68,7 @@ namespace ProyectoRPG.Combate
                     Console.SetCursorPosition(jugadorX, spriteY + y);
                     Console.Write(new string(' ', totalAnchoSprites));
                 }
-                
+
                 int dxJugador = esJugador ? i * desplazamiento : 0;
                 int dxEnemigo = esJugador ? 0 : -i * desplazamiento;
 
@@ -80,13 +79,12 @@ namespace ProyectoRPG.Combate
                 Thread.Sleep(10);
             }
 
-            // Parpadeo del sprite golpeado
             int parpadeos = 3;
             int delayParpadeo = 30;
 
             for (int i = 0; i < parpadeos; i++)
             {
-                
+
                 for (int y = 0; y < altoMayor; y++)
                 {
                     int x = esJugador ? enemigoX : jugadorX;
@@ -96,14 +94,14 @@ namespace ProyectoRPG.Combate
 
                 Thread.Sleep(delayParpadeo);
 
-               
+
                 string spriteGolpeado = esJugador ? enemigo.GetSprite() : jugador.GetSprite();
                 int xSprite = esJugador ? enemigoX : jugadorX;
                 Dibujar.DibujarSpriteNormal(xSprite, spriteY, spriteGolpeado);
 
                 Thread.Sleep(delayParpadeo);
             }
-            
+
             for (int i = pasos - 1; i >= 0; i--)
             {
                 for (int y = 0; y < altoMayor; y++)
@@ -121,7 +119,6 @@ namespace ProyectoRPG.Combate
 
                 Thread.Sleep(10);
             }
-            
         }
 
         public void DibujarSpritesCombate()
@@ -242,7 +239,7 @@ namespace ProyectoRPG.Combate
             for (int i = 0; i < opciones.Length; i++)
             {
                 Console.SetCursorPosition(menuX, menuY + i);
-                Console.Write(new string(' ', 15)); // Limpiar cada línea del menú
+                Console.Write(new string(' ', 15));
             }
         }
 
@@ -299,7 +296,7 @@ namespace ProyectoRPG.Combate
             return opcion;
         }
 
-        public int MenuAtaque(int x, int y, int maxAnchura, int maxAltura)
+        public Ataque MenuAtaque(int x, int y, int maxAnchura, int maxAltura)
         {
             Console.CursorVisible = false;
             string[] opciones = jugador.Ataques.Select(a => a.ToString()).ToArray();
@@ -349,13 +346,59 @@ namespace ProyectoRPG.Combate
                 Thread.Sleep(50);
             }
             Ataque ataqueSeleccionado = jugador.GetAtaques().ToArray()[opcion];
-            int danoDelAtaque = ataqueSeleccionado.dano;
-            return danoDelAtaque;
+            return ataqueSeleccionado;
+        }
+
+        public Item MenuItem(int x, int y, int maxAnchura, int maxAltura)
+        {
+            Console.CursorVisible = false;
+            List<Pocion> pociones = jugador.GetInventario().Pociones;
+
+            string[] opciones = pociones.Select(i => i.ToString()).ToArray();
+            int opcion = 0;
+            int menuX = Dibujar.X + 12;
+            int menuY = Dibujar.Y + Dibujar.AlturaRectangulo - opciones.Length - 3;
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+            while (tecla.Key != ConsoleKey.Enter)
+            {
+                LimpiarAreaMenu(menuX, menuY, opciones);
+                for (int i = 0; i < opciones.Length; i++)
+                {
+                    if (opcion == i)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+                    Console.SetCursorPosition(menuX, menuY + i);
+                    Console.Write($"{opciones[i]}");
+                    if (opcion == i)
+                    {
+                        Console.ResetColor();
+                    }
+                }
+                if (Console.KeyAvailable)
+                {
+                    tecla = Console.ReadKey(true);
+                    switch (tecla.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (opcion - 1 >= 0)
+                                opcion--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (opcion + 1 < opciones.Length)
+                                opcion++;
+                            break;
+                    }
+                }
+                Thread.Sleep(50);
+            }
+            Pocion pocionSeleccionada = pociones[opcion];
+            return pocionSeleccionada;
         }
 
         public bool EmpezarCombate()
         {
-            
             bool combateActivo = true;
             bool victoria = false;
 
@@ -379,6 +422,7 @@ namespace ProyectoRPG.Combate
                         break;
                     case 2:
                         EjecutarItem();
+                        DibujarBarrasVida();
                         break;
                     case 3:
                         if (IntentarHuir())
@@ -417,14 +461,48 @@ namespace ProyectoRPG.Combate
             return victoria;
         }
 
-
         private void EjecutarAtaque()
         {
-            int danoArma = jugador.GetInventario().ObtenerObjetos().OfType<Arma>().First().dano;
-            int danoAtaque = MenuAtaque(Dibujar.X + 8, Dibujar.Y + Dibujar.AlturaRectangulo - 7, 20, 4);
-            int dano = CalcularDaño(jugador, enemigo) +;
-            enemigo.RecibirDaño(dano);
-            MostrarMensaje($"{jugador.GetNombre()} ataca a {enemigo.GetNombre()} causando {dano} de daño!", true);
+            Ataque ataqueSeleccionado = MenuAtaque(Dibujar.X + 8, Dibujar.Y + Dibujar.AlturaRectangulo - 7, 20, 4);
+            Random random = new Random();
+
+            int tirada = random.Next(1, 101);
+            if (tirada > ataqueSeleccionado.probabilidad)
+            {
+                MostrarMensaje($"{jugador.GetNombre()} intenta usar {ataqueSeleccionado.nombre}, ¡pero falla!", true);
+                return;
+            }
+
+            int dañoBase = jugador.GetAtaque();
+
+            Arma? arma = jugador.GetArma();
+            int dañoArma = 0;
+            int dañoCriticoArma = 0;
+            int probCritico = 0;
+
+            if (arma != null)
+            {
+                dañoArma = arma.dano;
+                dañoCriticoArma = arma.danoCritico;
+                probCritico = arma.probabilidadCritico;
+            }
+
+            bool esCritico = random.Next(1, 101) <= probCritico;
+
+            int dañoTotal = esCritico
+                ? dañoBase + dañoCriticoArma + ataqueSeleccionado.dano
+                : dañoBase + dañoArma + ataqueSeleccionado.dano;
+
+            int defensa = enemigo.GetDefensa();
+            dañoTotal = Math.Max(0, dañoTotal - defensa);
+
+            enemigo.RecibirDaño(dañoTotal);
+
+            string mensaje = esCritico
+                ? $"{jugador.GetNombre()} ataca con {ataqueSeleccionado.nombre} y causa {dañoTotal} de impacto crítico!"
+                : $"{jugador.GetNombre()} ataca con {ataqueSeleccionado.nombre} y causa {dañoTotal} de daño!";
+
+            MostrarMensaje(mensaje, true);
             AnimacionAtaqueSprite(true);
         }
 
@@ -437,8 +515,17 @@ namespace ProyectoRPG.Combate
 
         private void EjecutarItem()
         {
-            MostrarMensaje("Función de items no implementada aún.", true);
-
+            Pocion pocion = (Pocion)MenuItem(Dibujar.X + 8, Dibujar.Y + Dibujar.AlturaRectangulo - 7, 20, 4);
+            if (jugador.GetInventario().ContieneObjeto(pocion))
+            {
+                jugador.UsarPocion(pocion);
+                jugador.GetInventario().EliminarObjeto(pocion);
+                MostrarMensaje($"{jugador.GetNombre()} usa {pocion.GetNombre()} y recupera {pocion.curacion} de vida.", true);
+            }
+            else
+            {
+                MostrarMensaje("No tienes esa poción en tu inventario.", true);
+            }
         }
 
         private bool IntentarHuir()
@@ -466,7 +553,8 @@ namespace ProyectoRPG.Combate
 
         private void MostrarMensaje(string mensaje, bool espera)
         {
-            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 10;
+            BorrarMensaje();
+            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 5;
             int mensajeY = Dibujar.AlturaRectangulo / 4 * 4 + 5;
 
             Console.SetCursorPosition(mensajeX, mensajeY);
@@ -474,12 +562,19 @@ namespace ProyectoRPG.Combate
             Console.Write(mensaje);
             Console.ResetColor();
             if (espera)
-            { 
+            {
                 Thread.Sleep(1000);
             }
+
         }
 
-        
+        private void BorrarMensaje()
+        {
+            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 4;
+            int mensajeY = Dibujar.AlturaRectangulo / 4 * 4 + 5;
+            Console.SetCursorPosition(mensajeX, mensajeY);
+            Console.Write(new string(' ', 58));
+        }
 
         public override string ToString()
         {

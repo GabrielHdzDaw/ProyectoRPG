@@ -171,6 +171,50 @@ l42 ==' '=='";
          / (        ^-/, |
         /, |          ^-  
         ^-";
+
+        static string espadaCorda = @"
+      /| ________________
+O|===|* >________________>
+      \|
+";
+
+        static string espadaLarga = @"
+         />_________________________________
+[########[]_________________________________>
+         \>
+";
+
+        static string katana = @"
+            /\
+/vvvvvvvvvvvv \--------------------------------------,
+`^^^^^^^^^^^^ /=====================================""
+            \/
+";
+        static string punalBarato = @"
+   '
+=={==========-
+   `
+";
+        static string punalEngarzado = @"
+     #
+O%%%%#============--
+     #
+";
+        static string punalElectrico = @"
+          ./~
+(=@@@@@@@=[}=================--
+          `\_
+";
+        static string arcoCorto = @"
+   (
+    \
+     )
+##-------->
+     )
+    /
+   (
+";
+
         public static string Mago { get => mago; }
         public static string Caballero { get => caballero; }
         public static string Elfo { get => elfo; }
@@ -179,8 +223,11 @@ l42 ==' '=='";
         public static string Fantasmicos { get => fantasmicos; }
         public static string Esqueleto { get => esqueleto; }
         public static string Centauro { get => centauro; }
+        public static string EspadaCorda { get => espadaCorda; }
+        public static string EspadaLarga { get => espadaLarga; }
+        public static string Katana { get => katana; }
+        public static string PunalBarato { get => punalBarato; }
+        public static string PunalEngarzado { get => punalEngarzado; }
 
-
-
-        }
+    }
 }

@@ -11,14 +11,15 @@ namespace ProyectoRPG.Personajes
 {
     internal class Elfo:Jugador
     {
-        public Elfo(string nombre) 
-            : base(nombre, Sprites.Elfo, 90, 15, 18, 15)
+        public Elfo(string nombre)
+    : base(nombre, Sprites.Elfo, 85, 18, 12, 18)
         {
-            GetAtaques().Add(new Ataque("Ataque rápido", 10, 90));
-            GetAtaques().Add(new Ataque("Ataque pesado", 20, 70));
-            GetAtaques().Add(new Ataque("Ataque poderoso", 30, 40));
-
-            AgregarItem(new Arma("Arco corto", "Arco que usan los elfos para el entrenamiento", 0, 8, 15));
+            GetAtaques().Add(new Ataque("Flecha rápida", 10, 95));
+            GetAtaques().Add(new Ataque("Flecha pesada", 18, 80));
+            GetAtaques().Add(new Ataque("Triple flecha", 30, 60));
+            Arma arma = new Arma("Arco corto", "Arco que usan los elfos en el entrenamiento", 0, 10, 18, 20);
+            AgregarItem(arma);
+            SetArma(arma);
         }
         public override string ToString()
         {

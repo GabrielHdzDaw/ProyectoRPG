@@ -16,8 +16,7 @@ namespace ProyectoRPG.Personajes
         int ataque;
         int defensa;
         int velocidad;
-        InventarioPersonaje inventario;
-        Arma armaEquipada;
+        
 
         public Personaje(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad)
         {
@@ -28,8 +27,7 @@ namespace ProyectoRPG.Personajes
             this.ataque = ataque;
             this.defensa = defensa;
             this.velocidad = velocidad;
-            inventario = new InventarioPersonaje();
-            inventario.AgregarObjeto(new Pocion(20));
+            
         }
 
         public string GetNombre()
@@ -42,10 +40,7 @@ namespace ProyectoRPG.Personajes
             return sprite;
         }
 
-        public InventarioPersonaje GetInventario()
-        {
-            return inventario;
-        }
+       
 
         public int GetVida()
         {
@@ -109,15 +104,7 @@ namespace ProyectoRPG.Personajes
             this.velocidad = velocidad;
         }
 
-        public void AgregarItem(Item item)
-        {
-            inventario.AgregarObjeto(item);
-        }
-
-        public void EliminarItem(Item item)
-        {
-            inventario.EliminarObjeto(item);
-        }
+        
 
         public void RecibirDaño(int daño)
         {
@@ -137,7 +124,7 @@ namespace ProyectoRPG.Personajes
 
         public override string ToString()
         {
-            return $"Nombre: {nombre}, Vida: {vida}/{vidaMaxima}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}, Inventario: {inventario}";
+            return $"Nombre: {nombre}, Vida: {vida}/{vidaMaxima}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}";
         }
     }
 }

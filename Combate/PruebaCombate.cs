@@ -47,7 +47,6 @@ namespace ProyectoRPG.Combate
             string[] opciones = ["Continuar", "Nueva partida", "Records", "Creadores", "Salir"];
             int opcion = 0;
 
-            // Repetir este for hasta que se pulse enter
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
             while (tecla.Key != ConsoleKey.Enter)
@@ -72,7 +71,6 @@ namespace ProyectoRPG.Combate
 
                 tecla = Console.ReadKey();
 
-
                 switch (tecla.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -84,9 +82,7 @@ namespace ProyectoRPG.Combate
                             opcion++;
                         break;
                 }
-
             }
-
             Console.CursorVisible = true;
 
             return opcion;
@@ -97,14 +93,13 @@ namespace ProyectoRPG.Combate
             PrepararVentanaInicio();
             Dibujar.DibujarRectanguloPrincipal();
 
-            Picaro jugador = new Picaro("Picaro");
-            Enemigo enemigo = new Enemigo("Fantasma", Sprites.Fantasma, 100, 18, 12, 3);
+            Elfo jugador = new Elfo("Elfo");
+            Enemigo enemigo = new Enemigo("Fantasmikos", Sprites.Fantasmicos, 100, 18, 12, 3);
 
             Combate combate = new Combate(jugador, enemigo);
 
             combate.DibujarInterfazCombate();
             combate.EmpezarCombate();
-
         }
     }
 }

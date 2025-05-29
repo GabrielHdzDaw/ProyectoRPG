@@ -18,13 +18,14 @@ namespace ProyectoRPG.Personajes
             "dragón", "castillo", "princesa", "caballero", "aventura", "tesoro", "magia", "espada", "escudo", "reino"
         });
         public Picaro(string nombre) 
-            : base(nombre, Sprites.Picaro, 80, 25, 10, 12)
+            : base(nombre, Sprites.Picaro, 75, 22, 8, 15)
         {
             GetAtaques().Add(new Ataque("Ataque rápido", 10, 90));
-            GetAtaques().Add(new Ataque("Ataque sigiloso", 17, 70));
-            GetAtaques().Add(new Ataque("Ataque rabioso", 25, 35));
-
-            AgregarItem(new Arma("Puñal barato", "Puñal endeble que podría romperse en cualquier momento", 0, 10, 17));
+            GetAtaques().Add(new Ataque("Ataque sigiloso", 20, 70));
+            GetAtaques().Add(new Ataque("Ataque rabioso", 30, 30));
+            Arma arma = new Arma("Puñal barato", "Puñal endeble que podría romperse en cualquier momento", 0, 9, 25, 25);
+            AgregarItem(arma);
+            SetArma(arma);
         }
 
         public Ahorcado GetMinijuego()

@@ -11,11 +11,14 @@ namespace ProyectoRPG.Inventario
     {
         public int dano { get; set; }
         public int danoCritico { get; set; }
-        public Arma(string nombre, string descripcion, int precio, int dano, int danoCritico)
+
+        public int probabilidadCritico { get; set; } = 20;
+        public Arma(string nombre, string descripcion, int precio, int dano, int danoCritico, int probabilidadCritico)
             : base(nombre, descripcion, precio)
         {
             this.dano = dano;
             this.danoCritico = danoCritico;
+            this.probabilidadCritico = probabilidadCritico;
         }
         public override string ToString()
         {

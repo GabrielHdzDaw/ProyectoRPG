@@ -8,33 +8,58 @@ namespace ProyectoRPG.Inventario
 {
     internal class InventarioPersonaje
     {
-        public List<Item> objetos { get; set; }
+        public List<Pocion> Pociones { get; private set; }
+        public List<Arma> Armas { get; private set; }
+        public List<Armadura> Armaduras { get; private set; }
+        public List<ObjetoClave> ObjetosClave { get; private set; }
+
         public InventarioPersonaje()
         {
-            objetos = new List<Item>();
+            Pociones = new List<Pocion>();
+            Armas = new List<Arma>();
+            Armaduras = new List<Armadura>();
+            ObjetosClave = new List<ObjetoClave>();
         }
+
         public void AgregarObjeto(Item objeto)
         {
-            objetos.Add(objeto);
+            if (objeto is Pocion pocion)
+                Pociones.Add(pocion);
+            else if (objeto is Arma arma)
+                Armas.Add(arma);
+            else if (objeto is Armadura armadura)
+                Armaduras.Add(armadura);
         }
+
         public void EliminarObjeto(Item objeto)
         {
-            objetos.Remove(objeto);
+            if (objeto is Pocion pocion)
+                Pociones.Remove(pocion);
+            else if (objeto is Arma arma)
+                Armas.Remove(arma);
+            else if (objeto is Armadura armadura)
+                Armaduras.Remove(armadura);
         }
 
         public bool ContieneObjeto(Item objeto)
         {
-            return objetos.Contains(objeto);
+            if (objeto is Pocion pocion)
+                return Pociones.Contains(pocion);
+            else if (objeto is Arma arma)
+                return Armas.Contains(arma);
+            else if (objeto is Armadura armadura)
+                return Armaduras.Contains(armadura);
+            return false;
         }
 
-        public List<Item> ObtenerObjetos()
-        {
-            return objetos;
-        }
         public override string ToString()
         {
-            return string.Join(", ", objetos);
+            var todos = new List<string>();
+            todos.AddRange(Pociones.Select(p => p.ToString()));
+            todos.AddRange(Armas.Select(a => a.ToString()));
+            todos.AddRange(Armaduras.Select(a => a.ToString()));
+            todos.AddRange(ObjetosClave.Select(o => o.ToString()));
+            return string.Join(", ", todos);
         }
-        
     }
 }

@@ -92,7 +92,7 @@ namespace ProyectoRPG.Sistema
             return nombre.Length == 0 || nombre.Length > 30 || caracterNoValido || nombresArchivos.Contains($"{nombre}.json");
         }
 
-        private static void ClaseElegida() // Debería devolver algo...
+        private static void ClaseElegida()
         {
             string[] opciones = ["Mago", "Caballero", "Elfo", "Picaro"];
             string[] textosPersonajes = ["Un personaje que vive en una constante batalla mental",
