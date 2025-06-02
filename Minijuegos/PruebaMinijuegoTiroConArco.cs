@@ -29,12 +29,12 @@ namespace ProyectoRPG.Minijuegos
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
-        //public static void Main(string[] args)
-        //{
-        //    PrepararVentanaInicio();
-        //    MinijuegoTiroConArco minijuego=new MinijuegoTiroConArco();
-        //    minijuego.Empezar();
-        //}
+        public static void Main(string[] args)
+        {
+            PrepararVentanaInicio();
+            MinijuegoTiroConArco minijuego = new MinijuegoTiroConArco();
+            minijuego.Empezar();
+        }
 
     }
 }

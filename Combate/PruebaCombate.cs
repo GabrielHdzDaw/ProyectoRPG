@@ -87,19 +87,19 @@ namespace ProyectoRPG.Combate
 
             return opcion;
         }
-        public static void Main(string[] args)
-        {
-            Console.CursorVisible  = false;
-            PrepararVentanaInicio();
-            Dibujar.DibujarRectanguloPrincipal();
+        //public static void Main(string[] args)
+        //{
+        //    Console.CursorVisible  = false;
+        //    PrepararVentanaInicio();
+        //    Dibujar.DibujarRectanguloPrincipal();
 
-            Elfo jugador = new Elfo("Elfo");
-            Enemigo enemigo = new Enemigo("Fantasmikos", Sprites.Fantasmicos, 100, 18, 12, 3);
+        //    Caballero jugador = new Caballero("Caballero");
+        //    Enemigo enemigo = new Enemigo("Centauro", Sprites.Centauro, 100, 18, 12, 3);
 
-            Combate combate = new Combate(jugador, enemigo);
+        //    Combate combate = new Combate(jugador, enemigo);
 
-            combate.DibujarInterfazCombate();
-            combate.EmpezarCombate();
-        }
+        //    combate.DibujarInterfazCombate();
+        //    combate.EmpezarCombate();
+        //}
     }
 }

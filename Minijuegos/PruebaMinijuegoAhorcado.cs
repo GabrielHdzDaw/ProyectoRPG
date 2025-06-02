@@ -32,7 +32,7 @@ namespace ProyectoRPG.Minijuegos
         //public static void Main(string[] args)
         //{
         //    PrepararVentanaInicio();
-        //    List<string> palabras = new List<string> ();
+        //    List<string> palabras = new List<string>();
         //    palabras.Add("tomate");
         //    palabras.Add("ballena");
         //    palabras.Add("berenjena");

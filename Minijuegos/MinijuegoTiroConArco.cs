@@ -18,7 +18,7 @@ namespace ProyectoRPG.Minijuegos
 
         public MinijuegoTiroConArco() { }
 
-        public void Empezar()
+        public int Empezar()
         {
             Console.Clear();
             Console.CursorVisible = false;
@@ -33,7 +33,7 @@ namespace ProyectoRPG.Minijuegos
             
             Console.CursorVisible = true;
             Console.WriteLine($"Has ganado: {puntuacion} puntos");
-            
+            return puntuacion;
         }
 
         static int SeleccionarLineaHorizontal()
