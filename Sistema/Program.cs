@@ -9,13 +9,13 @@
 
 using System;
 using System.Runtime.InteropServices;
+using ProyectoRPG.Interfaz;
 
 
 namespace ProyectoRPG.Sistema
 {
     internal class Program
     {
-        // Ajustes para la pantalla
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern nint GetConsoleWindow();
 
@@ -33,20 +33,18 @@ namespace ProyectoRPG.Sistema
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
-        //public static void Main(string[] args)
-        //{
-        //    PrepararVentanaInicio();
+         public static void Main(string[] args)
+         {
+            PrepararVentanaInicio();
+            Dibujar.DibujarRectanguloPrincipal();
+            Dibujar.Inicio();
 
-        //    Dibujar.DibujarRectanguloPrincipal();
-
-        //    // Dibujar.Inicio();
-
-        //    int opcion = 0;
-        //    while (opcion != 4)
-        //    {
-        //        opcion = MenuPrincipal.Menu();
-        //        opcion = MenuPrincipal.OpcionSeleccionada(opcion);
-        //    }
-        //}
+            int opcion = 0;
+            while (opcion != 4)
+            {
+                opcion = MenuPrincipal.Menu();
+                opcion = MenuPrincipal.OpcionSeleccionada(opcion);
+            }
+         }
     }
 }

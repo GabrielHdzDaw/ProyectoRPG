@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProyectoRPG.Minijuegos
 {
     
-    internal class Ahorcado:Minijuego
+    internal class MinijuegoAhorcado : Minijuego
     {
         List<string> palabras = new List<string>();
         int palabra;
@@ -15,9 +15,9 @@ namespace ProyectoRPG.Minijuegos
         int vidas;
         int maxVidas;
         bool ganado;
-        public Ahorcado(List<string> palabras)
+        public MinijuegoAhorcado()
         {
-            this.palabras = palabras;
+            RellenarLista();
             palabra = 0;
             estado = "";
             vidas = 0;
@@ -27,6 +27,17 @@ namespace ProyectoRPG.Minijuegos
 
         public List<string> GetPalabras() { return palabras; }
         public int GetPalabra() { return palabra; }
+
+        public List<string> RellenarLista()
+        {
+            palabras.Add("tomate");
+            palabras.Add("ballena");
+            palabras.Add("berenjena");
+            palabras.Add("hipopotamo");
+            palabras.Add("sandia");
+            palabras.Add("lechuga");
+            return palabras;
+        }
         public string GetEstado()
         {
             string res = "";
@@ -181,11 +192,13 @@ namespace ProyectoRPG.Minijuegos
             {
                 Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 20);
                 Console.WriteLine($"¡Has ganado! La palabra era: {palabras[palabra]}");
+                PuntuacionMinijuego += 50;
             }
             else
             {
                 Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 20);
                 Console.WriteLine($"¡Has perdido! La palabra era: {palabras[palabra]}");
+                PuntuacionMinijuego += 10;
             }
         }
     }

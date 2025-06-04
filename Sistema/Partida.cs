@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ProyectoRPG.Interfaz;
+using ProyectoRPG.Minijuegos;
 using ProyectoRPG.Personajes;
 using ProyectoRPG.Recursos;
 
@@ -92,7 +93,7 @@ namespace ProyectoRPG.Sistema
             return nombre.Length == 0 || nombre.Length > 30 || caracterNoValido || nombresArchivos.Contains($"{nombre}.json");
         }
 
-        private static void ClaseElegida()
+        private static int ClaseElegida()
         {
             string[] opciones = ["Mago", "Caballero", "Elfo", "Picaro"];
             string[] textosPersonajes = ["Un personaje que vive en una constante batalla mental",
@@ -106,8 +107,11 @@ namespace ProyectoRPG.Sistema
 
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
-            while (tecla.Key != ConsoleKey.Enter)
+            bool personajeElegido = false;
+            while (!personajeElegido)
             {
+                Console.CursorVisible = false;
+
                 int espaciadoVertical = 1;
                 Dibujar.DibujarRectanguloPrincipal();
                 Dibujar.DibujarRectangulo(Dibujar.X, Dibujar.Y, Dibujar.AlturaRectangulo, Dibujar.AnchuraRectangulo / 4, Dibujar.Caracter);
@@ -168,18 +172,49 @@ namespace ProyectoRPG.Sistema
                                 Console.Clear();
                             }
                             break;
+                        case ConsoleKey.Enter:
+                            personajeElegido = true;
+                            break;
                     }
                 }
             }
+            
             Console.CursorVisible = true;
+            return indice;
         }
 
         public static Partida NuevaPartida()
         {
             string nombreUsuario = NombreElegido();
-            ClaseElegida();
-            // Cinematica
-            // Minijuego
+            int personaje = ClaseElegida();
+            Dibujar.LimpiarPantalla();
+            Dibujar.Cinematica(personaje);
+            
+            switch (personaje)
+            {
+                case 0:
+                    MinijuegoPeleaMagos minijuego1 = new MinijuegoPeleaMagos();
+                    minijuego1.Jugar();
+                    Console.Clear();
+                    break;
+                case 1:
+                    MinijuegoDados minijuego2 = new MinijuegoDados();
+                    minijuego2.Jugar();
+                    Console.Clear();
+                    break;
+                case 2:
+                    MinijuegoTiroConArco minijuego3 = new MinijuegoTiroConArco();
+                    minijuego3.Jugar();
+                    Console.Clear();
+                    break;
+                case 3: 
+                    MinijuegoAhorcado minijuego4 = new MinijuegoAhorcado();
+                    minijuego4.Jugar();
+                    Console.Clear();
+                    break;
+            }
+            
+            // Continuación con el mapa después de cada minijuego
             // Se crea el OBJETO personaje y se devuelve esta partida con ese personaje dentro
 
             return new Partida();

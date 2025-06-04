@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Interfaz
 {
@@ -121,22 +122,21 @@ namespace ProyectoRPG.Interfaz
         public static void LimpiarPantallaSimple()
         {
             Console.CursorVisible = false;
-            for (int i = x+1; i < x + anchuraRectangulo; i++)
+            for (int j = y + 1; j < y + alturaRectangulo - 1; j++)
             {
-                for (int j = y+1; j < y + alturaRectangulo; j++)
+                for (int i = x + 1; i < x + anchuraRectangulo - 1; i++)
                 {
                     Console.SetCursorPosition(i, j);
-                    Console.Write(" ");
+                    Console.Write(' ');
                 }
             }
             Console.CursorVisible = true;
         }
 
+
         public static void LimpiarPantalla()
         {
-            Console.BackgroundColor = ConsoleColor.Gray;
-            LimpiarPantallaSimple();
-            Console.ResetColor();
+            Console.BackgroundColor = ConsoleColor.Black;
             LimpiarPantallaSimple();
         }
 
@@ -204,14 +204,15 @@ namespace ProyectoRPG.Interfaz
             bool pantallaCompleta = false;
             while (!pantallaCompleta)
             {
+                Console.CursorVisible = false;
                 if (Console.KeyAvailable)
                 {
-                    pantallaCompleta = Console.ReadKey().Key == ConsoleKey.Enter;
+                    pantallaCompleta = Console.ReadKey(true).Key == ConsoleKey.Enter;
                 }
             }
             Console.CursorVisible = true;
 
-            LimpiarPantalla();
+            LimpiarPantalla(); 
 
             string titulo = "\r\n██████╗░██████╗░░██████╗░" +
                             "\r\n██╔══██╗██╔══██╗██╔════╝░" +
@@ -226,7 +227,7 @@ namespace ProyectoRPG.Interfaz
             EscribirTexto(subtitulo1);
             EscribirTexto("...");
 
-            string subtitulo2 = "Pulse ENTER para comenzar la aventura";
+            string subtitulo2 = "Pulse ENTER para comenzar la aventura...";
             Console.SetCursorPosition(inicioX - subtitulo2.Length / 2, inicioY + 2);
             EscribirTexto(subtitulo2);
 
@@ -236,14 +237,67 @@ namespace ProyectoRPG.Interfaz
 
             while (!enterPulsado)
             {
+                Console.CursorVisible = false;
                 if (Console.KeyAvailable)
                 {
-                    enterPulsado = Console.ReadKey().Key == ConsoleKey.Enter;
+                    enterPulsado = Console.ReadKey(true).Key == ConsoleKey.Enter;
                 }
             }
 
             LimpiarPantalla();
             Console.CursorVisible = true;
+        }
+        public static void Cinematica(int personaje)
+        {
+            int inicioX = x + anchuraRectangulo / 2;
+            int inicioY = y + alturaRectangulo / 2;
+            switch (personaje)
+            {
+                case 0:
+                    DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.5), Dibujar.Y + Dibujar.AlturaRectangulo / 6 / 2, Sprites.Mago);
+                    Console.CursorVisible = false;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Mago !");
+                    Console.ResetColor();
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Maelion, el mago errante, conjura hechizos que hasta los dioses temen recordar\"");
+                    break;
+                case 1:
+                    DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.5), Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 6 / 2, Sprites.Caballero);
+                    Console.CursorVisible = false;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Caballero !");
+                    Console.ResetColor();
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Sir Dareth, sin reino ni escudo, lucha por un honor más pesado que su armadura\"");
+                    break;
+                case 2:
+                    DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.25), Dibujar.Y + Dibujar.AlturaRectangulo / 6 / 2 + 1, Sprites.Elfo);
+                    Console.CursorVisible = false;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Elfo !");
+                    Console.ResetColor();
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Elarien, guardián de los bosques antiguos, dispara con la precisión de siglos vividos en silencio\"");
+                    break;
+                case 3:
+                    DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.4), Dibujar.Y + Dibujar.AlturaRectangulo / 6 / 2 + 1, Sprites.Picaro);
+                    Console.CursorVisible = false;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Picaro !");
+                    Console.ResetColor();
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Kael, sombra entre sombras, roba secretos mejor guardados que el oro\"");
+                    break;
+            }
+            DibujarSpriteCentrado(inicioX, inicioY + 12, "Para jugar pulse ENTER...");
+            bool jugarMinijuego = false;
+            while (!jugarMinijuego)
+            {
+                Console.CursorVisible = false;
+                if (Console.KeyAvailable)
+                {
+                    jugarMinijuego = Console.ReadKey(true).Key == ConsoleKey.Enter;
+                }
+            }
+            Console.CursorVisible = true;
+
         }
     }
 }

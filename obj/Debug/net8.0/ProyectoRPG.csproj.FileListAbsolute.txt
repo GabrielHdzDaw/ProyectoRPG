@@ -1,0 +1,15 @@
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\bin\Debug\net8.0\ProyectoRPG.exe
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\bin\Debug\net8.0\ProyectoRPG.deps.json
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\bin\Debug\net8.0\ProyectoRPG.runtimeconfig.json
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\bin\Debug\net8.0\ProyectoRPG.dll
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\bin\Debug\net8.0\ProyectoRPG.pdb
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.GeneratedMSBuildEditorConfig.editorconfig
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.AssemblyInfoInputs.cache
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.AssemblyInfo.cs
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.csproj.CoreCompileInputs.cache
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.sourcelink.json
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.dll
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\refint\ProyectoRPG.dll
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.pdb
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ProyectoRPG.genruntimeconfig.cache
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Debug\net8.0\ref\ProyectoRPG.dll

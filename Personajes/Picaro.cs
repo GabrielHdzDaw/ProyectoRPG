@@ -13,7 +13,7 @@ namespace ProyectoRPG.Personajes
     
     internal class Picaro:Jugador
     {
-        Ahorcado minijuego = new Ahorcado(new List<string>() // Hacer txt con un puñao de palabras y cargar 10 de ellas random
+        MinijuegoAhorcado minijuego = new Ahorcado(new List<string>() // Hacer txt con un puñao de palabras y cargar 10 de ellas random
         {
             "dragón", "castillo", "princesa", "caballero", "aventura", "tesoro", "magia", "espada", "escudo", "reino"
         });
@@ -28,7 +28,7 @@ namespace ProyectoRPG.Personajes
             SetArma(arma);
         }
 
-        public Ahorcado GetMinijuego()
+        public MinijuegoAhorcado GetMinijuego()
         {
             return minijuego;
         }

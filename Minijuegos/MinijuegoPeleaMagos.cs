@@ -62,9 +62,15 @@ namespace ProyectoRPG.Minijuegos
 
             Console.SetCursorPosition(0, 6);
             if (progresoJugador >= maxProgreso)
+            {
                 Console.WriteLine("Has derrotado al enemigo.");
+                PuntuacionMinijuego += 50;
+            }
             else
+            {
                 Console.WriteLine("El rival te derrotó.");
+                PuntuacionMinijuego += 10;
+            }
 
             Console.ResetColor();
         }

@@ -79,9 +79,15 @@ namespace ProyectoRPG.Minijuegos
             } while (dadoJugador == dadoMaquina);
 
             if (dadoJugador > dadoMaquina)
+            {
                 Console.WriteLine("Has derrotado al enemigo");
+                PuntuacionMinijuego += 50;
+            }
             else
+            { 
                 Console.WriteLine("El enemigo ganó la batalla");
+                PuntuacionMinijuego += 10;
+            }
         }
 
         public void MostrarDadosCentrados(int valorJugador, int valorMaquina)

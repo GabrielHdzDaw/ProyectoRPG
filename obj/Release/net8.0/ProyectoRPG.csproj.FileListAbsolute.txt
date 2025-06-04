@@ -1,0 +1,5 @@
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Release\net8.0\ProyectoRPG.GeneratedMSBuildEditorConfig.editorconfig
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Release\net8.0\ProyectoRPG.AssemblyInfoInputs.cache
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Release\net8.0\ProyectoRPG.AssemblyInfo.cs
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Release\net8.0\ProyectoRPG.csproj.CoreCompileInputs.cache
+E:\DAW\1DAW\PROGRAMACIÓN\ProyectoRPG\obj\Release\net8.0\ProyectoRPG.sourcelink.json

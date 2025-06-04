@@ -77,7 +77,6 @@ namespace ProyectoRPG.Sistema
                     break;
                 case 1:
                     Partida partida = Partida.NuevaPartida();
-                    // ···
                     break;
                 case 2:
                     Records();

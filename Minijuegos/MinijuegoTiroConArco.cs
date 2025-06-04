@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
-    internal class MinijuegoTiroConArco:Minijuego
+    internal class MinijuegoTiroConArco : Minijuego
     {
-        int puntuacion = 0;
-
-        int tiradas = 3;
-        int ancho = 80; 
-        int alto = 25;
-        int top = 0;
+        private int puntuacion = 0;
+        private int tiradas = 3;
 
         public MinijuegoTiroConArco() { }
 
-        public int Empezar()
+        public void Jugar()
         {
             Console.Clear();
             Console.CursorVisible = false;
@@ -27,16 +20,12 @@ namespace ProyectoRPG.Minijuegos
             {
                 int y = SeleccionarLineaHorizontal();
                 int x = SeleccionarLineaVertical(y);
-   
-                puntuacion += MostrarImpacto(x,y);
+
+                puntuacion += MostrarImpacto(x, y);
             }
-            
-            Console.CursorVisible = true;
-            Console.WriteLine($"Has ganado: {puntuacion} puntos");
-            return puntuacion;
         }
 
-        static int SeleccionarLineaHorizontal()
+        private int SeleccionarLineaHorizontal()
         {
             int y = 1;
             int direccion = 1;
@@ -59,7 +48,7 @@ namespace ProyectoRPG.Minijuegos
             return y;
         }
 
-        static int SeleccionarLineaVertical(int yFijo)
+        private int SeleccionarLineaVertical(int yFijo)
         {
             int x = 1;
             int direccion = 1;
@@ -74,7 +63,7 @@ namespace ProyectoRPG.Minijuegos
                 for (int j = 1; j < Console.WindowHeight - 1; j++)
                     Dibujar.DibujarCaracter(x, j, '|');
 
-                Thread.Sleep(1);
+                Thread.Sleep(100);
                 x += direccion;
 
                 if (x == Console.WindowWidth - 2 || x == 1)
@@ -85,7 +74,7 @@ namespace ProyectoRPG.Minijuegos
             return x;
         }
 
-        static int MostrarImpacto(int x, int y)
+        private int MostrarImpacto(int x, int y)
         {
             DibujarDiana();
 
@@ -100,7 +89,7 @@ namespace ProyectoRPG.Minijuegos
             int puntos = CalcularPuntos(x, y);
 
             Console.SetCursorPosition(0, Console.WindowHeight - 2);
-            Console.WriteLine("¡Disparo realizado! Has ganado " + puntos + " puntos.");
+            Console.WriteLine($"¡Disparo realizado! Has ganado {puntos} puntos.");
 
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
             Console.WriteLine("Pulsa cualquier tecla para continuar...");
@@ -109,8 +98,7 @@ namespace ProyectoRPG.Minijuegos
             return puntos;
         }
 
-
-        static void DibujarDiana()
+        private void DibujarDiana()
         {
             Console.Clear();
 
@@ -132,7 +120,8 @@ namespace ProyectoRPG.Minijuegos
                 Dibujar.DibujarRectangulo(posX, posY, altura, anchura, caracteres[i]);
             }
         }
-        static int CalcularPuntos(int x, int y)
+
+        private int CalcularPuntos(int x, int y)
         {
             int anchoConsola = Console.WindowWidth;
             int altoConsola = Console.WindowHeight;
@@ -157,9 +146,5 @@ namespace ProyectoRPG.Minijuegos
 
             return 0;
         }
-
-
-
-
     }
 }
