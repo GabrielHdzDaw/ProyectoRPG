@@ -283,7 +283,7 @@ namespace ProyectoRPG.Sistema
         {
             try
             {
-                string[] lineas = File.ReadAllLines("mapa.txt");
+                string[] lineas = File.ReadAllLines("./../../../Recursos/mapa.txt");
 
                 int filas = lineas.Length;
                 int columnas = lineas[0].Length;
@@ -314,9 +314,10 @@ namespace ProyectoRPG.Sistema
         public void GuardarPartida()
         {
             string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("./jugadores/" + NombreArchivo(), json);
+            File.WriteAllText("./../../../Recursos/jugadores/" + NombreArchivo(), json);
         }
 
+        // Añadir prefijo ruta si fuera necesario (./../../../Recursos/)
         static Partida CargarPartida(string archivo)
         {
             if (!File.Exists(archivo))
