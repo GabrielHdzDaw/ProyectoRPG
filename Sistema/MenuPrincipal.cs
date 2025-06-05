@@ -73,10 +73,11 @@ namespace ProyectoRPG.Sistema
             int resultado = opcion;
             switch(opcion)
             {
-                case 0: // Continuar
+                case 0:
                     break;
                 case 1:
                     Partida partida = Partida.NuevaPartida();
+                    partida.Continuar(partida);
                     break;
                 case 2:
                     Records();

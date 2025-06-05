@@ -65,7 +65,7 @@ namespace ProyectoRPG.Minijuegos
 
         public ConsoleKey GenerarTeclaAleatoria()
         {
-            ConsoleKey[] teclas = { ConsoleKey.LeftArrow, ConsoleKey.RightArrow };
+            ConsoleKey[] teclas = { ConsoleKey.Q, ConsoleKey.E };
             return teclas[random.Next(teclas.Length)];
         }
 
@@ -75,7 +75,7 @@ namespace ProyectoRPG.Minijuegos
             int y = Console.WindowHeight / 2;
 
             Console.SetCursorPosition(0, y);
-            ImprimirCentrado("Presiona: " + (teclaObjetivo == ConsoleKey.LeftArrow ? "Izquierda" : "Derecha  "));
+            ImprimirCentrado("Presiona: " + (teclaObjetivo == ConsoleKey.Q ? "Q" : "E"));
         }
 
         public void MostrarBarras()

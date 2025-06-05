@@ -228,7 +228,82 @@ namespace ProyectoRPG.Sistema
 
             partida.GuardarPartida();
 
-            return new Partida();
+            return partida;
+        }
+
+        public void Continuar(Partida partida)
+        {
+            char[,] mapa = AbrirMapa();
+            Console.CursorVisible = false;
+
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+
+            while(tecla.Key != ConsoleKey.Escape)
+            {
+                Dibujar.DibujarMapa(mapa, partida.jugador.x, partida.jugador.y);
+
+                if(Console.KeyAvailable == true)
+                {
+                    tecla = Console.ReadKey(true);
+                    switch(tecla.Key)
+                    {
+                        case ConsoleKey.LeftArrow:
+                            char cUp = mapa[partida.jugador.x, partida.jugador.y - 1];
+                            if(cUp != 'A')
+                                partida.jugador.y -= 1;
+                            break;
+                        case ConsoleKey.RightArrow:
+                            char cDown = mapa[partida.jugador.x, partida.jugador.y + 1];
+                            if (cDown != 'A')
+                                partida.jugador.y += 1;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            char cLeft = mapa[partida.jugador.x - 1, partida.jugador.y];
+                                if (cLeft != 'A')
+                                    partida.jugador.x -= 1;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            char cRight = mapa[partida.jugador.x + 1, partida.jugador.y];
+                            if (cRight != 'A')
+                                partida.jugador.x += 1;
+                            break;
+                    }
+
+                    if(mapa[partida.jugador.x, partida.jugador.y] == 'C')
+                    {
+                        partida.GuardarPartida();
+                    }
+                }
+            }
+
+            Dibujar.LimpiarPantallaSimple();
+        }
+
+        private static char[,] AbrirMapa()
+        {
+            try
+            {
+                string[] lineas = File.ReadAllLines("mapa.txt");
+
+                int filas = lineas.Length;
+                int columnas = lineas[0].Length;
+
+                char[,] matriz = new char[filas, columnas];
+
+                for (int i = 0; i < filas; i++)
+                {
+                    for (int j = 0; j < columnas; j++)
+                    {
+                        matriz[i, j] = lineas[i][j];
+                    }
+                }
+
+                return matriz;
+            }
+            catch (IOException ex)
+            {
+                return new char[0, 0];
+            }
         }
 
         public string NombreArchivo()

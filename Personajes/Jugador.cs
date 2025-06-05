@@ -16,6 +16,8 @@ namespace ProyectoRPG.Personajes
         int ataque { get; set; }
         int defensa { get; set; }
         int velocidad { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
         public List<Ataque> Ataques { get; protected set; }
         protected InventarioPersonaje inventario;
         Arma? armaEquipada;
@@ -42,6 +44,8 @@ namespace ProyectoRPG.Personajes
             Ataques = new List<Ataque>();
             inventario = new InventarioPersonaje();
             inventario.AgregarObjeto(new Pocion(20));
+            x = 66;
+            y = 127;
         }
         
         public List<Ataque> GetAtaques()

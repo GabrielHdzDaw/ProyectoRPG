@@ -263,7 +263,7 @@ namespace ProyectoRPG.Interfaz
                     Console.ForegroundColor = ConsoleColor.White;
                     DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un mago errante, conjura hechizos que hasta los dioses temen recordar\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar una batalla de magos donde tienes que pulsar en la dirección que te indiquen, ¡preparate!, para jugar pulse ENTER...");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar una batalla de magos donde tienes que pulsar la tecla que te indiquen, ¡preparate!, para jugar pulse ENTER...");
                     break;
                 case 1:
                     DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.5), Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 6 / 2, Sprites.Caballero);
@@ -273,7 +273,7 @@ namespace ProyectoRPG.Interfaz
                     Console.ForegroundColor = ConsoleColor.White;
                     DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un caballero sin reino ni escudo, lucha por un honor más pesado que su armadura\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar a los dados, ¡preparate!, para jugar pulse ENTER...");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar a los dados, ¡atento a tus números y sabrás si has ganado!, para jugar pulse ENTER...");
                     break;
                 case 2:
                     DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.25), Dibujar.Y + Dibujar.AlturaRectangulo / 6 / 2 + 1, Sprites.Elfo);
@@ -307,7 +307,59 @@ namespace ProyectoRPG.Interfaz
                 }
             }
             Console.CursorVisible = true;
+        }
 
+        public static void DibujarMapa(char[,] mapa, int x, int y)
+        {
+            int maxX = Dibujar.X + 1;
+            int maxY = Dibujar.Y + 1;
+
+            for(int i=0; i < Dibujar.AlturaRectangulo - 2; i++)
+            {
+                for(int j=0; j < Dibujar.AnchuraRectangulo - 2; j++)
+                {
+                    Console.SetCursorPosition(maxX + j, maxY + i);
+
+                    char caracter = mapa[x - (Dibujar.AlturaRectangulo / 2 + 1) + i, y - (Dibujar.AnchuraRectangulo / 2 + 1) + j];
+
+                    switch(caracter)
+                    {
+                        case 'A':
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.BackgroundColor = ConsoleColor.Blue;
+                            break;
+                        case 'L':
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            break;
+                        case 'D':
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            break;
+                        case 'C':
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.BackgroundColor = ConsoleColor.Magenta;
+                            break;
+                        case 'M':
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                            break;
+                        case 'J':
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            break;
+                    }
+
+                    if(i == (Dibujar.AlturaRectangulo / 2 + 1) && j == (Dibujar.AnchuraRectangulo / 2 + 1))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        caracter = '@';
+                    }
+                    Console.Write(caracter);
+                }
+            }
+            Console.ResetColor();
         }
     }
 }
