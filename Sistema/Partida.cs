@@ -189,33 +189,44 @@ namespace ProyectoRPG.Sistema
             int personaje = ClaseElegida();
             Dibujar.LimpiarPantalla();
             Dibujar.Cinematica(personaje);
-            
+
+            Dibujar.LimpiarPantallaSimple();
+
+            bool resultado = false;
+            Jugador jugador = null;
             switch (personaje)
             {
                 case 0:
+                    jugador = new Mago(nombreUsuario);
                     MinijuegoPeleaMagos minijuego1 = new MinijuegoPeleaMagos();
-                    minijuego1.Jugar();
-                    Console.Clear();
+                    resultado = minijuego1.Jugar();
                     break;
                 case 1:
+                    jugador = new Caballero(nombreUsuario);
                     MinijuegoDados minijuego2 = new MinijuegoDados();
-                    minijuego2.Jugar();
-                    Console.Clear();
+                    resultado = minijuego2.Jugar();
                     break;
                 case 2:
+                    jugador = new Elfo(nombreUsuario);
                     MinijuegoTiroConArco minijuego3 = new MinijuegoTiroConArco();
-                    minijuego3.Jugar();
-                    Console.Clear();
+                    resultado = minijuego3.Jugar();
                     break;
                 case 3: 
+                    jugador = new Picaro(nombreUsuario);
                     MinijuegoAhorcado minijuego4 = new MinijuegoAhorcado();
-                    minijuego4.Jugar();
-                    Console.Clear();
+                    resultado = minijuego4.Jugar();
                     break;
             }
-            
-            // Continuación con el mapa después de cada minijuego
-            // Se crea el OBJETO personaje y se devuelve esta partida con ese personaje dentro
+
+            Dibujar.LimpiarPantallaSimple();
+
+            Partida partida = new Partida(jugador);
+            if(resultado)
+            {
+                partida.puntuacion = 50;
+            }
+
+            partida.GuardarPartida();
 
             return new Partida();
         }
@@ -228,8 +239,7 @@ namespace ProyectoRPG.Sistema
         public void GuardarPartida()
         {
             string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(NombreArchivo(), json);
-            Console.WriteLine("Catálogo guardado.");
+            File.WriteAllText("./jugadores/" + NombreArchivo(), json);
         }
 
         static Partida CargarPartida(string archivo)

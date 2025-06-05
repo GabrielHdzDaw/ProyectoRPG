@@ -78,24 +78,24 @@ namespace ProyectoRPG.Minijuegos
 
         public void DibujarPalabra()
         {
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 10);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 8, Console.WindowHeight / 2 - 3);
             Console.WriteLine("Palabra: " + estado);
         }
 
         public void DibujarAhorcado(string estado)
         {
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 1);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, Console.WindowHeight / 2 - 11);
 
             Console.WriteLine("____");
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 1);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, Console.WindowHeight / 2 - 9);
             Console.WriteLine("|");
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 2);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, Console.WindowHeight / 2 - 8);
             Console.WriteLine("|");
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 3);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, Console.WindowHeight / 2 - 7);
             Console.WriteLine("|");
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 + 4);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, Console.WindowHeight / 2 - 6);
             Console.WriteLine("_");
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 10);
             switch (estado)
             {
                 case "cabeza":
@@ -103,31 +103,31 @@ namespace ProyectoRPG.Minijuegos
                     break;
                 case "torso":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 9);
                     Console.Write("  |\n");
                     break;
                 case "brazoizq":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 9);
                     Console.Write(" /|\n");
                     break;
                 case "brazoder":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 9);
                     Console.Write(" /|\\\n");
                     break;
                 case "piernaizq":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 9);
                     Console.Write(" /|\\\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 2);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 8);
                     Console.Write(" /\n");
                     break;
                 case "piernader":
                     Console.Write("  O\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 1);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 9);
                     Console.Write(" /|\\\n");
-                    Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 2);
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 2, Console.WindowHeight / 2 - 8);
                     Console.Write(" / \\\n");
                     break;
             }
@@ -146,7 +146,7 @@ namespace ProyectoRPG.Minijuegos
         public void ActualizarPalabra()
         {
             bool acierto = false;
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 15);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 12);
             Console.Write("Introduce una letra: ");
             char letraUsuario = Convert.ToChar(Console.ReadLine());
             for (int i = 0; i < palabras[palabra].Length; i++)
@@ -169,10 +169,10 @@ namespace ProyectoRPG.Minijuegos
             DibujarAhorcado(GetEstado());
         }
 
-        public void Jugar()
+        public bool Jugar()
         {
             Random generator = new Random();
-            palabra = generator.Next(0, palabras.Count() + 1);
+            palabra = generator.Next(0, palabras.Count);
             estado = "";
             for (int i = 0; i < palabras[palabra].Length; i++)
             {
@@ -181,25 +181,39 @@ namespace ProyectoRPG.Minijuegos
 
             while (!HasGanado() && !EstasAhorcado())
             {
-                Console.Clear();
                 DibujarPalabra();
                 DibujarAhorcado(GetEstado());
 
                 ActualizarPalabra();
                 ActualizarAhorcado();
             }
+
             if (HasGanado())
             {
-                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 20);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 14);
                 Console.WriteLine($"¡Has ganado! La palabra era: {palabras[palabra]}");
                 PuntuacionMinijuego += 50;
             }
             else
             {
-                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 20);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 14);
                 Console.WriteLine($"¡Has perdido! La palabra era: {palabras[palabra]}");
                 PuntuacionMinijuego += 10;
             }
+
+            Console.CursorVisible = false;
+            Console.ResetColor();
+
+            for(int i=8; i>0; i--)
+            {
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 16);
+                Console.WriteLine($"Comenzando el juego en {i}...");
+                Thread.Sleep(1000);
+            }
+
+            return HasGanado();
         }
     }
 }

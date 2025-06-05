@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
@@ -26,13 +24,9 @@ namespace ProyectoRPG.Minijuegos
             teclaObjetivo = GenerarTeclaAleatoria();
         }
 
-        public void Jugar()
+        public bool Jugar()
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("¡Presiona la tecla que aparece en pantalla!");
-            Console.WriteLine("-------------------------------------------");
-
+            Dibujar.LimpiarPantallaSimple();
             MostrarBarras();
             MostrarFlecha();
 
@@ -60,19 +54,13 @@ namespace ProyectoRPG.Minijuegos
                 Thread.Sleep(10);
             }
 
-            Console.SetCursorPosition(0, 6);
-            if (progresoJugador >= maxProgreso)
-            {
-                Console.WriteLine("Has derrotado al enemigo.");
-                PuntuacionMinijuego += 50;
-            }
-            else
-            {
-                Console.WriteLine("El rival te derrotó.");
-                PuntuacionMinijuego += 10;
-            }
+            int centroY = Console.WindowHeight / 2 + 4;
+            Console.SetCursorPosition(0, centroY);
+            bool ganaste = progresoJugador >= maxProgreso;
 
             Console.ResetColor();
+            Thread.Sleep(5000);
+            return ganaste;
         }
 
         public ConsoleKey GenerarTeclaAleatoria()
@@ -83,31 +71,29 @@ namespace ProyectoRPG.Minijuegos
 
         public void MostrarFlecha()
         {
-            Console.SetCursorPosition(0, 4);
-            Console.Write("Presiona: ");
-            switch (teclaObjetivo)
-            {
-                case ConsoleKey.LeftArrow:
-                    Console.WriteLine("Izquierda");
-                    break;
-                case ConsoleKey.RightArrow:
-                    Console.WriteLine("Derecha  ");
-                    break;
-            }
+            int centroX = Console.WindowWidth / 2;
+            int y = Console.WindowHeight / 2;
+
+            Console.SetCursorPosition(0, y);
+            ImprimirCentrado("Presiona: " + (teclaObjetivo == ConsoleKey.LeftArrow ? "Izquierda" : "Derecha  "));
         }
 
         public void MostrarBarras()
         {
-            Console.SetCursorPosition(0, 2);
-            Console.Write("Jugador: [");
-            Console.Write(new string('█', progresoJugador));
-            Console.Write(new string(' ', maxProgreso - progresoJugador));
-            Console.WriteLine("]");
+            Console.CursorVisible = false;
+            int centroY = Console.WindowHeight / 2 - 2;
+            Console.SetCursorPosition(0, centroY);
+            ImprimirCentrado($"Jugador: [{new string('█', progresoJugador)}{new string(' ', maxProgreso - progresoJugador)}]");
 
-            Console.Write("Rival:   [");
-            Console.Write(new string('█', progresoRival));
-            Console.Write(new string(' ', maxProgreso - progresoRival));
-            Console.WriteLine("]");
+            Console.SetCursorPosition(0, centroY + 1);
+            ImprimirCentrado($"Rival:   [{new string('█', progresoRival)}{new string(' ', maxProgreso - progresoRival)}]");
+        }
+
+        private void ImprimirCentrado(string texto)
+        {
+            int centroX = (Console.WindowWidth - texto.Length) / 2;
+            Console.SetCursorPosition(centroX < 0 ? 0 : centroX, Console.CursorTop);
+            Console.WriteLine(texto);
         }
     }
 }

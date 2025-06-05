@@ -122,12 +122,12 @@ namespace ProyectoRPG.Interfaz
         public static void LimpiarPantallaSimple()
         {
             Console.CursorVisible = false;
-            for (int j = y + 1; j < y + alturaRectangulo - 1; j++)
+            for (int i = x + 1; i < x + anchuraRectangulo - 1; i++)
             {
-                for (int i = x + 1; i < x + anchuraRectangulo - 1; i++)
+                for (int j = y + 1; j < y + alturaRectangulo - 1; j++)
                 {
                     Console.SetCursorPosition(i, j);
-                    Console.Write(' ');
+                    Console.Write(" ");
                 }
             }
             Console.CursorVisible = true;
@@ -136,7 +136,9 @@ namespace ProyectoRPG.Interfaz
 
         public static void LimpiarPantalla()
         {
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            LimpiarPantallaSimple();
+            Console.ResetColor();
             LimpiarPantallaSimple();
         }
 
@@ -258,35 +260,43 @@ namespace ProyectoRPG.Interfaz
                     Console.CursorVisible = false;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Mago !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un mago errante, conjura hechizos que hasta los dioses temen recordar\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Maelion, el mago errante, conjura hechizos que hasta los dioses temen recordar\"");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar una batalla de magos donde tienes que pulsar en la dirección que te indiquen, ¡preparate!, para jugar pulse ENTER...");
                     break;
                 case 1:
                     DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.5), Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 6 / 2, Sprites.Caballero);
                     Console.CursorVisible = false;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Caballero !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un caballero sin reino ni escudo, lucha por un honor más pesado que su armadura\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Sir Dareth, sin reino ni escudo, lucha por un honor más pesado que su armadura\"");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar a los dados, ¡preparate!, para jugar pulse ENTER...");
                     break;
                 case 2:
                     DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.25), Dibujar.Y + Dibujar.AlturaRectangulo / 6 / 2 + 1, Sprites.Elfo);
                     Console.CursorVisible = false;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Elfo !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un elfo, guardián de los bosques antiguos, dispara con la precisión de siglos vividos en silencio\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Elarien, guardián de los bosques antiguos, dispara con la precisión de siglos vividos en silencio\"");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar a la diana, ¡preparate!, para jugar pulse ENTER...");
                     break;
                 case 3:
                     DibujarSpriteNormal(Convert.ToInt32(Dibujar.X + Dibujar.AnchuraRectangulo / 2.4), Dibujar.Y + Dibujar.AlturaRectangulo / 6 / 2 + 1, Sprites.Picaro);
                     Console.CursorVisible = false;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     DibujarSpriteCentrado(inicioX, inicioY + 8, "¡ Picaro !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un picaro, una sombra entre sombras, roba secretos mejor guardados que el oro\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Kael, sombra entre sombras, roba secretos mejor guardados que el oro\"");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar una partida al ahorcado, ¡preparate!, para jugar pulse ENTER...");
                     break;
             }
-            DibujarSpriteCentrado(inicioX, inicioY + 12, "Para jugar pulse ENTER...");
+            Console.ResetColor();
             bool jugarMinijuego = false;
             while (!jugarMinijuego)
             {

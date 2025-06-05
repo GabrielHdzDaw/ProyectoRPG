@@ -11,9 +11,8 @@ namespace ProyectoRPG.Minijuegos
 
         public MinijuegoTiroConArco() { }
 
-        public void Jugar()
+        public bool Jugar()
         {
-            Console.Clear();
             Console.CursorVisible = false;
 
             for (int i = 0; i < tiradas; i++)
@@ -23,6 +22,11 @@ namespace ProyectoRPG.Minijuegos
 
                 puntuacion += MostrarImpacto(x, y);
             }
+
+            Console.Clear();
+            Dibujar.DibujarRectanguloPrincipal();
+            // Mostrar si se ha ganado o no, omitir de la línea 97 a la 102
+            return puntuacion > 150;
         }
 
         private int SeleccionarLineaHorizontal()
@@ -37,6 +41,7 @@ namespace ProyectoRPG.Minijuegos
                 for (int x = 1; x < Console.WindowWidth - 1; x++)
                     Dibujar.DibujarCaracter(x, y, '-');
 
+                Dibujar.DibujarRectanguloPrincipal();
                 Thread.Sleep(100);
                 y += direccion;
 
@@ -63,7 +68,8 @@ namespace ProyectoRPG.Minijuegos
                 for (int j = 1; j < Console.WindowHeight - 1; j++)
                     Dibujar.DibujarCaracter(x, j, '|');
 
-                Thread.Sleep(100);
+                Dibujar.DibujarRectanguloPrincipal();
+                Thread.Sleep(10);
                 x += direccion;
 
                 if (x == Console.WindowWidth - 2 || x == 1)
@@ -101,7 +107,6 @@ namespace ProyectoRPG.Minijuegos
         private void DibujarDiana()
         {
             Console.Clear();
-
             int anchoConsola = Console.WindowWidth;
             int altoConsola = Console.WindowHeight;
 

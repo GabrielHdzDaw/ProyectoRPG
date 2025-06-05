@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
@@ -26,26 +27,12 @@ namespace ProyectoRPG.Minijuegos
             Random = new Random();
         }
 
-        public void Jugar()
+        public bool Jugar()
         {
             int dadoJugador, dadoMaquina;
 
-            Console.Clear();
-            Console.WriteLine("¡Comienza la batalla!");
-            Console.WriteLine("Presiona una tecla para tirar los dados...");
-
             do
             {
-                Console.ReadKey(true);
-                Console.Write("\nTirando los dados");
-                for (int i = 0; i < 3; i++)
-                {
-                    Thread.Sleep(1000);
-                    Console.Write(" .");
-                }
-
-                Console.WriteLine();
-
                 int delay = TiempoAnimacion / PasosAnimacion;
                 int mostrarJugador = 0, mostrarMaquina = 0;
 
@@ -54,9 +41,7 @@ namespace ProyectoRPG.Minijuegos
                     mostrarJugador = Random.Next(1, 7);
                     mostrarMaquina = Random.Next(1, 7);
 
-                    Console.Clear();
-                    Console.WriteLine("¡Comienza la batalla!");
-                    Console.WriteLine("\nDados girando...");
+                    Dibujar.LimpiarPantallaSimple();
 
                     MostrarDadosCentrados(mostrarJugador, mostrarMaquina);
 
@@ -66,28 +51,27 @@ namespace ProyectoRPG.Minijuegos
                 dadoJugador = mostrarJugador;
                 dadoMaquina = mostrarMaquina;
 
-                Console.WriteLine($"\nTú sacaste: {dadoJugador}");
-                Console.WriteLine($"El enemigo sacó: {dadoMaquina}");
-
                 if (dadoJugador == dadoMaquina)
                 {
-                    Console.WriteLine("Empate, ¡se repite la tirada!");
                     Thread.Sleep(2000);
-                    Console.Clear();
+                    Dibujar.LimpiarPantallaSimple();
                 }
 
             } while (dadoJugador == dadoMaquina);
 
+            bool ganaste;
             if (dadoJugador > dadoMaquina)
             {
-                Console.WriteLine("Has derrotado al enemigo");
-                PuntuacionMinijuego += 50;
+                ganaste = true;
             }
             else
-            { 
-                Console.WriteLine("El enemigo ganó la batalla");
-                PuntuacionMinijuego += 10;
+            {
+                ganaste = false;
             }
+
+            Thread.Sleep(5000);
+
+            return ganaste;
         }
 
         public void MostrarDadosCentrados(int valorJugador, int valorMaquina)
@@ -108,16 +92,23 @@ namespace ProyectoRPG.Minijuegos
             int ancho = Console.WindowWidth;
             int alto = Console.WindowHeight;
 
-            int filaInicio = (alto / 2) - 3;
+            int filaInicio = (alto / 2) - 4;
             int colInicio = (ancho / 2) - 16;
+
+            // Etiquetas "Tú" y "Rival"
+            Console.SetCursorPosition(colInicio + 3, filaInicio);
+            Console.Write("Tú");
+            Console.SetCursorPosition(colInicio + 16, filaInicio);
+            Console.Write("Rival");
 
             for (int i = 0; i < jugador.Length; i++)
             {
-                Console.SetCursorPosition(colInicio, filaInicio + i);
+                Console.SetCursorPosition(colInicio, filaInicio + i + 1);
+                Console.CursorVisible = false;
                 Console.Write(jugador[i] + "     " + maquina[i]);
             }
 
-            Console.SetCursorPosition(0, filaInicio + 6);
+            Console.SetCursorPosition(0, filaInicio + jugador.Length + 2);
         }
     }
 }
