@@ -75,7 +75,7 @@ namespace ProyectoRPG.Sistema
         {
             string cadenaCaracteresNoValidos = "ºª\\!|\"@·#$~%€&¬/()='?¡¿`^[+*]´¨{ç},;.:-_<>";
 
-            List<FileInfo> ficheros = new List<FileInfo>(new DirectoryInfo("./jugadores").GetFiles());
+            List<FileInfo> ficheros = new List<FileInfo>(new DirectoryInfo("./../../../Recursos/jugadores").GetFiles());
             List<string> nombresArchivos = ficheros.Select(f => f.Name).ToList();
 
             bool caracterNoValido = false;
