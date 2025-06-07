@@ -8,13 +8,5 @@ namespace ProyectoRPG.Minijuegos
 {
     public class Minijuego
     {
-        protected int puntuacionMinijuego;
-
-        public Minijuego()
-        {
-            PuntuacionMinijuego = 0;
-        }
-
-        protected int PuntuacionMinijuego { get => puntuacionMinijuego; set => puntuacionMinijuego = value; }
     }
 }

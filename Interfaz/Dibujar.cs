@@ -11,10 +11,10 @@ namespace ProyectoRPG.Interfaz
 {
     public class Dibujar
     {
-        static int anchuraRectangulo = 176; // Dentro el ancho es de 175
-        static int alturaRectangulo = 44; // Dentro el ancho es de 43
-        static int x = (Console.WindowWidth - anchuraRectangulo) / 2 + 1;
-        static int y = (Console.WindowHeight - alturaRectangulo) / 2 + 1;
+        public static int anchuraRectangulo = 176; // Dentro el ancho es de 175
+        public static int alturaRectangulo = 44; // Dentro el ancho es de 43
+        public static int x = (Console.WindowWidth - anchuraRectangulo) / 2 + 1;
+        public static int y = (Console.WindowHeight - alturaRectangulo) / 2 + 1;
         static char caracter = '▓';
 
         public static int AnchuraRectangulo { get => anchuraRectangulo; }

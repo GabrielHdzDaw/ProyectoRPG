@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
@@ -146,23 +147,47 @@ namespace ProyectoRPG.Minijuegos
         public void ActualizarPalabra()
         {
             bool acierto = false;
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 12);
+
+            // Limpia la línea de entrada
+            int inputX = Console.WindowWidth / 2 - 9;
+            int inputY = Console.WindowHeight / 2 + 12;
+            Console.SetCursorPosition(inputX, inputY);
+            Console.Write(new string(' ', 40)); // Borra línea anterior
+            Console.SetCursorPosition(inputX, inputY);
             Console.Write("Introduce una letra: ");
-            char letraUsuario = Convert.ToChar(Console.ReadLine());
-            for (int i = 0; i < palabras[palabra].Length; i++)
+
+            string entrada = Console.ReadLine();
+
+            // Limpia mensaje de error anterior (si lo hubo)
+            Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
+            Console.Write(new string(' ', 60)); // Borra error anterior
+
+            if (char.TryParse(entrada, out char letraUsuario) && char.IsLetter(letraUsuario))
             {
-                if (palabras[palabra][i] == letraUsuario)
+                letraUsuario = char.ToLower(letraUsuario); // Por si se ingresa en mayúscula
+
+                for (int i = 0; i < palabras[palabra].Length; i++)
                 {
-                    estado = estado.Remove(i, 1).Insert(i, letraUsuario.ToString());
-                    acierto = true;
+                    if (palabras[palabra][i] == letraUsuario)
+                    {
+                        estado = estado.Remove(i, 1).Insert(i, letraUsuario.ToString());
+                        acierto = true;
+                    }
+                }
+
+                if (!acierto)
+                {
+                    AddDaño();
+                    ActualizarAhorcado();
                 }
             }
-            if (!acierto)
+            else
             {
-                AddDaño();
-                ActualizarAhorcado();
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
+                Console.WriteLine("¡ERROR! Debes introducir solo una letra.".PadRight(60));
             }
         }
+
 
         public void ActualizarAhorcado()
         {
@@ -193,14 +218,12 @@ namespace ProyectoRPG.Minijuegos
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 14);
                 Console.WriteLine($"¡Has ganado! La palabra era: {palabras[palabra]}");
-                PuntuacionMinijuego += 50;
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 14);
                 Console.WriteLine($"¡Has perdido! La palabra era: {palabras[palabra]}");
-                PuntuacionMinijuego += 10;
             }
 
             Console.CursorVisible = false;

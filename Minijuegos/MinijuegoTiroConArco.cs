@@ -26,10 +26,10 @@ namespace ProyectoRPG.Minijuegos
 
             if (tiradas == 3)
             {
-                Console.SetCursorPosition(Dibujar.X + 2, Dibujar.AlturaRectangulo - 39);
+                Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 39);
                 Console.WriteLine($"¡Tu puntuación total es de {puntuacion} puntos!".PadRight(60));
-                Console.SetCursorPosition(Dibujar.X + 2, Dibujar.AlturaRectangulo - 37);
-                
+                Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 37);
+
                 Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
                 Console.CursorVisible = false;
                 Console.ReadKey(true);
@@ -43,7 +43,7 @@ namespace ProyectoRPG.Minijuegos
 
         private int SeleccionarLineaHorizontal()
         {
-            int y = Dibujar.Y + 1;
+            int y = Dibujar.y + 1;
             int direccion = 1;
 
             while (!Console.KeyAvailable)
@@ -51,7 +51,7 @@ namespace ProyectoRPG.Minijuegos
                 Console.CursorVisible = false;
                 DibujarDiana();
 
-                for (int x = Dibujar.X + 1; x < Dibujar.X + Dibujar.AnchuraRectangulo - 1; x++)
+                for (int x = Dibujar.x + 1; x < Dibujar.x + Dibujar.anchuraRectangulo - 1; x++)
                 {
                     Console.CursorVisible = false;
                     Dibujar.DibujarCaracter(x, y, '-');
@@ -61,7 +61,7 @@ namespace ProyectoRPG.Minijuegos
                 Thread.Sleep(100);
                 y += direccion;
 
-                if (y == Dibujar.Y + Dibujar.AlturaRectangulo - 2 || y == Dibujar.Y + 1)
+                if (y == Dibujar.y + Dibujar.alturaRectangulo - 2 || y == Dibujar.y + 1)
                     direccion *= -1;
             }
 
@@ -71,7 +71,7 @@ namespace ProyectoRPG.Minijuegos
 
         private int SeleccionarLineaVertical(int yFijo)
         {
-            int x = Dibujar.X + 1;
+            int x = Dibujar.x + 1;
             int direccion = 1;
 
             while (!Console.KeyAvailable)
@@ -79,13 +79,13 @@ namespace ProyectoRPG.Minijuegos
                 Console.CursorVisible = false;
                 DibujarDiana();
 
-                for (int i = Dibujar.X + 1; i < Dibujar.X + Dibujar.AnchuraRectangulo - 1; i++)
+                for (int i = Dibujar.x + 1; i < Dibujar.x + Dibujar.anchuraRectangulo - 1; i++)
                 {
                     Console.CursorVisible = false;
                     Dibujar.DibujarCaracter(i, yFijo, '-');
                 }
                 Console.CursorVisible = false;
-                for (int j = Dibujar.Y + 1; j < Dibujar.Y + Dibujar.AlturaRectangulo - 1; j++)
+                for (int j = Dibujar.y + 1; j < Dibujar.y + Dibujar.alturaRectangulo - 1; j++)
                 {
                     Console.CursorVisible = false;
                     Dibujar.DibujarCaracter(x, j, '|');
@@ -95,7 +95,7 @@ namespace ProyectoRPG.Minijuegos
                 Thread.Sleep(10);
                 x += direccion;
 
-                if (x == Dibujar.X + Dibujar.AnchuraRectangulo - 2 || x == Dibujar.X + 1)
+                if (x == Dibujar.x + Dibujar.anchuraRectangulo - 2 || x == Dibujar.x + 1)
                     direccion *= -1;
             }
 
@@ -107,10 +107,10 @@ namespace ProyectoRPG.Minijuegos
         {
             DibujarDiana();
 
-            for (int i = Dibujar.X + 1; i < Dibujar.X + Dibujar.AnchuraRectangulo - 1; i++)
+            for (int i = Dibujar.x + 1; i < Dibujar.x + Dibujar.anchuraRectangulo - 1; i++)
                 Dibujar.DibujarCaracter(i, y, '-');
 
-            for (int j = Dibujar.Y + 1; j < Dibujar.Y + Dibujar.AlturaRectangulo - 1; j++)
+            for (int j = Dibujar.y + 1; j < Dibujar.y + Dibujar.alturaRectangulo - 1; j++)
                 Dibujar.DibujarCaracter(x, j, '|');
 
             Dibujar.DibujarCaracter(x, y, 'X');
@@ -119,10 +119,10 @@ namespace ProyectoRPG.Minijuegos
 
             Dibujar.DibujarRectanguloPrincipal();
 
-            Console.SetCursorPosition(Dibujar.X + 2, Dibujar.AlturaRectangulo - 39);
+            Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 39);
             Console.WriteLine($"¡Disparo realizado! Has ganado {puntos} puntos.".PadRight(60));
 
-            Console.SetCursorPosition(Dibujar.X + 2, Dibujar.AlturaRectangulo - 37);
+            Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 37);
             Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
             Console.CursorVisible = false;
             Console.ReadKey(true);
@@ -134,8 +134,8 @@ namespace ProyectoRPG.Minijuegos
         {
             Console.Clear();
 
-            int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2;
-            int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2;
+            int centroX = Dibujar.x + Dibujar.anchuraRectangulo / 2;
+            int centroY = Dibujar.y + Dibujar.alturaRectangulo / 2;
 
             int[] anchos = { 20, 14, 8 };
             int[] altos = { 10, 6, 2 };

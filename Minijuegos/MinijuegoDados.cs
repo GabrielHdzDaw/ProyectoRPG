@@ -7,7 +7,7 @@ using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
-    public class MinijuegoDados : Minijuego
+    internal class MinijuegoDados : Minijuego
     {
         public int TiempoAnimacion;
         public int PasosAnimacion;
@@ -69,8 +69,29 @@ namespace ProyectoRPG.Minijuegos
                 ganaste = false;
             }
 
-            Thread.Sleep(5000);
+            if (ganaste)
+            {
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
+                Console.WriteLine("¡Enhorabuena, has ganado al caballero!".PadRight(60));
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 30);
 
+                Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
+                Console.CursorVisible = false;
+                Console.ReadKey(true);
+            }
+            else
+            {
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
+                Console.WriteLine("¡Buen intento pero el caballero te ha ganado!".PadRight(60));
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 30);
+
+                Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
+                Console.CursorVisible = false;
+                Console.ReadKey(true);
+            }
+
+            Console.Clear();
+            Dibujar.DibujarRectanguloPrincipal();
             return ganaste;
         }
 

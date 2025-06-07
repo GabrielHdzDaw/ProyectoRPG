@@ -4,7 +4,7 @@ using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
-    public class MinijuegoPeleaMagos : Minijuego
+    internal class MinijuegoPeleaMagos : Minijuego
     {
         public const int maxProgreso = 30;
         public int progresoJugador;
@@ -58,8 +58,30 @@ namespace ProyectoRPG.Minijuegos
             Console.SetCursorPosition(0, centroY);
             bool ganaste = progresoJugador >= maxProgreso;
 
+            if (ganaste)
+            {
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
+                Console.WriteLine("¡Enhorabuena, has ganado al mago!".PadRight(60));
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 30);
+
+                Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
+                Console.CursorVisible = false;
+                Console.ReadKey(true);
+            }
+            else
+            {
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
+                Console.WriteLine("¡Buen intento pero el mago te ha ganado!".PadRight(60));
+                Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 30);
+
+                Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
+                Console.CursorVisible = false;
+                Console.ReadKey(true);
+            }
+
+            Console.Clear();
             Console.ResetColor();
-            Thread.Sleep(5000);
+            Dibujar.DibujarRectanguloPrincipal();
             return ganaste;
         }
 
