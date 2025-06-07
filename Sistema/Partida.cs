@@ -60,13 +60,13 @@ namespace ProyectoRPG.Sistema
         {
             if (escritoMal)
             {
-                Console.SetCursorPosition(Dibujar.X + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 2);
+                Console.SetCursorPosition(Dibujar.X + 10, Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 2);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("ERROR: El nombre debe estar entre 1 y 30 caracteres y no debe usar caracteres especiales o estar ya registrado.");
                 Console.ResetColor();
             }
 
-            Console.SetCursorPosition(Dibujar.X + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 2);
+            Console.SetCursorPosition(Dibujar.X + 10, Dibujar.Y + Dibujar.AlturaRectangulo / 2);
             Console.Write("Nombre del jugador (30 caracteres): ");
             return Console.ReadLine();
         }
@@ -181,6 +181,85 @@ namespace ProyectoRPG.Sistema
             
             Console.CursorVisible = true;
             return indice;
+        }
+
+        public static Partida RenaudarPartida()
+        {
+            Dibujar.LimpiarPantalla();
+            Console.CursorVisible = false;
+
+            int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 1;
+            int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
+
+            string rutaCarpeta = "./../../../Recursos/jugadores";
+            string[] archivosJson = Directory.GetFiles(rutaCarpeta, "*.json");
+
+
+            string[] opciones = new string[archivosJson.Length];
+
+            for (int i = 0; i < archivosJson.Length; i++)
+            {
+                opciones[i] = Path.GetFileNameWithoutExtension(archivosJson[i]);
+            }
+
+            int opcion = 0;
+
+            Dibujar.DibujarSpriteCentrado(centroX - 55, centroY - 15,"Selecciona la partida a continuar: ");
+
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+
+            string archivo = "";
+
+            // Repetir este bucle hasta que se pulse enter
+            while (tecla.Key != ConsoleKey.Enter)
+            {
+                int espaciadoVertical = 10;
+                for (int i = 0; i < opciones.Length; i++)
+                {
+                    if (opcion == i)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical,$"{i+1}. " + opciones[i]);
+                    espaciadoVertical -= 1;
+
+                    if (opcion == i)
+                    {
+                        Console.ResetColor();
+                    }
+
+                    if (tecla.Key == ConsoleKey.Enter)
+                    {
+                        archivo = opciones[i] + ".json";
+                    }
+                }
+
+                if (Console.KeyAvailable)
+                {
+                    tecla = Console.ReadKey(true);
+
+                    switch (tecla.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (opcion - 1 >= 0)
+                                opcion--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (opcion + 1 < opciones.Length)
+                                opcion++;
+                            break;
+                    }
+                }
+            }
+
+            Console.CursorVisible = true;
+
+
+            Partida continuarPartida = CargarPartida(archivo);
+
+            return continuarPartida;
         }
 
         public static Partida NuevaPartida()
@@ -317,13 +396,13 @@ namespace ProyectoRPG.Sistema
             File.WriteAllText("./../../../Recursos/jugadores/" + NombreArchivo(), json);
         }
 
-        // Añadir prefijo ruta si fuera necesario (./../../../Recursos/)
+        
         static Partida CargarPartida(string archivo)
         {
-            if (!File.Exists(archivo))
+            if (!File.Exists("./../../../Recursos/jugadores/" + archivo))
                 return null;
 
-            string json = File.ReadAllText(archivo);
+            string json = File.ReadAllText("./../../../Recursos/jugadores/" + archivo);
             Partida partida = JsonSerializer.Deserialize<Partida>(json);
 
             return partida != null ? partida : new Partida();

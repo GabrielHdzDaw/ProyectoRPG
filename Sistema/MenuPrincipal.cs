@@ -74,6 +74,8 @@ namespace ProyectoRPG.Sistema
             switch(opcion)
             {
                 case 0:
+                    Partida partidaEmpezada = Partida.RenaudarPartida();
+                    partidaEmpezada.Continuar(partidaEmpezada);
                     break;
                 case 1:
                     Partida partida = Partida.NuevaPartida();
