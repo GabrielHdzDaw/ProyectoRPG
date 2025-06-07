@@ -7,7 +7,7 @@ using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
-    internal class MinijuegoDados : Minijuego
+    public class MinijuegoDados : Minijuego
     {
         public int TiempoAnimacion;
         public int PasosAnimacion;

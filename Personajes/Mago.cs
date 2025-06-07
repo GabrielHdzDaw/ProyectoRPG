@@ -9,7 +9,7 @@ using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Personajes
 {
-    internal class Mago:Jugador
+    public class Mago:Jugador
     {
         public Mago(string nombre) 
             : base(nombre, Sprites.Mago, 80, 35, 5, 10)

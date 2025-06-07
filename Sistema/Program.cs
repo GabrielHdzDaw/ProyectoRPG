@@ -14,7 +14,7 @@ using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Sistema
 {
-    internal class Program
+    public class Program
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern nint GetConsoleWindow();
@@ -33,8 +33,8 @@ namespace ProyectoRPG.Sistema
             ShowWindow(consoleWindow, SW_MAXIMIZE);
         }
 
-         public static void Main(string[] args)
-         {
+        public static void Main(string[] args)
+        {
             PrepararVentanaInicio();
             Dibujar.DibujarRectanguloPrincipal();
             Dibujar.Inicio();
@@ -45,6 +45,6 @@ namespace ProyectoRPG.Sistema
                 opcion = MenuPrincipal.Menu();
                 opcion = MenuPrincipal.OpcionSeleccionada(opcion);
             }
-         }
+        }
     }
 }

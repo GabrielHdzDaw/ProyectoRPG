@@ -7,7 +7,7 @@ using ProyectoRPG.Inventario;
 
 namespace ProyectoRPG.Personajes
 {
-    internal abstract class Personaje
+    public abstract class Personaje
     {
         string nombre;
         string sprite;

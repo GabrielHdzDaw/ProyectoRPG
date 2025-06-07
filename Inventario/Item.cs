@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG.Inventario
 {
-    internal abstract class Item
+    public abstract class Item
     {
         string nombre;
         string descripcion;

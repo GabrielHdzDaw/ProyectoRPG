@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProyectoRPG.Inventario
 {
 
-    internal class Arma: Item
+    public class Arma: Item
     {
         public int dano { get; set; }
         public int danoCritico { get; set; }

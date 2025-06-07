@@ -9,7 +9,7 @@ using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Personajes
 {
-    internal class Caballero : Jugador
+    public class Caballero : Jugador
     {
 
         public Caballero(string nombre)

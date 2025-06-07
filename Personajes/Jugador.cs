@@ -8,7 +8,7 @@ using ProyectoRPG.Inventario;
 
 namespace ProyectoRPG.Personajes
 {
-    internal class Jugador:Personaje
+    public class Jugador:Personaje
     {
         string nombre { get; set; }
         string sprite { get; set; }

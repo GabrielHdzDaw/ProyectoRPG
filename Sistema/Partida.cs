@@ -14,7 +14,7 @@ using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Sistema
 {
-    class Partida
+    public class Partida
     {
         Jugador jugador { get; set; }
         int puntuacion { get; set; }

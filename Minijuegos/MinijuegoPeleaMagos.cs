@@ -4,7 +4,7 @@ using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Minijuegos
 {
-    internal class MinijuegoPeleaMagos : Minijuego
+    public class MinijuegoPeleaMagos : Minijuego
     {
         public const int maxProgreso = 30;
         public int progresoJugador;

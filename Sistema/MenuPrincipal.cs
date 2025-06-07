@@ -7,7 +7,7 @@ using ProyectoRPG.Interfaz;
 
 namespace ProyectoRPG.Sistema
 {
-    internal abstract class MenuPrincipal
+    public abstract class MenuPrincipal
     {
         public static int Menu()
         {

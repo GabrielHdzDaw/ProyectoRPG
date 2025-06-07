@@ -10,8 +10,8 @@ using ProyectoRPG.Inventario;
 
 namespace ProyectoRPG.Personajes
 {
-    
-    internal class Picaro:Jugador
+
+    public class Picaro:Jugador
     {
         public Picaro(string nombre) 
             : base(nombre, Sprites.Picaro, 75, 22, 8, 15)

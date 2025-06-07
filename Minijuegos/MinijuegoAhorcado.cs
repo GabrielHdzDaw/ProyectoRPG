@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProyectoRPG.Minijuegos
 {
     
-    internal class MinijuegoAhorcado : Minijuego
+    public class MinijuegoAhorcado : Minijuego
     {
         List<string> palabras = new List<string>();
         int palabra;

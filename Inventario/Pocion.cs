@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG.Inventario
 {
-    internal class Pocion: Item
+    public class Pocion: Item
     {
         public int curacion { get; set; }
         public Pocion(int curacion)

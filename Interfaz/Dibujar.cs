@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProyectoRPG.Recursos;
+using ProyectoRPG.Combate;
+using ProyectoRPG.Personajes;
 
 namespace ProyectoRPG.Interfaz
 {
-    internal class Dibujar
+    public class Dibujar
     {
         static int anchuraRectangulo = 176; // Dentro el ancho es de 175
         static int alturaRectangulo = 44; // Dentro el ancho es de 43
@@ -309,6 +311,7 @@ namespace ProyectoRPG.Interfaz
             Console.CursorVisible = true;
         }
 
+        
         public static void DibujarMapa(char[,] mapa, int x, int y)
         {
             int maxX = Dibujar.X + 1;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG.Minijuegos
 {
-    internal class Minijuego
+    public class Minijuego
     {
         protected int puntuacionMinijuego;
 

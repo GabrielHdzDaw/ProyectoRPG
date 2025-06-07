@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG.Combate
 {
-    internal class Ataque
+    public class Ataque
     {
         public string nombre { get; }
         public int dano { get; }

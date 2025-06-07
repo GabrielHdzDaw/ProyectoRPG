@@ -8,6 +8,8 @@ namespace ProyectoRPG.Recursos
 {
     abstract class Sprites
     {
+
+        
         static string mago = @"
                     ____ 
                   .'* *.'
@@ -171,6 +173,79 @@ l42 ==' '=='";
          / (        ^-/, |
         /, |          ^-  
         ^-";
+        static string caballeroChepa = @"
+  ,^.
+  |||
+  |||       _T_
+  |||   .-.[:|:].-.
+  ===_ /\| ""'""  |/
+   E]_|\/ \--|-|''''|
+   O  `'  '=[:]| C  |
+          /""""|  S |
+         /"""" `.__.'
+        []""/"" \[]
+        | \     / |
+        | |     | |
+      <\\\)     (///>
+";
+        static string goblin = @"
+     _____
+ .-,;='';_),-.
+  \_\(),()/_/
+    (,___,)
+   ,-/`~`\-,___
+  / /).:.('--._)
+ {_[ (_,_)
+     | Y |
+    /  |  \
+   """" """"";
+        static string caballeroElite = @"
+                                 _A_
+                                / | \
+                               |.-=-.|
+                               )\_|_/(
+                            .=='\   /`==.
+                          .'\   (`:')   /`.
+                        _/_ |_.-' : `-._|__\_
+                       <___>'\    :   / `<___>
+                       /  /   >=======<  /  /
+                     _/ .'   /  ,-:-.  \/=,'
+                    / _/    |__/v^v^v\__) \
+                    \(\)     |V^V^V^V^V|\_/
+                     (\\     \`---|---'/
+                       \\     \-._|_,-/
+                        \\     |__|__|
+                         \\   <___X___>
+                          \\   \..|../
+                           \\   \ | /
+                            \\  /V|V\
+                             \|/  |  \
+                              '--' `--`
+";
+        static string demonio = @"
+                                     ,--,  ,.-.
+               ,                   \,       '-,-`,'-.' | ._
+              /|           \    ,   |\         }  )/  / `-,',
+              [ ,          |\  /|   | |        /  \|  |/`  ,`
+              | |       ,.`  `,` `, | |  _,...(   (      .',
+              \  \  __ ,-` `  ,  , `/ |,'      Y     (   /_L\
+               \  \_\,``,   ` , ,  /  |         )         _,/
+                \  '  `  ,_ _`_,-,<._.<        /         /
+                 ', `>.,`  `  `   ,., |_      |         /
+                   \/`  `,   `   ,`  | /__,.-`    _,   `\
+               -,-..\  _  \  `  /  ,  / `._) _,-\`       \
+                \_,,.) /\    ` /  / ) (-,, ``    ,        |
+               ,` )  | \_\       '-`  |  `(               \
+              /  /```(   , --, ,' \   |`<`    ,            |
+             /  /_,--`\   <\  V /> ,` )<_/)  | \      _____)
+       ,-, ,`   `   (_,\ \    |   /) / __/  /   `----`
+      (-, \           ) \ ('_.-._)/ /,`    /
+      | /  `          `/ \\ V   V, /`     /
+   ,--\(        ,     <_/`\\     ||      /
+  (   ,``-     \/|         \-A.A-`|     /
+ ,>,_ )_,..(    )\          -,,_-`  _--`
+(_ \|`   _,/_  /  \_            ,--`
+ \( `   <.,../`     `-.._   _,-`";
 
         static string espadaCorda = @"
       /| ________________
@@ -223,11 +298,20 @@ O%%%%#============--
         public static string Fantasmicos { get => fantasmicos; }
         public static string Esqueleto { get => esqueleto; }
         public static string Centauro { get => centauro; }
+        public static string CaballeroChepa { get => caballeroChepa; }
+        public static string Goblin { get => goblin; }
+        public static string CaballeroElite { get => caballeroElite; }
         public static string EspadaCorda { get => espadaCorda; }
         public static string EspadaLarga { get => espadaLarga; }
         public static string Katana { get => katana; }
         public static string PunalBarato { get => punalBarato; }
         public static string PunalEngarzado { get => punalEngarzado; }
+        public static string PunalElectrico { get => punalElectrico; }
+        public static string ArcoCorto { get => arcoCorto; }
+        public static string Demonio { get => demonio; }
+        
+
+       
 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG.Personajes
 {
-    internal class Enemigo : Personaje
+    public class Enemigo : Personaje
     {
         public Enemigo(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad) : base(nombre, sprite, vida, ataque, defensa, velocidad)
         {

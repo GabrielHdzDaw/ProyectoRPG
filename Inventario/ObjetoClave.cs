@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoRPG.Inventario
 {
-    internal class ObjetoClave: Item
+    public class ObjetoClave: Item
     {
         public ObjetoClave(string nombre, string descripcion, int precio) 
             : base(nombre, descripcion, precio)

@@ -10,7 +10,7 @@ using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Combate
 {
-    internal class PruebaCombate
+    public class PruebaCombate
     {
         const int ANCHURA_RECTANGULO = 176; // Dentro el ancho es de 175
         const int ALTURA_RECTANGULO = 44; // Dentro el ancho es de 43
@@ -89,12 +89,12 @@ namespace ProyectoRPG.Combate
         }
         //public static void Main(string[] args)
         //{
-        //    Console.CursorVisible  = false;
+        //    Console.CursorVisible = false;
         //    PrepararVentanaInicio();
         //    Dibujar.DibujarRectanguloPrincipal();
 
         //    Caballero jugador = new Caballero("Caballero");
-        //    Enemigo enemigo = new Enemigo("Centauro", Sprites.Centauro, 100, 18, 12, 3);
+        //    Enemigo enemigo = new Enemigo("Demonio malo malo", Sprites.Demonio, 100, 18, 12, 3);
 
         //    Combate combate = new Combate(jugador, enemigo);
 

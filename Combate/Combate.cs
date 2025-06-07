@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using ProyectoRPG.Interfaz;
 using ProyectoRPG.Personajes;
 using ProyectoRPG.Inventario;
+using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Combate
 {
-    internal class Combate
+    public class Combate
     {
         Jugador jugador { get; set; }
         Enemigo enemigo { get; set; }
@@ -20,8 +21,11 @@ namespace ProyectoRPG.Combate
             this.enemigo = enemigo;
         }
 
+        
+
         public void DibujarInterfazCombate()
         {
+           
             Dibujar.DibujarRectanguloPrincipal();
             int alturaSubRect = 10;
             int yBase = Dibujar.Y + Dibujar.AlturaRectangulo - alturaSubRect;
@@ -37,11 +41,8 @@ namespace ProyectoRPG.Combate
 
             Dibujar.DibujarRectangulo(x1, yBase, alturaSubRect, ancho1, '▓');
             Dibujar.DibujarRectangulo(x2, yBase, alturaSubRect, ancho2, '▓');
-            Dibujar.DibujarRectangulo(x3, yBase, alturaSubRect, ancho3, '▓');
 
             DibujarSpritesCombate();
-
-
         }
         public void AnimacionAtaqueSprite(bool esJugador)
         {
@@ -397,6 +398,12 @@ namespace ProyectoRPG.Combate
             return pocionSeleccionada;
         }
 
+        public void OtorgarPocion()
+        {
+            Pocion pocion = new Pocion(50);
+            jugador.GetInventario().AgregarObjeto(pocion);
+        }
+
         public bool EmpezarCombate()
         {
             bool combateActivo = true;
@@ -451,6 +458,13 @@ namespace ProyectoRPG.Combate
                 else if (enemigo.EstaMuerto())
                 {
                     MostrarMensaje("¡Has ganado el combate!", true);
+                    Random random = new Random();
+                    if (random.Next(0, 100) < 50)
+                    {
+                        OtorgarPocion();
+                        MostrarMensaje("¡Has encontrado una poción!", true);
+                    }
+
                     combateActivo = false;
                     victoria = true;
                 }
@@ -565,7 +579,6 @@ namespace ProyectoRPG.Combate
             {
                 Thread.Sleep(1000);
             }
-
         }
 
         private void BorrarMensaje()
