@@ -98,7 +98,9 @@ namespace ProyectoRPG.Sistema
 
         private static void Records()
         {
-            // Por hacer
+            Dibujar.LimpiarPantalla();
+            //deserializar las partidas para sacar de ellas la puntuacion¿?
+            List<Partida> partidas = new List<Partida>();
         }
 
         private static void Creditos()
@@ -177,7 +179,7 @@ namespace ProyectoRPG.Sistema
                             Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2, Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 4 / 2, Sprites.Caballero); //dayron
                             break;
                         case 2:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 6, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 + 1, Sprites.Elfo); //gabriel
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 - 2, Sprites.Gabriel);
                             break;
                         case 3:
                             Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 + 1, Sprites.Picaro); //lucia

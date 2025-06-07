@@ -22,6 +22,40 @@ namespace ProyectoRPG.Recursos
 ";
 
 
+        static string gabriel = @"
+                  .....            
+             ....  ...:;;:.        
+           ..      .....:;+;.      
+                    ...::::;+:     
+                  ....::::::;;.    
+         .:::....:;;+++x++;:::::   
+       :;;;;:::::::;;;;;;;;;;:;+;. 
+  :   .:::;;;;..:::;;;;++;::;;;++; 
+   .. .;;:++;  .:;;;+:++;++;:;;;++ 
+      .::::;.  .:::;;;;;;;;::::;++ 
+            ...::::::::....:::::+; 
+......     .+:;++:::::::::...::;+; 
+.....      :+;+++;;::....::::::;++.
+::.:. ...::;;;+xxx+;;;;:::::::;+++;
+::::...:;++xxx++++++++++;;:;:;+xx+.
+.:::::;;;xxxxXxx+++++x+++;;;++++++.
+:::::;;;;;;+xxx+++;;++++++++++xx+;.
+;::::;+++;;++++++++++++x++++++x++;:
+;:;;;;;++++x++++xxx+xxx++;+++++++;+
+;:;;++xx+xXxxxx+xxxxxXXxxxxx++++;;x
+;;++++xxXxxxxxxxxxxxXxXXXxx++xx++++
+;+++xxxxXXXxXXxXxXxxxxXxXXXxxxx++x+
++++++xxXxxxXXx+xxxXXXxxxXXXxxxx++x+
+++xxxxxxxxXXXxxxxXXXXXxxXxXXXxxxx+;
+++xxxxXxXXXxxxXXXXXXXXXXXXXXXXXx++;
++xxxxxXXXXxxXXXXXXXXXXXXXXXXXx++;;;
+;;+xxXXXXxxxXXXXXX$$XXXXXXXxx+;;;;;
+;:;xxxxxxxXxxXXXX$$X$Xx++++;;;;;;;;
+:;;+xxx+++++xXXXXXXXXx+;;;;;;++++;;
+....;++;;::;xXXXXXXXx++++++xxx++++;
+.......:::;+xxxXXXXx+xxxxxxxxx++++;
+ ";
+
         static string carlos = @"
 ........................-=++***+==-.......................
 ....................:=*############*=:....................
@@ -343,7 +377,7 @@ O%%%%#============--
         public static string Carlos { get => carlos; }
     //  public static string Alvaro { get => alvaro; }
     //  public static string Dayron { get => dayron; }
-    //  public static string Gabriel { get => gabriel; }
+        public static string Gabriel { get => gabriel; }
     //  public static string Lucia { get => lucia; }
         public static string Gracias { get => gracias; }
         public static string Mago { get => mago; }
