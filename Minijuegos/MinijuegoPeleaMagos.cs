@@ -60,20 +60,22 @@ namespace ProyectoRPG.Minijuegos
 
             if (ganaste)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
                 Console.WriteLine("¡Enhorabuena, has ganado al mago!".PadRight(60));
                 Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 30);
-
+                Console.ResetColor();
                 Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
                 Console.CursorVisible = false;
                 Console.ReadKey(true);
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
                 Console.WriteLine("¡Buen intento pero el mago te ha ganado!".PadRight(60));
                 Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 30);
-
+                Console.ResetColor();
                 Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
                 Console.CursorVisible = false;
                 Console.ReadKey(true);

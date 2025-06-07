@@ -26,10 +26,11 @@ namespace ProyectoRPG.Minijuegos
 
             if (tiradas == 3)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 39);
                 Console.WriteLine($"¡Tu puntuación total es de {puntuacion} puntos!".PadRight(60));
                 Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 37);
-
+                Console.ResetColor();
                 Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
                 Console.CursorVisible = false;
                 Console.ReadKey(true);
@@ -119,9 +120,10 @@ namespace ProyectoRPG.Minijuegos
 
             Dibujar.DibujarRectanguloPrincipal();
 
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 39);
             Console.WriteLine($"¡Disparo realizado! Has ganado {puntos} puntos.".PadRight(60));
-
+            Console.ResetColor();
             Console.SetCursorPosition(Dibujar.x + 2, Dibujar.alturaRectangulo - 37);
             Console.WriteLine("Pulsa cualquier tecla para continuar...".PadRight(60));
             Console.CursorVisible = false;

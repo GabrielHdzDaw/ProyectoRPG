@@ -148,23 +148,21 @@ namespace ProyectoRPG.Minijuegos
         {
             bool acierto = false;
 
-            // Limpia la línea de entrada
             int inputX = Console.WindowWidth / 2 - 9;
             int inputY = Console.WindowHeight / 2 + 12;
             Console.SetCursorPosition(inputX, inputY);
-            Console.Write(new string(' ', 40)); // Borra línea anterior
+            Console.Write(new string(' ', 40)); 
             Console.SetCursorPosition(inputX, inputY);
             Console.Write("Introduce una letra: ");
 
             string entrada = Console.ReadLine();
 
-            // Limpia mensaje de error anterior (si lo hubo)
             Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
-            Console.Write(new string(' ', 60)); // Borra error anterior
+            Console.Write(new string(' ', 60)); 
 
             if (char.TryParse(entrada, out char letraUsuario) && char.IsLetter(letraUsuario))
             {
-                letraUsuario = char.ToLower(letraUsuario); // Por si se ingresa en mayúscula
+                letraUsuario = char.ToLower(letraUsuario);
 
                 for (int i = 0; i < palabras[palabra].Length; i++)
                 {
@@ -183,8 +181,10 @@ namespace ProyectoRPG.Minijuegos
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(Dibujar.x + 4, Dibujar.alturaRectangulo - 32);
                 Console.WriteLine("¡ERROR! Debes introducir solo una letra.".PadRight(60));
+                Console.ResetColor();
             }
         }
 
@@ -229,7 +229,7 @@ namespace ProyectoRPG.Minijuegos
             Console.CursorVisible = false;
             Console.ResetColor();
 
-            for(int i=8; i>0; i--)
+            for(int i=5; i>0; i--)
             {
                 Console.SetCursorPosition(Console.WindowWidth / 2 - 9, Console.WindowHeight / 2 + 16);
                 Console.WriteLine($"Comenzando el juego en {i}...");
