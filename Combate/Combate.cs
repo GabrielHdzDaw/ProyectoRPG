@@ -17,7 +17,7 @@ namespace ProyectoRPG.Combate
         Partida partida { get; set; }
         Enemigo enemigo { get; set; }
 
-        public static Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 500, 25, 30, 20);
+        public static Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 500, 25, 20, 20);
 
         public Combate(Partida partida, Enemigo enemigo)
         {
@@ -357,7 +357,11 @@ namespace ProyectoRPG.Combate
         {
             Console.CursorVisible = false;
             List<Pocion> pociones = partida.jugador.GetInventario().Pociones;
-
+            if (pociones.Count == 0)
+            {
+                MostrarMensaje("¡No tienes pociones en tu inventario!", true);
+                return null; // O lanzar una excepción controlada
+            }
             string[] opciones = pociones.Select(i => i.ToString()).ToArray();
             int opcion = 0;
             int menuX = Dibujar.X + 12;
@@ -550,6 +554,11 @@ namespace ProyectoRPG.Combate
 
         private void EjecutarItem()
         {
+            if (partida.jugador.GetInventario().Pociones.Count == 0)
+            {
+                MostrarMensaje("No tienes pociones en tu inventario.", true);
+                return;
+            }
             Pocion pocion = (Pocion)MenuItem(Dibujar.X + 8, Dibujar.Y + Dibujar.AlturaRectangulo - 7, 20, 4);
             if (partida.jugador.GetInventario().ContieneObjeto(pocion))
             {

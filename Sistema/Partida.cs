@@ -354,14 +354,16 @@ namespace ProyectoRPG.Sistema
             char[,] mapa = AbrirMapa();
             Console.CursorVisible = false;
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
-            while (tecla.Key != ConsoleKey.Escape)
+            bool victoriaCombateFinal = false;
+            bool combateFinalTerminado = false;
+            while (tecla.Key != ConsoleKey.Escape && !combateFinalTerminado)
             {
                 Dibujar.DibujarMapa(mapa, partida.jugador.x, partida.jugador.y);
                 if (Console.KeyAvailable == true)
                 {
                     tecla = Console.ReadKey(true);
                     bool seMovio = false;
-                    bool victoriaCombateFinal = false;
+                    
                     int x = 0;
                     int y = 0;
 
@@ -439,16 +441,21 @@ namespace ProyectoRPG.Sistema
                         {
                             ProyectoRPG.Combate.Combate combateFinal = new ProyectoRPG.Combate.Combate(partida, ProyectoRPG.Combate.Combate.demonio);
                             victoriaCombateFinal = combateFinal.EmpezarCombate();
+                            combateFinalTerminado = true;
+                            if (!victoriaCombateFinal)
+                            {
+                                Dibujar.LimpiarPantalla();
+                                Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2), "Has sido derrotado por el demonio... volverás al menú principal");
+                                Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2, "Pulsa ENTER para salir");
+                                while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+                            }
                         }
                         else
                         {
                             Dibujar.LimpiarPantalla();
                             Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2), "La pared está muy empinada, no podrás subir sin un pico.");
                             Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2, "Pulsa ENTER para continuar");
-                            while (Console.ReadKey(true).Key != ConsoleKey.Enter)
-                            {
-                                // Espera a que el usuario pulse Enter
-                            }
+                            while (Console.ReadKey(true).Key != ConsoleKey.Enter){ }
                             Dibujar.LimpiarPantalla();
                         }
                     }
@@ -457,12 +464,11 @@ namespace ProyectoRPG.Sistema
                         Dibujar.LimpiarPantalla();
                         Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2), "¡Felicidades! Has derrotado al demonio y completado el juego.");
                         Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2, "Pulsa ENTER para continuar");
+                        partida.puntuacion += 100;
                         partida.terminada = true;
                         partida.GuardarPartida();
-                        while (Console.ReadKey(true).Key != ConsoleKey.Enter)
-                        {
-                            // Espera a que el usuario pulse Enter
-                        }
+                        while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+                        Dibujar.LimpiarPantalla();
                         return;
                     }
                 }

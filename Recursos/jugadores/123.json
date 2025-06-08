@@ -1,0 +1,80 @@
+{
+  "$id": "1",
+  "jugador": {
+    "$id": "2",
+    "$type": "picaro",
+    "x": 66,
+    "y": 127,
+    "ataques": {
+      "$id": "3",
+      "$values": [
+        {
+          "$id": "4",
+          "nombre": "Ataque r\u00E1pido",
+          "dano": 10,
+          "probabilidad": 90
+        },
+        {
+          "$id": "5",
+          "nombre": "Ataque sigiloso",
+          "dano": 20,
+          "probabilidad": 70
+        },
+        {
+          "$id": "6",
+          "nombre": "Ataque rabioso",
+          "dano": 30,
+          "probabilidad": 30
+        }
+      ]
+    },
+    "inventario": {
+      "$id": "7",
+      "pociones": {
+        "$id": "8",
+        "$values": [
+          {
+            "$id": "9",
+            "curacion": 20,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 20 puntos de vida al que la bebe.",
+            "precio": 10
+          }
+        ]
+      },
+      "armas": {
+        "$id": "10",
+        "$values": [
+          {
+            "$id": "11",
+            "dano": 9,
+            "danoCritico": 25,
+            "probabilidadCritico": 25,
+            "nombre": "Pu\u00F1al barato",
+            "descripcion": "Pu\u00F1al endeble que podr\u00EDa romperse en cualquier momento",
+            "precio": 0
+          }
+        ]
+      },
+      "objetosClave": {
+        "$id": "12",
+        "$values": []
+      }
+    },
+    "armaEquipada": {
+      "$ref": "11"
+    },
+    "ataqueTotal": 31,
+    "ataqueCriticoTotal": 47,
+    "nombre": "123",
+    "sprite": "\r\n        __    ___\r\n       |__|  /   \\\r\n        \\ \\ | 0  -|\r\n        _\\ \\)  |  (\r\n       |  --\u0027\\ ~ /\u0060--.\r\n       .-\\- / --- \\  /\u0060.\r\n      _/_|_.-\u0027 : \u0060-._|__\\_\r\n     \u003C__\u003E\u0027\\    :   / \u0060\u003C___\u003E\r\n     / /   \u003E=======\u003C  /  /\r\n    /.\u0027   /  ,-:-.  \\/=,\u0027\r\n   |_|   |__/v^v^v\\__)_\\\r\n   \\ /    |V^V^V^V^V|\\_/\r\n   (-)    \\\u0060---|---\u0027/\\ \\\r\n  /   \\    \\-._|_,-/  \\ \\\r\n (     )   |__ | __|   \\/\r\n(  $$$  ) \u003C___ X ___\u003E\r\n (     )   \\.. | ../\r\n  -----     \\  |  /\r\n            /V | V\\\r\n           /  /|\\  \\\r\n          \u0027--\u0027   \u0060--\u0060\r\n",
+    "vida": 75,
+    "vidaMaxima": 75,
+    "ataque": 22,
+    "defensa": 8,
+    "velocidad": 15
+  },
+  "puntuacion": 50,
+  "terminada": false,
+  "creacion": "2025-06-08T20:34:16.4905917+02:00"
+}

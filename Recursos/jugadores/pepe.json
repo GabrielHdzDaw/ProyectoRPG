@@ -3,8 +3,8 @@
   "jugador": {
     "$id": "2",
     "$type": "caballero",
-    "x": 37,
-    "y": 140,
+    "x": 41,
+    "y": 132,
     "ataques": {
       "$id": "3",
       "$values": [
@@ -74,14 +74,21 @@
             "nombre": "Poci\u00F3n peque\u00F1a",
             "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
             "precio": 10
+          },
+          {
+            "$id": "15",
+            "curacion": 50,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
+            "precio": 10
           }
         ]
       },
       "armas": {
-        "$id": "15",
+        "$id": "16",
         "$values": [
           {
-            "$id": "16",
+            "$id": "17",
             "dano": 8,
             "danoCritico": 12,
             "probabilidadCritico": 15,
@@ -92,16 +99,16 @@
         ]
       },
       "objetosClave": {
-        "$id": "17",
+        "$id": "18",
         "$values": [
           {
-            "$id": "18",
+            "$id": "19",
             "nombre": "Pico de escalada",
             "descripcion": "Con este pico llegar\u00E1s a lo m\u00E1s alto de la monta\u00F1a del Demonio Malo Mal\u00EDsimo",
             "precio": 0
           },
           {
-            "$id": "19",
+            "$id": "20",
             "nombre": "Pico de escalada",
             "descripcion": "Con este pico llegar\u00E1s a lo m\u00E1s alto de la monta\u00F1a del Demonio Malo Mal\u00EDsimo",
             "precio": 0
@@ -110,19 +117,19 @@
       }
     },
     "armaEquipada": {
-      "$ref": "16"
+      "$ref": "17"
     },
     "ataqueTotal": 23,
     "ataqueCriticoTotal": 27,
     "nombre": "pepe",
     "sprite": "\r\n  ,   A           {}\r\n / \\, | ,        .--.\r\n|    =|= \u003E      /.--.\\\r\n \\ /\u0060 | \u0060       |====|\r\n  \u0060   |         |\u0060::\u0060|\r\n      |     .-;\u0060\\..../\u0060;_.-^-._\r\n     /\\\\/  /  |...::..|\u0060   :   \u0060|\r\n     |:\u0027\\ |   /\u0027\u0027\u0027::\u0027\u0027|   .:.   |\r\n      \\ /\\;-,/\\   ::  |..:::::..|\r\n      |\\ \u003C\u0060 \u003E  \u003E._::_.| \u0027:::::\u0027 |\r\n      |  \u0060\u0022\u0060  /   ^^  |   \u0027:\u0027   |\r\n      |       |       \\    :    /\r\n      |       |        \\   :   /\r\n      |       |___/\\___|\u0060-.:.-\u0060\r\n      |        \\_ || _/    \u0060\r\n      |        \u003C_ \u003E\u003C _\u003E\r\n      |        |  ||  |\r\n      |        |  ||  |\r\n      |       _\\.:||:./_\r\n      |      /____/\\____\\\r\n",
-    "vida": 105,
+    "vida": 28,
     "vidaMaxima": 120,
     "ataque": 15,
     "defensa": 22,
     "velocidad": 5
   },
-  "puntuacion": 130,
-  "terminada": false,
+  "puntuacion": 240,
+  "terminada": true,
   "creacion": "2025-06-08T17:35:48.9007532+02:00"
 }

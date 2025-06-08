@@ -1,0 +1,80 @@
+{
+  "$id": "1",
+  "jugador": {
+    "$id": "2",
+    "$type": "mago",
+    "x": 66,
+    "y": 127,
+    "ataques": {
+      "$id": "3",
+      "$values": [
+        {
+          "$id": "4",
+          "nombre": "Bola de fuego",
+          "dano": 10,
+          "probabilidad": 90
+        },
+        {
+          "$id": "5",
+          "nombre": "Rayo",
+          "dano": 15,
+          "probabilidad": 80
+        },
+        {
+          "$id": "6",
+          "nombre": "Tormenta elemental",
+          "dano": 40,
+          "probabilidad": 30
+        }
+      ]
+    },
+    "inventario": {
+      "$id": "7",
+      "pociones": {
+        "$id": "8",
+        "$values": [
+          {
+            "$id": "9",
+            "curacion": 20,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 20 puntos de vida al que la bebe.",
+            "precio": 10
+          }
+        ]
+      },
+      "armas": {
+        "$id": "10",
+        "$values": [
+          {
+            "$id": "11",
+            "dano": 12,
+            "danoCritico": 25,
+            "probabilidadCritico": 10,
+            "nombre": "Vara m\u00E1gica oxidada",
+            "descripcion": "Vara con poderes m\u00E1gicos. De mala calidad.",
+            "precio": 0
+          }
+        ]
+      },
+      "objetosClave": {
+        "$id": "12",
+        "$values": []
+      }
+    },
+    "armaEquipada": {
+      "$ref": "11"
+    },
+    "ataqueTotal": 47,
+    "ataqueCriticoTotal": 60,
+    "nombre": "Test",
+    "sprite": "\r\n                    ____ \r\n                  .\u0027* *.\u0027\r\n               __/_*_*(_\r\n              / _______ \\\r\n             _\\_)/___\\(_/_ \r\n            / _((\\- -/))_ \\\r\n            \\ \\())(-)(()/ /\r\n             \u0027 \\(((()))/ \u0027\r\n            / \u0027 \\)).))/ \u0027 \\\r\n           / _ \\ - | - /_  \\\r\n          (   ( .;\u0027\u0027\u0027;. .\u0027  )\r\n          _\\\u0022__ /    )\\ __\u0022/_\r\n            \\/  \\   \u0027 /  \\/\r\n             .\u0027  \u0027...\u0027 \u0027 )\r\n              / /  |  \\ \\\r\n             / .   .   . \\\r\n            /   .     .   \\\r\n           /   /   |   \\   \\\r\n         .\u0027   /    b    \u0027.  \u0027.\r\n     _.-\u0027    /     Bb     \u0027-. \u0027-._ \r\n _.-\u0027       |      BBb       \u0027-.  \u0027-. \r\n(________mrf\\____.dBBBb.________)____)\r\n",
+    "vida": 80,
+    "vidaMaxima": 80,
+    "ataque": 35,
+    "defensa": 8,
+    "velocidad": 10
+  },
+  "puntuacion": 50,
+  "terminada": false,
+  "creacion": "2025-06-08T23:21:34.9699852+02:00"
+}
