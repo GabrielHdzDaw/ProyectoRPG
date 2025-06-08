@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using ProyectoRPG.Interfaz;
+using ProyectoRPG.Inventario;
+using ProyectoRPG.Personajes;
 using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Sistema
@@ -99,8 +102,77 @@ namespace ProyectoRPG.Sistema
         private static void Records()
         {
             Dibujar.LimpiarPantalla();
-            //deserializar las partidas para sacar de ellas la puntuacion¿?
+            //deserializar las partidas para sacar de ellas la puntuacion¿? --alvaro help!!!
             List<Partida> partidas = new List<Partida>();
+            
+            //esto es prueba
+            Mago mago = new Mago("Mago");
+            Picaro picaro = new Picaro("Picaro");
+            Elfo elfo = new Elfo("Elfo");
+            Partida p1 = new Partida(mago);
+            p1.puntuacion = 50;
+            Partida p2 = new Partida(picaro);
+            p2.puntuacion = 10;
+            Partida p3 = new Partida(elfo);
+            p3.puntuacion = 69;
+            partidas.Add(p1);
+            partidas.Add(p2);
+            partidas.Add(p3);
+
+            partidas.Sort();
+
+            Console.CursorVisible = false;
+
+            int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 1;
+            int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
+
+            int opcion = 0;
+
+            Dibujar.DibujarSpriteCentrado(centroX - 55, centroY - 15, "Récords: ");
+
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo();
+
+            while (tecla.Key != ConsoleKey.Enter)
+            {
+                int espaciadoVertical = 10;
+
+                for (int i = 0; i < partidas.Count; i++)
+                {
+                    if (opcion == i)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidas[i].jugador.GetNombre());
+                    espaciadoVertical -= 1;
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical,"");
+                    espaciadoVertical -= 1;
+
+                    if (opcion == i)
+                    {
+                        Console.ResetColor();
+                    }
+                }
+
+                if (Console.KeyAvailable)
+                {
+                    tecla = Console.ReadKey(true);
+
+                    switch (tecla.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (opcion > 0)
+                                opcion--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (opcion < partidas.Count - 1)
+                                opcion++;
+                            break;
+                    }
+                }
+            }
+
         }
 
         private static void Creditos()

@@ -14,11 +14,11 @@ using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Sistema
 {
-    public class Partida
+    public class Partida : IComparable<Partida>
     {
-        Jugador jugador { get; set; }
-        int puntuacion { get; set; }
-        bool terminada { get; set; }
+        public Jugador jugador { get; set; }
+        public int puntuacion { get; set; }
+        public bool terminada { get; set; }
 
         public Partida()
         { }
@@ -28,6 +28,11 @@ namespace ProyectoRPG.Sistema
             this.jugador = jugador;
             puntuacion = 0;
             terminada = false;
+        }
+
+        public int CompareTo(Partida other)
+        {
+            return this.puntuacion.CompareTo(other.puntuacion);
         }
 
         private static string NombreElegido()
@@ -223,6 +228,8 @@ namespace ProyectoRPG.Sistema
                     }
 
                     Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical,$"{i+1}. " + opciones[i]);
+                    espaciadoVertical -= 1;
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, "");
                     espaciadoVertical -= 1;
 
                     if (opcion == i)
