@@ -14,7 +14,7 @@ namespace ProyectoRPG.Personajes
 
         public Mago() { }
         public Mago(string nombre) 
-            : base(nombre, Sprites.Mago, 80, 35, 5, 10)
+            : base(nombre, Sprites.Mago, 80, 35, 8, 10)
         {
             GetAtaques().Add(new Ataque("Bola de fuego", 10, 90));
             GetAtaques().Add(new Ataque("Rayo", 15, 80));

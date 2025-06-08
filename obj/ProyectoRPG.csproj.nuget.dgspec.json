@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\DAW\\1DAW\\PROGRAMACIÓN\\RPG\\ProyectoRPG.csproj": {}
+    "C:\\Users\\Gabriel\\Documents\\DAW\\Programación\\ProyectoRPG\\ProyectoRPG.csproj": {}
   },
   "projects": {
-    "E:\\DAW\\1DAW\\PROGRAMACIÓN\\RPG\\ProyectoRPG.csproj": {
+    "C:\\Users\\Gabriel\\Documents\\DAW\\Programación\\ProyectoRPG\\ProyectoRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DAW\\1DAW\\PROGRAMACIÓN\\RPG\\ProyectoRPG.csproj",
+        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\DAW\\Programación\\ProyectoRPG\\ProyectoRPG.csproj",
         "projectName": "ProyectoRPG",
-        "projectPath": "E:\\DAW\\1DAW\\PROGRAMACIÓN\\RPG\\ProyectoRPG.csproj",
-        "packagesPath": "C:\\Users\\carlo\\.nuget\\packages\\",
-        "outputPath": "E:\\DAW\\1DAW\\PROGRAMACIÓN\\RPG\\obj\\",
+        "projectPath": "C:\\Users\\Gabriel\\Documents\\DAW\\Programación\\ProyectoRPG\\ProyectoRPG.csproj",
+        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gabriel\\Documents\\DAW\\Programación\\ProyectoRPG\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\carlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

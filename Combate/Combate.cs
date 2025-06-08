@@ -17,7 +17,7 @@ namespace ProyectoRPG.Combate
         Partida partida { get; set; }
         Enemigo enemigo { get; set; }
 
-        Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 1000, 25, 30, 20);
+        public static Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 1000, 25, 30, 20);
 
         public Combate(Partida partida, Enemigo enemigo)
         {
@@ -36,12 +36,11 @@ namespace ProyectoRPG.Combate
 
 
             int ancho1 = 58;
-            int ancho2 = 60;
-            int ancho3 = 58;
+            int ancho2 = 118;
+            
 
             int x1 = Dibujar.X;
             int x2 = x1 + ancho1;
-            int x3 = x2 + ancho2;
 
             Dibujar.DibujarRectangulo(x1, yBase, alturaSubRect, ancho1, '▓');
             Dibujar.DibujarRectangulo(x2, yBase, alturaSubRect, ancho2, '▓');
@@ -410,6 +409,7 @@ namespace ProyectoRPG.Combate
 
         public bool EmpezarCombate()
         {
+            bool esJefeFinal = enemigo.Nombre == "Demonio Malo Malísimo";
             bool combateActivo = true;
             bool victoria = false;
 
@@ -436,15 +436,25 @@ namespace ProyectoRPG.Combate
                         DibujarBarrasVida();
                         break;
                     case 3:
-                        if (IntentarHuir())
+                        if (!esJefeFinal)
                         {
-                            combateActivo = false;
-                            MostrarMensaje("¡Has huido del combate!", true);
+                            if (IntentarHuir())
+                            {
+                                combateActivo = false;
+                                MostrarMensaje("¡Has huido del combate!", true);
+                            }
+                            else
+                            {
+                                MostrarMensaje("No puedes huir...", true);
+                            }
+                            continue;
                         }
                         else
                         {
-                            MostrarMensaje("No puedes huir...", true);
+                            MostrarMensaje("¿A dónde crees que vas?", true);
+                            continue;
                         }
+
                         break;
                 }
 
@@ -466,8 +476,8 @@ namespace ProyectoRPG.Combate
                     Random randomPico = new Random();
                     if (randomPico.Next(0, 100) < 25)
                     {
-                        partida.jugador.GetInventario().AgregarObjeto(new ObjetoClave("Pico de escalada", "Con este pico llegarás a lo más alto de la montaña del Demonio Malo Malísimo", 0));
-                        MostrarMensaje("¡Has encontrado un pico! ¡Ve a la montaña!", true);
+                        partida.jugador.GetInventario().AgregarObjetoClave(new ObjetoClave("Pico de escalada", "Con este pico llegarás a lo más alto de la montaña del Demonio Malo Malísimo", 0));
+                        MostrarMensaje("¡Has encontrado un pico! ¡Ya puedes subir a la montaña!", true);
                     }
                     if (randomPocion.Next(0, 100) < 50)
                     {
@@ -579,7 +589,7 @@ namespace ProyectoRPG.Combate
         private void MostrarMensaje(string mensaje, bool espera)
         {
             BorrarMensaje();
-            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 5;
+            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 25;
             int mensajeY = Dibujar.AlturaRectangulo / 4 * 4 + 5;
 
             Console.SetCursorPosition(mensajeX, mensajeY);
@@ -594,7 +604,7 @@ namespace ProyectoRPG.Combate
 
         private void BorrarMensaje()
         {
-            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 4;
+            int mensajeX = Dibujar.AnchuraRectangulo / 2 + 25;
             int mensajeY = Dibujar.AlturaRectangulo / 4 * 4 + 5;
             Console.SetCursorPosition(mensajeX, mensajeY);
             Console.Write(new string(' ', 58));

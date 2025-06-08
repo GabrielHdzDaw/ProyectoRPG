@@ -47,6 +47,16 @@ namespace ProyectoRPG.Inventario
             return false;
         }
 
+        public void AgregarObjetoClave(ObjetoClave objetoClave)
+        {
+            ObjetosClave.Add(objetoClave);
+        }
+
+        public bool ContieneObjetoClave()
+        {
+            return ObjetosClave.Any(o => o.Nombre == "Pico de escalada");
+        }
+
         public override string ToString()
         {
             var todos = new List<string>();

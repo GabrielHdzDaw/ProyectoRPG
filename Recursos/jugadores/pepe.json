@@ -3,8 +3,8 @@
   "jugador": {
     "$id": "2",
     "$type": "caballero",
-    "x": 66,
-    "y": 127,
+    "x": 37,
+    "y": 140,
     "ataques": {
       "$id": "3",
       "$values": [
@@ -35,18 +35,53 @@
         "$values": [
           {
             "$id": "9",
-            "curacion": 20,
+            "curacion": 50,
             "nombre": "Poci\u00F3n peque\u00F1a",
-            "descripcion": "Poci\u00F3n que cura 20 puntos de vida al que la bebe.",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
+            "precio": 10
+          },
+          {
+            "$id": "10",
+            "curacion": 50,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
+            "precio": 10
+          },
+          {
+            "$id": "11",
+            "curacion": 50,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
+            "precio": 10
+          },
+          {
+            "$id": "12",
+            "curacion": 50,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
+            "precio": 10
+          },
+          {
+            "$id": "13",
+            "curacion": 50,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
+            "precio": 10
+          },
+          {
+            "$id": "14",
+            "curacion": 50,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 50 puntos de vida al que la bebe.",
             "precio": 10
           }
         ]
       },
       "armas": {
-        "$id": "10",
+        "$id": "15",
         "$values": [
           {
-            "$id": "11",
+            "$id": "16",
             "dano": 8,
             "danoCritico": 12,
             "probabilidadCritico": 15,
@@ -57,24 +92,37 @@
         ]
       },
       "objetosClave": {
-        "$id": "12",
-        "$values": []
+        "$id": "17",
+        "$values": [
+          {
+            "$id": "18",
+            "nombre": "Pico de escalada",
+            "descripcion": "Con este pico llegar\u00E1s a lo m\u00E1s alto de la monta\u00F1a del Demonio Malo Mal\u00EDsimo",
+            "precio": 0
+          },
+          {
+            "$id": "19",
+            "nombre": "Pico de escalada",
+            "descripcion": "Con este pico llegar\u00E1s a lo m\u00E1s alto de la monta\u00F1a del Demonio Malo Mal\u00EDsimo",
+            "precio": 0
+          }
+        ]
       }
     },
     "armaEquipada": {
-      "$ref": "11"
+      "$ref": "16"
     },
     "ataqueTotal": 23,
     "ataqueCriticoTotal": 27,
     "nombre": "pepe",
     "sprite": "\r\n  ,   A           {}\r\n / \\, | ,        .--.\r\n|    =|= \u003E      /.--.\\\r\n \\ /\u0060 | \u0060       |====|\r\n  \u0060   |         |\u0060::\u0060|\r\n      |     .-;\u0060\\..../\u0060;_.-^-._\r\n     /\\\\/  /  |...::..|\u0060   :   \u0060|\r\n     |:\u0027\\ |   /\u0027\u0027\u0027::\u0027\u0027|   .:.   |\r\n      \\ /\\;-,/\\   ::  |..:::::..|\r\n      |\\ \u003C\u0060 \u003E  \u003E._::_.| \u0027:::::\u0027 |\r\n      |  \u0060\u0022\u0060  /   ^^  |   \u0027:\u0027   |\r\n      |       |       \\    :    /\r\n      |       |        \\   :   /\r\n      |       |___/\\___|\u0060-.:.-\u0060\r\n      |        \\_ || _/    \u0060\r\n      |        \u003C_ \u003E\u003C _\u003E\r\n      |        |  ||  |\r\n      |        |  ||  |\r\n      |       _\\.:||:./_\r\n      |      /____/\\____\\\r\n",
-    "vida": 120,
+    "vida": 105,
     "vidaMaxima": 120,
     "ataque": 15,
-    "defensa": 20,
+    "defensa": 22,
     "velocidad": 5
   },
-  "puntuacion": 50,
+  "puntuacion": 130,
   "terminada": false,
   "creacion": "2025-06-08T17:35:48.9007532+02:00"
 }

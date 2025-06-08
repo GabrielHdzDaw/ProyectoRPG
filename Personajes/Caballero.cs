@@ -13,7 +13,7 @@ namespace ProyectoRPG.Personajes
     {
         public Caballero() { }
         public Caballero(string nombre)
-    : base(nombre, Sprites.Caballero, 120, 15, 20, 5)
+    : base(nombre, Sprites.Caballero, 120, 18, 15, 5)
         {
             GetAtaques().Add(new Ataque("Ataque rápido", 8, 90));
             GetAtaques().Add(new Ataque("Ataque pesado", 18, 75));

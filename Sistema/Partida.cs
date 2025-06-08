@@ -22,7 +22,7 @@ namespace ProyectoRPG.Sistema
         public Jugador jugador { get; set; }
         public int puntuacion { get; set; }
         public bool terminada { get; set; }
-        public DateTime creacion {  get; set; }
+        public DateTime creacion { get; set; }
 
         private static Random random = new Random();
         private static int pasosDesdeUltimoCombate = 0;
@@ -361,6 +361,7 @@ namespace ProyectoRPG.Sistema
                 {
                     tecla = Console.ReadKey(true);
                     bool seMovio = false;
+                    bool victoriaCombateFinal = false;
 
                     switch (tecla.Key)
                     {
@@ -398,7 +399,7 @@ namespace ProyectoRPG.Sistema
                             break;
                     }
 
-                   
+
                     if (seMovio && ProbabilidadCombate())
                     {
                         CombateAleatorio combate = new CombateAleatorio(partida);
@@ -408,6 +409,39 @@ namespace ProyectoRPG.Sistema
                     if (mapa[partida.jugador.x, partida.jugador.y] == 'C')
                     {
                         partida.GuardarPartida();
+                    }
+
+                    if (mapa[partida.jugador.x, partida.jugador.y] == 'J')
+                    {
+                        if (partida.jugador.Inventario.ContieneObjetoClave())
+                        {
+                            ProyectoRPG.Combate.Combate combateFinal = new ProyectoRPG.Combate.Combate(partida, ProyectoRPG.Combate.Combate.demonio);
+                            victoriaCombateFinal = combateFinal.EmpezarCombate();
+                        }
+                        else
+                        {
+                            Dibujar.LimpiarPantalla();
+                            Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2), "La pared está muy empinada, no podrás subir sin un pico.");
+                            Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2, "Pulsa ENTER para continuar");
+                            while (Console.ReadKey(true).Key != ConsoleKey.Enter)
+                            {
+                                // Espera a que el usuario pulse Enter
+                            }
+                            Dibujar.LimpiarPantalla();
+                        }
+                    }
+                    if (victoriaCombateFinal)
+                    {
+                        Dibujar.LimpiarPantalla();
+                        Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2), "¡Felicidades! Has derrotado al demonio y completado el juego.");
+                        Dibujar.DibujarSpriteCentrado(Console.WindowWidth / 2, (Console.WindowHeight / 2) + 2, "Pulsa ENTER para continuar");
+                        partida.terminada = true;
+                        partida.GuardarPartida();
+                        while (Console.ReadKey(true).Key != ConsoleKey.Enter)
+                        {
+                            // Espera a que el usuario pulse Enter
+                        }
+                        return;
                     }
                 }
             }
