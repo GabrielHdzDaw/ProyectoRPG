@@ -343,13 +343,9 @@ namespace ProyectoRPG.Interfaz
                             Console.ForegroundColor = ConsoleColor.Magenta;
                             Console.BackgroundColor = ConsoleColor.Magenta;
                             break;
-                        case 'M':
+                        case 'J':
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.BackgroundColor = ConsoleColor.DarkRed;
-                            break;
-                        case 'J':
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.BackgroundColor = ConsoleColor.Red;
                             break;
                     }
 

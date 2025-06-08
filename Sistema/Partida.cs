@@ -362,39 +362,61 @@ namespace ProyectoRPG.Sistema
                     tecla = Console.ReadKey(true);
                     bool seMovio = false;
                     bool victoriaCombateFinal = false;
+                    int x = 0;
+                    int y = 0;
 
                     switch (tecla.Key)
                     {
                         case ConsoleKey.LeftArrow:
                             char cUp = mapa[partida.jugador.x, partida.jugador.y - 1];
-                            if (cUp != 'A')
+                            if (cUp != 'A' && cUp != 'J')
                             {
                                 partida.jugador.y -= 1;
                                 seMovio = true;
                             }
-                            break;
+                            else
+                            {
+                                if(cUp == 'J' && partida.jugador.Inventario.ContieneObjetoClave())
+                                    y -= 1;
+                            }
+                                break;
                         case ConsoleKey.RightArrow:
                             char cDown = mapa[partida.jugador.x, partida.jugador.y + 1];
-                            if (cDown != 'A')
+                            if (cDown != 'A' && cDown != 'J')
                             {
                                 partida.jugador.y += 1;
                                 seMovio = true;
                             }
+                            else
+                            {
+                                if (cDown == 'J' && partida.jugador.Inventario.ContieneObjetoClave())
+                                    y += 1;
+                            }
                             break;
                         case ConsoleKey.UpArrow:
                             char cLeft = mapa[partida.jugador.x - 1, partida.jugador.y];
-                            if (cLeft != 'A')
+                            if (cLeft != 'A' && cLeft != 'J')
                             {
                                 partida.jugador.x -= 1;
                                 seMovio = true;
                             }
+                            else
+                            {
+                                if (cLeft == 'J' && partida.jugador.Inventario.ContieneObjetoClave())
+                                    x -= 1;
+                            }
                             break;
                         case ConsoleKey.DownArrow:
                             char cRight = mapa[partida.jugador.x + 1, partida.jugador.y];
-                            if (cRight != 'A')
+                            if (cRight != 'A' && cRight != 'J')
                             {
                                 partida.jugador.x += 1;
                                 seMovio = true;
+                            }
+                            else
+                            {
+                                if (cRight == 'J' && partida.jugador.Inventario.ContieneObjetoClave())
+                                    x += 1;
                             }
                             break;
                     }
@@ -411,7 +433,7 @@ namespace ProyectoRPG.Sistema
                         partida.GuardarPartida();
                     }
 
-                    if (mapa[partida.jugador.x, partida.jugador.y] == 'J')
+                    if (mapa[partida.jugador.x + x, partida.jugador.y + y] == 'J')
                     {
                         if (partida.jugador.Inventario.ContieneObjetoClave())
                         {

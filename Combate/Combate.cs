@@ -17,7 +17,7 @@ namespace ProyectoRPG.Combate
         Partida partida { get; set; }
         Enemigo enemigo { get; set; }
 
-        public static Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 1000, 25, 30, 20);
+        public static Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 500, 25, 30, 20);
 
         public Combate(Partida partida, Enemigo enemigo)
         {
