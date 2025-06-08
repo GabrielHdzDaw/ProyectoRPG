@@ -138,29 +138,40 @@ namespace ProyectoRPG.Sistema
             int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
 
             int opcion = 0;
+            bool salir = false;
 
             Dibujar.DibujarSpriteCentrado(centroX - 55, centroY - 15, "Récords: ");
 
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
-            while (tecla.Key != ConsoleKey.Enter)
+            while (!salir)
             {
                 int espaciadoVertical = 10;
-                int maxMostrar = Math.Min(10, partidasAcabadas.Count);
+                int maxPartidasMostrar = Math.Min(10, partidasAcabadas.Count());
+                int maxMostrar = maxPartidasMostrar + 1;
 
                 for (int i = 0; i < maxMostrar; i++)
                 {
+                    string simb = "\u2192";
                     if (opcion == i)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidasAcabadas[i]);
-                    espaciadoVertical -= 1;
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, "");
-                    espaciadoVertical -= 1;
-                    
+                    if (i < maxPartidasMostrar)
+                    {
+                        Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidasAcabadas[i]);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical + 4, simb + " Salir");
+                        Console.ResetColor();
+                    }
+
+                    espaciadoVertical -= 2;
+
                     if (opcion == i)
                     {
                         Console.ResetColor();
@@ -181,9 +192,16 @@ namespace ProyectoRPG.Sistema
                             if (opcion < maxMostrar - 1)
                                 opcion++;
                             break;
+                        case ConsoleKey.Enter:
+                            if (opcion == maxMostrar -1)
+                            {
+                                salir = true;
+                            }
+                            break;
                     }
                 }
             }
+            Dibujar.LimpiarPantalla();
 
         }
 
@@ -191,11 +209,13 @@ namespace ProyectoRPG.Sistema
         {
             int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 1;
             int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
+            string cora = "\u2665";
 
             Dibujar.LimpiarPantalla();
             Console.ForegroundColor = ConsoleColor.Green;
-            Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - 0, "\"Nos alegramos muchísimoooo de que quieras conocer a los creadores\"");
+            Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - 0, $"\"Nos alegramos muchísimoooo de que quieras conocer a los creadores\"");
             Console.ResetColor();
+            Dibujar.DibujarSpriteCentrado(centroX + 34, centroY - 0, cora);
             Dibujar.DibujarSpriteCentrado(centroX - 1, centroY + 2, "Pulse ENTER para conocerlos...");
             bool avanzar = false;
             while (!avanzar)
@@ -239,6 +259,7 @@ namespace ProyectoRPG.Sistema
 
                 for (int i = 0; i < opciones.Length; i++)
                 {
+                    string simb = "\u2192";
                     Console.CursorVisible = false;
                     if (indice == i)
                     {
@@ -246,7 +267,16 @@ namespace ProyectoRPG.Sistema
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(Dibujar.X + Dibujar.AnchuraRectangulo / 4 / 2, Dibujar.Y + Dibujar.AlturaRectangulo / 5 - espaciadoVertical, opciones[i]);
+                    if (i == opciones.Length - 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Dibujar.DibujarSpriteCentrado(Dibujar.X + Dibujar.AnchuraRectangulo / 4 / 2, Dibujar.Y + Dibujar.AlturaRectangulo / 5 - espaciadoVertical, simb + " " + opciones[i]);
+                    }
+                    else
+                    {
+                        Dibujar.DibujarSpriteCentrado(Dibujar.X + Dibujar.AnchuraRectangulo / 4 / 2, Dibujar.Y + Dibujar.AlturaRectangulo / 5 - espaciadoVertical, opciones[i]);
+                    }
+                    Console.ResetColor();
                     espaciadoVertical -= 6;
 
                     if (indice == i)
