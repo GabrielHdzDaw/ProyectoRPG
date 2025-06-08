@@ -7,17 +7,21 @@ using ProyectoRPG.Interfaz;
 using ProyectoRPG.Personajes;
 using ProyectoRPG.Inventario;
 using ProyectoRPG.Recursos;
+using ProyectoRPG.Sistema;
+
 
 namespace ProyectoRPG.Combate
 {
     public class Combate
     {
-        Jugador jugador { get; set; }
+        Partida partida { get; set; }
         Enemigo enemigo { get; set; }
 
-        public Combate(Jugador jugador, Enemigo enemigo)
+        Enemigo demonio { get; set; } = new Enemigo("Demonio Malo Malísimo", Sprites.Demonio, 1000, 25, 30, 20);
+
+        public Combate(Partida partida, Enemigo enemigo)
         {
-            this.jugador = jugador;
+            this.partida = partida;
             this.enemigo = enemigo;
         }
 
@@ -47,10 +51,10 @@ namespace ProyectoRPG.Combate
         public void AnimacionAtaqueSprite(bool esJugador)
         {
 
-            int anchoJugador = jugador.GetSprite().Split('\n').Max(line => line.Length);
-            int altoJugador = jugador.GetSprite().Split('\n').Length;
-            int anchoEnemigo = enemigo.GetSprite().Split('\n').Max(line => line.Length);
-            int altoEnemigo = enemigo.GetSprite().Split('\n').Length;
+            int anchoJugador = partida.jugador.Sprite.Split('\n').Max(line => line.Length);
+            int altoJugador = partida.jugador.Sprite.Split('\n').Length;
+            int anchoEnemigo = enemigo.Sprite.Split('\n').Max(line => line.Length);
+            int altoEnemigo = enemigo.Sprite.Split('\n').Length;
             int altoMayor = Math.Max(altoJugador, altoEnemigo);
             int separacion = 20;
             int totalAnchoSprites = anchoJugador + separacion + anchoEnemigo;
@@ -73,8 +77,8 @@ namespace ProyectoRPG.Combate
                 int dxJugador = esJugador ? i * desplazamiento : 0;
                 int dxEnemigo = esJugador ? 0 : -i * desplazamiento;
 
-                Dibujar.DibujarSpriteNormal(jugadorX + dxJugador, spriteY, jugador.GetSprite());
-                Dibujar.DibujarSpriteNormal(enemigoX + dxEnemigo, spriteY, enemigo.GetSprite());
+                Dibujar.DibujarSpriteNormal(jugadorX + dxJugador, spriteY, partida.jugador.Sprite);
+                Dibujar.DibujarSpriteNormal(enemigoX + dxEnemigo, spriteY, enemigo.Sprite);
                 DibujarBarrasVida();
 
                 Thread.Sleep(10);
@@ -96,7 +100,7 @@ namespace ProyectoRPG.Combate
                 Thread.Sleep(delayParpadeo);
 
 
-                string spriteGolpeado = esJugador ? enemigo.GetSprite() : jugador.GetSprite();
+                string spriteGolpeado = esJugador ? enemigo.Sprite : partida.jugador.Sprite;
                 int xSprite = esJugador ? enemigoX : jugadorX;
                 Dibujar.DibujarSpriteNormal(xSprite, spriteY, spriteGolpeado);
 
@@ -114,8 +118,8 @@ namespace ProyectoRPG.Combate
                 int dxJugador = esJugador ? i * desplazamiento : 0;
                 int dxEnemigo = esJugador ? 0 : -i * desplazamiento;
 
-                Dibujar.DibujarSpriteNormal(jugadorX + dxJugador, spriteY, jugador.GetSprite());
-                Dibujar.DibujarSpriteNormal(enemigoX + dxEnemigo, spriteY, enemigo.GetSprite());
+                Dibujar.DibujarSpriteNormal(jugadorX + dxJugador, spriteY, partida.jugador.Sprite);
+                Dibujar.DibujarSpriteNormal(enemigoX + dxEnemigo, spriteY, enemigo.Sprite);
                 DibujarBarrasVida();
 
                 Thread.Sleep(10);
@@ -124,11 +128,11 @@ namespace ProyectoRPG.Combate
 
         public void DibujarSpritesCombate()
         {
-            int anchoJugador = jugador.GetSprite().Split('\n').Max(line => line.Length);
-            int altoJugador = jugador.GetSprite().Split('\n').Length;
+            int anchoJugador = partida.jugador.Sprite.Split('\n').Max(line => line.Length);
+            int altoJugador = partida.jugador.Sprite.Split('\n').Length;
 
-            int anchoEnemigo = enemigo.GetSprite().Split('\n').Max(line => line.Length);
-            int altoEnemigo = enemigo.GetSprite().Split('\n').Length;
+            int anchoEnemigo = enemigo.Sprite.Split('\n').Max(line => line.Length);
+            int altoEnemigo = enemigo.Sprite.Split('\n').Length;
 
             int altoMayor = Math.Max(altoJugador, altoEnemigo);
             int separacion = 20;
@@ -141,17 +145,17 @@ namespace ProyectoRPG.Combate
 
             int spriteY = Dibujar.Y + (Dibujar.AlturaRectangulo - altoMayor) / 2 - 3;
 
-            Dibujar.DibujarSpriteNormal(jugadorX, spriteY, jugador.GetSprite());
-            Dibujar.DibujarSpriteNormal(enemigoX, spriteY, enemigo.GetSprite());
+            Dibujar.DibujarSpriteNormal(jugadorX, spriteY, partida.jugador.Sprite);
+            Dibujar.DibujarSpriteNormal(enemigoX, spriteY, enemigo.Sprite);
             DibujarBarrasVida();
         }
 
         public void DibujarBarrasVida()
         {
-            int anchoJugador = jugador.GetSprite().Split('\n').Max(line => line.Length);
-            int altoJugador = jugador.GetSprite().Split('\n').Length;
-            int anchoEnemigo = enemigo.GetSprite().Split('\n').Max(line => line.Length);
-            int altoEnemigo = enemigo.GetSprite().Split('\n').Length;
+            int anchoJugador = partida.jugador.Sprite.Split('\n').Max(line => line.Length);
+            int altoJugador = partida.jugador.Sprite.Split('\n').Length;
+            int anchoEnemigo = enemigo.Sprite.Split('\n').Max(line => line.Length);
+            int altoEnemigo = enemigo.Sprite.Split('\n').Length;
             int altoMayor = Math.Max(altoJugador, altoEnemigo);
             int separacion = 20;
             int totalAnchoSprites = anchoJugador + separacion + anchoEnemigo;
@@ -165,13 +169,13 @@ namespace ProyectoRPG.Combate
 
             int barraJugadorX = jugadorX + anchoJugador / 2 - anchoBarraVida / 2;
             int barraJugadorY = spriteY + offsetY;
-            DibujarNombrePersonaje(barraJugadorX, barraJugadorY - 1, anchoBarraVida, jugador.GetNombre());
-            DibujarBarraVida(barraJugadorX, barraJugadorY, anchoBarraVida, jugador.GetVida(), jugador.GetVidaMaxima());
+            DibujarNombrePersonaje(barraJugadorX, barraJugadorY - 1, anchoBarraVida, partida.jugador.Nombre);
+            DibujarBarraVida(barraJugadorX, barraJugadorY, anchoBarraVida, partida.jugador.Vida, partida.jugador.VidaMaxima);
 
             int barraEnemigoX = enemigoX + anchoEnemigo / 2 - anchoBarraVida / 2;
             int barraEnemigoY = spriteY + offsetY;
-            DibujarNombrePersonaje(barraEnemigoX, barraEnemigoY - 1, anchoBarraVida, enemigo.GetNombre());
-            DibujarBarraVida(barraEnemigoX, barraEnemigoY, anchoBarraVida, enemigo.GetVida(), enemigo.GetVidaMaxima());
+            DibujarNombrePersonaje(barraEnemigoX, barraEnemigoY - 1, anchoBarraVida, enemigo.Nombre);
+            DibujarBarraVida(barraEnemigoX, barraEnemigoY, anchoBarraVida, enemigo.Vida, enemigo.VidaMaxima);
         }
 
         private void DibujarNombrePersonaje(int x, int y, int anchoBarra, string nombre)
@@ -300,7 +304,7 @@ namespace ProyectoRPG.Combate
         public Ataque MenuAtaque(int x, int y, int maxAnchura, int maxAltura)
         {
             Console.CursorVisible = false;
-            string[] opciones = jugador.Ataques.Select(a => a.ToString()).ToArray();
+            string[] opciones = partida.jugador.Ataques.Select(a => a.ToString()).ToArray();
             int opcion = 0;
 
             int menuX = Dibujar.X + 12;
@@ -346,14 +350,14 @@ namespace ProyectoRPG.Combate
 
                 Thread.Sleep(50);
             }
-            Ataque ataqueSeleccionado = jugador.GetAtaques().ToArray()[opcion];
+            Ataque ataqueSeleccionado = partida.jugador.GetAtaques().ToArray()[opcion];
             return ataqueSeleccionado;
         }
 
         public Item MenuItem(int x, int y, int maxAnchura, int maxAltura)
         {
             Console.CursorVisible = false;
-            List<Pocion> pociones = jugador.GetInventario().Pociones;
+            List<Pocion> pociones = partida.jugador.GetInventario().Pociones;
 
             string[] opciones = pociones.Select(i => i.ToString()).ToArray();
             int opcion = 0;
@@ -401,7 +405,7 @@ namespace ProyectoRPG.Combate
         public void OtorgarPocion()
         {
             Pocion pocion = new Pocion(50);
-            jugador.GetInventario().AgregarObjeto(pocion);
+            partida.jugador.GetInventario().AgregarObjeto(pocion);
         }
 
         public bool EmpezarCombate()
@@ -409,12 +413,12 @@ namespace ProyectoRPG.Combate
             bool combateActivo = true;
             bool victoria = false;
 
-            while (combateActivo && !jugador.EstaMuerto() && !enemigo.EstaMuerto())
+            while (combateActivo && !partida.jugador.EstaMuerto() && !enemigo.EstaMuerto())
             {
 
                 Console.Clear();
                 DibujarInterfazCombate();
-                MostrarMensaje($"¡Un {enemigo.GetNombre()} te ataca!", false);
+                MostrarMensaje($"¡Un {enemigo.Nombre} te ataca!", false);
 
 
                 int opcionSeleccionada = MostrarMenuCombate();
@@ -449,7 +453,7 @@ namespace ProyectoRPG.Combate
                     EjecutarTurnoEnemigo();
                 }
 
-                if (jugador.EstaMuerto())
+                if (partida.jugador.EstaMuerto())
                 {
                     MostrarMensaje("¡Has sido derrotado!", true);
                     combateActivo = false;
@@ -458,11 +462,19 @@ namespace ProyectoRPG.Combate
                 else if (enemigo.EstaMuerto())
                 {
                     MostrarMensaje("¡Has ganado el combate!", true);
-                    Random random = new Random();
-                    if (random.Next(0, 100) < 50)
+                    Random randomPocion = new Random();
+                    Random randomPico = new Random();
+                    if (randomPico.Next(0, 100) < 25)
+                    {
+                        partida.jugador.GetInventario().AgregarObjeto(new ObjetoClave("Pico de escalada", "Con este pico llegarás a lo más alto de la montaña del Demonio Malo Malísimo", 0));
+                        MostrarMensaje("¡Has encontrado un pico! ¡Ve a la montaña!", true);
+                    }
+                    if (randomPocion.Next(0, 100) < 50)
                     {
                         OtorgarPocion();
                         MostrarMensaje("¡Has encontrado una poción!", true);
+                        MostrarMensaje($"Puntuación: {partida.puntuacion} + 10 = {partida.puntuacion + 10}", true);
+                        partida.puntuacion += 10;
                     }
 
                     combateActivo = false;
@@ -483,22 +495,22 @@ namespace ProyectoRPG.Combate
             int tirada = random.Next(1, 101);
             if (tirada > ataqueSeleccionado.probabilidad)
             {
-                MostrarMensaje($"{jugador.GetNombre()} intenta usar {ataqueSeleccionado.nombre}, ¡pero falla!", true);
+                MostrarMensaje($"{partida.jugador.Nombre} intenta usar {ataqueSeleccionado.nombre}, ¡pero falla!", true);
                 return;
             }
 
-            int dañoBase = jugador.GetAtaque();
+            int dañoBase = partida.jugador.Ataque;
 
-            Arma? arma = jugador.GetArma();
+            Arma? arma = partida.jugador.GetArma();
             int dañoArma = 0;
             int dañoCriticoArma = 0;
             int probCritico = 0;
 
             if (arma != null)
             {
-                dañoArma = arma.dano;
-                dañoCriticoArma = arma.danoCritico;
-                probCritico = arma.probabilidadCritico;
+                dañoArma = arma.Dano;
+                dañoCriticoArma = arma.DanoCritico;
+                probCritico = arma.ProbabilidadCritico;
             }
 
             bool esCritico = random.Next(1, 101) <= probCritico;
@@ -507,14 +519,14 @@ namespace ProyectoRPG.Combate
                 ? dañoBase + dañoCriticoArma + ataqueSeleccionado.dano
                 : dañoBase + dañoArma + ataqueSeleccionado.dano;
 
-            int defensa = enemigo.GetDefensa();
+            int defensa = enemigo.Defensa;
             dañoTotal = Math.Max(0, dañoTotal - defensa);
 
             enemigo.RecibirDaño(dañoTotal);
 
             string mensaje = esCritico
-                ? $"{jugador.GetNombre()} ataca con {ataqueSeleccionado.nombre} y causa {dañoTotal} de impacto crítico!"
-                : $"{jugador.GetNombre()} ataca con {ataqueSeleccionado.nombre} y causa {dañoTotal} de daño!";
+                ? $"{partida.jugador.Nombre} ataca con {ataqueSeleccionado.nombre} y causa {dañoTotal} de impacto crítico!"
+                : $"{partida.jugador.Nombre} ataca con {ataqueSeleccionado.nombre} y causa {dañoTotal} de daño!";
 
             MostrarMensaje(mensaje, true);
             AnimacionAtaqueSprite(true);
@@ -522,19 +534,18 @@ namespace ProyectoRPG.Combate
 
         private void EjecutarDefensa()
         {
-            MostrarMensaje($"{jugador.GetNombre()} se defiende. Recibirá menos daño este turno.", true);
-            jugador.SetDefensa(jugador.GetDefensa() + 2);
-
+            MostrarMensaje($"{partida.jugador.Nombre} se defiende. Recibirá menos daño este turno.", true);
+            partida.jugador.Defensa = partida.jugador.Defensa + 2;
         }
 
         private void EjecutarItem()
         {
             Pocion pocion = (Pocion)MenuItem(Dibujar.X + 8, Dibujar.Y + Dibujar.AlturaRectangulo - 7, 20, 4);
-            if (jugador.GetInventario().ContieneObjeto(pocion))
+            if (partida.jugador.GetInventario().ContieneObjeto(pocion))
             {
-                jugador.UsarPocion(pocion);
-                jugador.GetInventario().EliminarObjeto(pocion);
-                MostrarMensaje($"{jugador.GetNombre()} usa {pocion.GetNombre()} y recupera {pocion.curacion} de vida.", true);
+                partida.jugador.UsarPocion(pocion);
+                partida.jugador.GetInventario().EliminarObjeto(pocion);
+                MostrarMensaje($"{partida.jugador.Nombre} usa {pocion.Nombre} y recupera {pocion.curacion} de vida.", true);
             }
             else
             {
@@ -545,22 +556,22 @@ namespace ProyectoRPG.Combate
         private bool IntentarHuir()
         {
             Random random = new Random();
-            int probabilidadHuir = jugador.GetVelocidad() * 100 / (jugador.GetVelocidad() + enemigo.GetVelocidad());
+            int probabilidadHuir = partida.jugador.Velocidad * 100 / (partida.jugador.Velocidad + enemigo.Velocidad);
             return random.Next(0, 100) < probabilidadHuir;
         }
 
         private void EjecutarTurnoEnemigo()
         {
-            int dano = CalcularDaño(enemigo, jugador);
-            jugador.RecibirDaño(dano);
-            MostrarMensaje($"{enemigo.GetNombre()} ataca a {jugador.GetNombre()} causando {dano} de daño!", true);
+            int dano = CalcularDaño(enemigo, partida.jugador);
+            partida.jugador.RecibirDaño(dano);
+            MostrarMensaje($"{enemigo.Nombre} ataca a {partida.jugador.Nombre} causando {dano} de daño!", true);
             AnimacionAtaqueSprite(false);
         }
 
         private int CalcularDaño(Personaje atacante, Personaje defensor)
         {
             Random random = new Random();
-            int danoBase = atacante.GetAtaque() - defensor.GetDefensa();
+            int danoBase = atacante.Ataque - defensor.Defensa;
             int variacion = random.Next(-2, 3);
             return Math.Max(1, danoBase + variacion);
         }
@@ -591,7 +602,7 @@ namespace ProyectoRPG.Combate
 
         public override string ToString()
         {
-            return "Combate entre " + jugador.ToString() + " y " + enemigo.ToString();
+            return "Combate entre " + partida.jugador.ToString() + " y " + enemigo.ToString();
         }
     }
 }

@@ -8,16 +8,14 @@ namespace ProyectoRPG.Inventario
 {
     public class InventarioPersonaje
     {
-        public List<Pocion> Pociones { get; private set; }
-        public List<Arma> Armas { get; private set; }
-        
-        public List<ObjetoClave> ObjetosClave { get; private set; }
+        public List<Pocion> Pociones { get; set; }
+        public List<Arma> Armas { get; set; }
+        public List<ObjetoClave> ObjetosClave { get; set; }
 
         public InventarioPersonaje()
         {
             Pociones = new List<Pocion>();
             Armas = new List<Arma>();
-            
             ObjetosClave = new List<ObjetoClave>();
         }
 

@@ -295,7 +295,7 @@ namespace ProyectoRPG.Interfaz
                     Console.ForegroundColor = ConsoleColor.White;
                     DibujarSpriteCentrado(inicioX, inicioY + 10, "\"Un picaro, una sombra entre sombras, roba secretos mejor guardados que el oro\"");
                     Console.ResetColor();
-                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Vas a jugar una partida al ahorcado, ¡preparate!, para jugar pulse ENTER...");
+                    DibujarSpriteCentrado(inicioX, inicioY + 12, "Te han sorprendido robando y ahora te van a ahorcar, ¡preparate!, para jugar pulse ENTER...");
                     break;
             }
             Console.ResetColor();

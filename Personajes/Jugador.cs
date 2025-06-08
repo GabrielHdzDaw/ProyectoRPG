@@ -10,23 +10,17 @@ namespace ProyectoRPG.Personajes
 {
     public class Jugador:Personaje
     {
-        string nombre { get; set; }
-        string sprite { get; set; }
-        int vida { get; set; }
-        int ataque { get; set; }
-        int defensa { get; set; }
-        int velocidad { get; set; }
         public int x { get; set; }
         public int y { get; set; }
-        public List<Ataque> Ataques { get; protected set; }
-        protected InventarioPersonaje inventario;
-        Arma? armaEquipada;
+        public List<Ataque> Ataques { get; set; }
+        public InventarioPersonaje Inventario { get; set; }
+        public Arma ArmaEquipada { get; set; }
 
         public int AtaqueTotal
         {
             get
             {
-                return ataque + (armaEquipada?.dano ?? 0);
+                return Ataque + (ArmaEquipada?.Dano ?? 0);
             }
         }
 
@@ -34,7 +28,7 @@ namespace ProyectoRPG.Personajes
         {
             get
             {
-                return ataque + (armaEquipada?.danoCritico ?? 0);
+                return Ataque + (ArmaEquipada?.DanoCritico ?? 0);
             }
         }
 
@@ -42,8 +36,8 @@ namespace ProyectoRPG.Personajes
         public Jugador(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad) : base(nombre, sprite, vida, ataque, defensa, velocidad)
         {
             Ataques = new List<Ataque>();
-            inventario = new InventarioPersonaje();
-            inventario.AgregarObjeto(new Pocion(20));
+            Inventario = new InventarioPersonaje();
+            Inventario.AgregarObjeto(new Pocion(20));
             x = 66;
             y = 127;
         }
@@ -55,19 +49,19 @@ namespace ProyectoRPG.Personajes
 
         public InventarioPersonaje GetInventario()
         {
-            return inventario;
+            return Inventario;
         }
 
         public Arma? GetArma()
         {
-            return armaEquipada;
+            return ArmaEquipada;
         }
 
         public void SetArma(Arma arma)
         {
-            if (inventario.ContieneObjeto(arma))
+            if (Inventario.ContieneObjeto(arma))
             {
-                armaEquipada = arma;
+                ArmaEquipada = arma;
             }
             else
             {
@@ -77,27 +71,27 @@ namespace ProyectoRPG.Personajes
 
         public void AgregarItem(Item item)
         {
-            inventario.AgregarObjeto(item);
+            Inventario.AgregarObjeto(item);
         }
 
         public void EliminarItem(Item item)
         {
-            inventario.EliminarObjeto(item);
+            Inventario.EliminarObjeto(item);
         }
 
         public void UsarPocion(Pocion pocion)
         {
-            if (inventario.ContieneObjeto(pocion))
+            if (Inventario.ContieneObjeto(pocion))
             {
-                int nuevaVida = GetVida() + pocion.curacion;
+                int nuevaVida = Vida + pocion.curacion;
 
-                if (nuevaVida > GetVidaMaxima())
+                if (nuevaVida > VidaMaxima)
                 {
-                    nuevaVida = GetVidaMaxima();
+                    nuevaVida = VidaMaxima;
                 }
 
-                SetVida(nuevaVida);
-                inventario.EliminarObjeto(pocion);
+                Vida = nuevaVida;
+                Inventario.EliminarObjeto(pocion);
             }
             else
             {

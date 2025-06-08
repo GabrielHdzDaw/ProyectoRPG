@@ -12,12 +12,12 @@ namespace ProyectoRPG.Inventario
         public Pocion(int curacion)
             : base("Poción pequeña", "", 10)
         {
-            this.SetDescripcion("Poción que cura " + curacion + " puntos de vida al que la bebe.");
+            this.Descripcion = "Poción que cura " + curacion + " puntos de vida al que la bebe.";
             this.curacion = curacion;
         }
         public override string ToString()
         {
-            return  $" {GetNombre()} Curación: {curacion}";
+            return  $" {Nombre} Curación: {curacion}";
         }
     }
 }

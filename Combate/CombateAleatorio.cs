@@ -1,25 +1,28 @@
-﻿using ProyectoRPG.Personajes;
+﻿using ProyectoRPG.Interfaz;
+using ProyectoRPG.Personajes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProyectoRPG.Sistema;
 
 namespace ProyectoRPG.Combate
 {
     internal class CombateAleatorio
     {
-        Jugador jugador;
+        Partida partida;
         Combate combate;
         Enemigo enemigo = GeneradorEnemigos.EnemigoAleatorio();
-        public CombateAleatorio(Jugador jugador)
+        public CombateAleatorio(Partida partida)
         {
-            this.jugador = jugador;
-            this.combate = new Combate(jugador, enemigo);
+            this.partida = partida;
+            this.combate = new Combate(partida, enemigo);
         }
 
         public bool IniciarCombate()
         {
+            Dibujar.LimpiarPantalla();
             return combate.EmpezarCombate();
         }
     }

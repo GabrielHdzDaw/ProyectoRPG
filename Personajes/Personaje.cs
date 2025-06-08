@@ -9,122 +9,46 @@ namespace ProyectoRPG.Personajes
 {
     public abstract class Personaje
     {
-        string nombre;
-        string sprite;
-        int vida;
-        int vidaMaxima;
-        int ataque;
-        int defensa;
-        int velocidad;
-        
+        public string Nombre { get; set; }
+        public string Sprite { get; set; }
+        public int Vida { get; set; }
+        public int VidaMaxima { get; set; }
+        public int Ataque { get; set; }
+        public int Defensa { get; set; }
+        public int Velocidad { get; set; }
+
 
         public Personaje(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad)
         {
-            this.nombre = nombre;
-            this.sprite = sprite;
-            this.vida = vida;
-            vidaMaxima = vida;
-            this.ataque = ataque;
-            this.defensa = defensa;
-            this.velocidad = velocidad;
+            this.Nombre = nombre;
+            this.Sprite = sprite;
+            this.Vida = vida;
+            VidaMaxima = vida;
+            this.Ataque = ataque;
+            this.Defensa = defensa;
+            this.Velocidad = velocidad;
             
         }
 
-        public string GetNombre()
-        {
-            return nombre;
-        }
-
-        public string GetSprite()
-        {
-            return sprite;
-        }
-
-       
-
-        public int GetVida()
-        {
-            return vida;
-        }
-
-        public int GetVidaMaxima()
-        {
-            return vidaMaxima;
-        }
-
-        public int GetAtaque()
-        {
-            return ataque;
-        }
-
-        public int GetDefensa()
-        {
-            return defensa;
-        }
-
-        public int GetVelocidad()
-        {
-            return velocidad;
-        }
-
-        public void SetNombre(string nombre)
-        {
-            this.nombre = nombre;
-        }
-
-        public void SetSprite(string sprite)
-        {
-            this.sprite = sprite;
-        }
-
-
-        public void SetVida(int vida)
-        {
-            this.vida = vida;
-        }
-
-        public void SetVidaMaxima(int vidaMaxima)
-        {
-            this.vidaMaxima = vidaMaxima;
-        }
-
-        public void SetAtaque(int ataque)
-        {
-            this.ataque = ataque;
-        }
-
-
-        public void SetDefensa(int defensa)
-        {
-            this.defensa = defensa;
-        }
-
-        public void SetVelocidad(int velocidad)
-        {
-            this.velocidad = velocidad;
-        }
-
-        
-
         public void RecibirDaño(int daño)
         {
-            vida = Math.Max(0, vida - daño);
+            Vida = Math.Max(0, Vida - daño);
         }
 
         public void Curar(int cantidad)
         {
-            vida = Math.Min(vidaMaxima, vida + cantidad);
+            Vida = Math.Min(VidaMaxima, Vida + cantidad);
         }
 
         public bool EstaMuerto()
         {
-            return vida <= 0;
+            return Vida <= 0;
         }
 
 
         public override string ToString()
         {
-            return $"Nombre: {nombre}, Vida: {vida}/{vidaMaxima}, Ataque: {ataque}, Defensa: {defensa}, Velocidad: {velocidad}";
+            return $"Nombre: {Nombre}, Vida: {Vida}/{VidaMaxima}, Ataque: {Ataque}, Defensa: {Defensa}, Velocidad: {Velocidad}";
         }
     }
 }

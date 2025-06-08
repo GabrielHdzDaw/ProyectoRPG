@@ -75,11 +75,19 @@ namespace ProyectoRPG.Sistema
         public static int OpcionSeleccionada(int opcion)
         {
             int resultado = opcion;
-            switch(opcion)
+            switch (opcion)
             {
                 case 0:
                     Partida partidaEmpezada = Partida.RenaudarPartida();
-                    partidaEmpezada.Continuar(partidaEmpezada);
+                    if (partidaEmpezada != null)
+                    {
+                        partidaEmpezada.Continuar(partidaEmpezada);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hay partidas guardadas o hubo un error al cargar la partida.");
+                        Console.ReadKey();
+                    }
                     break;
                 case 1:
                     Partida partida = Partida.NuevaPartida();
@@ -144,7 +152,7 @@ namespace ProyectoRPG.Sistema
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidas[i].jugador.GetNombre());
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidas[i].jugador.Nombre);
                     espaciadoVertical -= 1;
                     Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical,"");
                     espaciadoVertical -= 1;

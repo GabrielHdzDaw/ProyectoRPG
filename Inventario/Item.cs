@@ -8,50 +8,22 @@ namespace ProyectoRPG.Inventario
 {
     public abstract class Item
     {
-        string nombre;
-        string descripcion;
-        int precio;
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public int Precio { get; set; }
 
         public Item(string nombre, string descripcion, int precio)
         {
-            this.nombre = nombre;
-            this.descripcion = descripcion;
-            this.precio = precio;
+            this.Nombre = nombre;
+            this.Descripcion = descripcion;
+            this.Precio = precio;
         }
 
-        public string GetNombre()
-        {
-            return nombre;
-        }
-
-        public string GetDescripcion()
-        {
-            return descripcion;
-        }
-
-        public int GetPrecio()
-        {
-            return precio;
-        }
-
-        public void SetNombre(string nombre)
-        {
-            this.nombre = nombre;
-        }
-
-        public void SetDescripcion(string descripcion)
-        {
-            this.descripcion = descripcion;
-        }
-
-        public void SetPrecio(int precio)
-        {
-            this.precio = precio;
-        }
+       
 
         public override string ToString()
         {
-            return "Item: " + nombre + " Descripcion: " + descripcion + " Precio: " + precio;
+            return "Item: " + Nombre + " Descripcion: " + Descripcion + " Precio: " + Precio;
         }
 
 

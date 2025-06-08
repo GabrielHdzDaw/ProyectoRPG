@@ -1,4 +1,9 @@
-﻿using System;
+﻿using ProyectoRPG.Combate;
+using ProyectoRPG.Interfaz;
+using ProyectoRPG.Minijuegos;
+using ProyectoRPG.Personajes;
+using ProyectoRPG.Recursos;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -6,11 +11,8 @@ using System.Reflection.Emit;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using ProyectoRPG.Interfaz;
-using ProyectoRPG.Minijuegos;
-using ProyectoRPG.Personajes;
-using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Sistema
 {
@@ -19,6 +21,9 @@ namespace ProyectoRPG.Sistema
         public Jugador jugador { get; set; }
         public int puntuacion { get; set; }
         public bool terminada { get; set; }
+
+        private static Random random = new Random();
+        private static int pasosDesdeUltimoCombate = 0;
 
         public Partida()
         { }
@@ -183,7 +188,7 @@ namespace ProyectoRPG.Sistema
                     }
                 }
             }
-            
+
             Console.CursorVisible = true;
             return indice;
         }
@@ -209,7 +214,7 @@ namespace ProyectoRPG.Sistema
 
             int opcion = 0;
 
-            Dibujar.DibujarSpriteCentrado(centroX - 55, centroY - 15,"Selecciona la partida a continuar: ");
+            Dibujar.DibujarSpriteCentrado(centroX - 55, centroY - 15, "Selecciona la partida a continuar: ");
 
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
@@ -227,7 +232,7 @@ namespace ProyectoRPG.Sistema
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical,$"{i+1}. " + opciones[i]);
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + opciones[i]);
                     espaciadoVertical -= 1;
                     Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, "");
                     espaciadoVertical -= 1;
@@ -297,7 +302,7 @@ namespace ProyectoRPG.Sistema
                     MinijuegoTiroConArco minijuego3 = new MinijuegoTiroConArco();
                     resultado = minijuego3.Jugar();
                     break;
-                case 3: 
+                case 3:
                     jugador = new Picaro(nombreUsuario);
                     MinijuegoAhorcado minijuego4 = new MinijuegoAhorcado();
                     resultado = minijuego4.Jugar();
@@ -307,7 +312,7 @@ namespace ProyectoRPG.Sistema
             Dibujar.LimpiarPantallaSimple();
 
             Partida partida = new Partida(jugador);
-            if(resultado)
+            if (resultado)
             {
                 partida.puntuacion = 50;
             }
@@ -317,52 +322,84 @@ namespace ProyectoRPG.Sistema
             return partida;
         }
 
+        public static bool ProbabilidadCombate()
+        {
+            pasosDesdeUltimoCombate++;
+
+            double probabilidad = 0.03 + (pasosDesdeUltimoCombate * 0.01);
+
+            if (random.NextDouble() < probabilidad)
+            {
+                pasosDesdeUltimoCombate = 0;
+                return true;
+            }
+            return false;
+        }
+
         public void Continuar(Partida partida)
         {
             char[,] mapa = AbrirMapa();
             Console.CursorVisible = false;
-
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
-
-            while(tecla.Key != ConsoleKey.Escape)
+            while (tecla.Key != ConsoleKey.Escape)
             {
                 Dibujar.DibujarMapa(mapa, partida.jugador.x, partida.jugador.y);
-
-                if(Console.KeyAvailable == true)
+                if (Console.KeyAvailable == true)
                 {
                     tecla = Console.ReadKey(true);
-                    switch(tecla.Key)
+                    bool seMovio = false;
+
+                    switch (tecla.Key)
                     {
                         case ConsoleKey.LeftArrow:
                             char cUp = mapa[partida.jugador.x, partida.jugador.y - 1];
-                            if(cUp != 'A')
+                            if (cUp != 'A')
+                            {
                                 partida.jugador.y -= 1;
+                                seMovio = true;
+                            }
                             break;
                         case ConsoleKey.RightArrow:
                             char cDown = mapa[partida.jugador.x, partida.jugador.y + 1];
                             if (cDown != 'A')
+                            {
                                 partida.jugador.y += 1;
+                                seMovio = true;
+                            }
                             break;
                         case ConsoleKey.UpArrow:
                             char cLeft = mapa[partida.jugador.x - 1, partida.jugador.y];
-                                if (cLeft != 'A')
-                                    partida.jugador.x -= 1;
+                            if (cLeft != 'A')
+                            {
+                                partida.jugador.x -= 1;
+                                seMovio = true;
+                            }
                             break;
                         case ConsoleKey.DownArrow:
                             char cRight = mapa[partida.jugador.x + 1, partida.jugador.y];
                             if (cRight != 'A')
+                            {
                                 partida.jugador.x += 1;
+                                seMovio = true;
+                            }
                             break;
                     }
 
-                    if(mapa[partida.jugador.x, partida.jugador.y] == 'C')
+                   
+                    if (seMovio && ProbabilidadCombate())
+                    {
+                        CombateAleatorio combate = new CombateAleatorio(partida);
+                        combate.IniciarCombate();
+                    }
+
+                    if (mapa[partida.jugador.x, partida.jugador.y] == 'C')
                     {
                         partida.GuardarPartida();
                     }
                 }
             }
-
             Dibujar.LimpiarPantallaSimple();
+            Console.CursorVisible = false;
         }
 
         private static char[,] AbrirMapa()
@@ -394,25 +431,33 @@ namespace ProyectoRPG.Sistema
 
         public string NombreArchivo()
         {
-            return $"{jugador.GetNombre()}.json";
+            return $"{jugador.Nombre}.json";
         }
 
         public void GuardarPartida()
         {
-            string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = ReferenceHandler.Preserve,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                IgnoreReadOnlyProperties = false // Asegura que los getters se incluyan
+            };
+            string json = JsonSerializer.Serialize(this, options);
             File.WriteAllText("./../../../Recursos/jugadores/" + NombreArchivo(), json);
         }
 
-        
         static Partida CargarPartida(string archivo)
         {
-            if (!File.Exists("./../../../Recursos/jugadores/" + archivo))
-                return null;
-
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = ReferenceHandler.Preserve,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                IgnoreReadOnlyProperties = false // Asegura que los getters se incluyan
+            };
             string json = File.ReadAllText("./../../../Recursos/jugadores/" + archivo);
-            Partida partida = JsonSerializer.Deserialize<Partida>(json);
-
-            return partida != null ? partida : new Partida();
+            return JsonSerializer.Deserialize<Partida>(json, options);
         }
     }
 }
