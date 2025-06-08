@@ -1,0 +1,78 @@
+{
+  "$id": "1",
+  "jugador": {
+    "$id": "2",
+    "x": 66,
+    "y": 127,
+    "ataques": {
+      "$id": "3",
+      "$values": [
+        {
+          "$id": "4",
+          "nombre": "Flecha r\u00E1pida",
+          "dano": 10,
+          "probabilidad": 95
+        },
+        {
+          "$id": "5",
+          "nombre": "Flecha pesada",
+          "dano": 18,
+          "probabilidad": 80
+        },
+        {
+          "$id": "6",
+          "nombre": "Triple flecha",
+          "dano": 30,
+          "probabilidad": 60
+        }
+      ]
+    },
+    "inventario": {
+      "$id": "7",
+      "pociones": {
+        "$id": "8",
+        "$values": [
+          {
+            "$id": "9",
+            "curacion": 20,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 20 puntos de vida al que la bebe.",
+            "precio": 10
+          }
+        ]
+      },
+      "armas": {
+        "$id": "10",
+        "$values": [
+          {
+            "$id": "11",
+            "dano": 10,
+            "danoCritico": 18,
+            "probabilidadCritico": 20,
+            "nombre": "Arco corto",
+            "descripcion": "Arco que usan los elfos en el entrenamiento",
+            "precio": 0
+          }
+        ]
+      },
+      "objetosClave": {
+        "$id": "12",
+        "$values": []
+      }
+    },
+    "armaEquipada": {
+      "$ref": "11"
+    },
+    "ataqueTotal": 28,
+    "ataqueCriticoTotal": 36,
+    "nombre": "elfo",
+    "sprite": "\r\n     .      .\r\n     |\\____/|\r\n     | _  _ |\r\n     \\ 0  0 /\r\n      | \u00AF\u00AF |\r\n   ___/\\__/\\____   \\\r\n  /             \\   \\\r\n /  \\         /  \\   \\\r\n|    \\___/___/(   |   |\r\n\\    |  }{  |   \\  )  |--\u003E\r\n \\   |  }{  |    \\  \\ |\r\n  \\  |;;;;;;;\\    \\  /\r\n   \\ /;;;;;;;;|  [,,,]\r\n     |;;;;;;/ |    /\r\n     ||;;|\\   |   /\r\n     ||;;/|   /\r\n     \\_|:||__|\r\n      \\ ;||  /\r\n      /= || =\\\r\n     | = /\\ = |\r\n    /___/  \\___\\\r\n",
+    "vida": 85,
+    "vidaMaxima": 85,
+    "ataque": 18,
+    "defensa": 12,
+    "velocidad": 18
+  },
+  "puntuacion": 0,
+  "terminada": false
+}

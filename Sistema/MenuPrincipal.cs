@@ -112,22 +112,25 @@ namespace ProyectoRPG.Sistema
             Dibujar.LimpiarPantalla();
             //deserializar las partidas para sacar de ellas la puntuacion¿? --alvaro help!!!
             List<Partida> partidas = new List<Partida>();
-            
-            //esto es prueba
-            Mago mago = new Mago("Mago");
-            Picaro picaro = new Picaro("Picaro");
-            Elfo elfo = new Elfo("Elfo");
-            Partida p1 = new Partida(mago);
-            p1.puntuacion = 50;
-            Partida p2 = new Partida(picaro);
-            p2.puntuacion = 10;
-            Partida p3 = new Partida(elfo);
-            p3.puntuacion = 69;
-            partidas.Add(p1);
-            partidas.Add(p2);
-            partidas.Add(p3);
 
-            partidas.Sort();
+            //esto es prueba
+            Elfo elfo = new Elfo("Peep");
+
+            Random random = new Random();
+
+            for (int i = 0; i < 18; i++)
+            {
+                int numero = random.Next(0, 2);
+                Partida partida = new Partida(elfo);
+                partida.puntuacion = i + 1 * numero;
+                partida.terminada = numero == 1 ? true : false;
+                partidas.Add(partida);
+            }
+
+
+            List<Partida> partidasAcabadas = partidas.FindAll(p => p.terminada);
+            
+            partidasAcabadas.Sort();
 
             Console.CursorVisible = false;
 
@@ -143,8 +146,9 @@ namespace ProyectoRPG.Sistema
             while (tecla.Key != ConsoleKey.Enter)
             {
                 int espaciadoVertical = 10;
+                int maxMostrar = Math.Min(10, partidasAcabadas.Count);
 
-                for (int i = 0; i < partidas.Count; i++)
+                for (int i = 0; i < maxMostrar; i++)
                 {
                     if (opcion == i)
                     {
@@ -152,11 +156,11 @@ namespace ProyectoRPG.Sistema
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidas[i].jugador.Nombre);
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidasAcabadas[i]);
                     espaciadoVertical -= 1;
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical,"");
+                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, "");
                     espaciadoVertical -= 1;
-
+                    
                     if (opcion == i)
                     {
                         Console.ResetColor();
@@ -174,7 +178,7 @@ namespace ProyectoRPG.Sistema
                                 opcion--;
                             break;
                         case ConsoleKey.DownArrow:
-                            if (opcion < partidas.Count - 1)
+                            if (opcion < maxMostrar - 1)
                                 opcion++;
                             break;
                     }
@@ -190,7 +194,7 @@ namespace ProyectoRPG.Sistema
 
             Dibujar.LimpiarPantalla();
             Console.ForegroundColor = ConsoleColor.Green;
-            Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - 0, "Nos alegramos muchísimoooo de que quieras conocer a los creadores...");
+            Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - 0, "\"Nos alegramos muchísimoooo de que quieras conocer a los creadores\"");
             Console.ResetColor();
             Dibujar.DibujarSpriteCentrado(centroX - 1, centroY + 2, "Pulse ENTER para conocerlos...");
             bool avanzar = false;
@@ -212,9 +216,9 @@ namespace ProyectoRPG.Sistema
         {
             string[] opciones = ["Álvaro", "Dayron", "Gabriel", "Lucía", "Carlos", "Salir"];
             string[] textosPersonajes = ["Un chico muy listo que con perilla es más guapo aún...",
-                                         "Un chico alto, guapo y con ganas de aprender",
+                                         "¡Gracias por jugar!, espero poder disfrutar del juego ahora que ya he terminado todo",
                                          "El padre de la clase, palabras textuales de \"Don José Manuel Fuster\"",
-                                         "Una chica atrevida, graciosa y con ganas de aprender",
+                                         "Ha sido un placer para mí poder trabajar en este juego. Espero que os haya gustado :)",
                                          "Un chico que cuando sabe lo que le gusta, no se lo piensa dos veces...",
                                          ""];
             int indice = 0;
@@ -253,16 +257,16 @@ namespace ProyectoRPG.Sistema
                     switch (indice)
                     {
                         case 0:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2, Sprites.Mago); //alvaro
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 -8, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 -2, Sprites.Alvaro); 
                             break;
                         case 1:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2, Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 4 / 2, Sprites.Caballero); //dayron
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 6, Dibujar.Y + 2 + Dibujar.AlturaRectangulo / 4 / 2 -4, Sprites.Dayron); 
                             break;
                         case 2:
                             Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 - 2, Sprites.Gabriel);
                             break;
                         case 3:
-                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 + 2, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 + 1, Sprites.Picaro); //lucia
+                            Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 5, Dibujar.Y + Dibujar.AlturaRectangulo / 4 / 2 - 2, Sprites.Lucia); 
                             break;
                         case 4:
                             Dibujar.DibujarSpriteNormal(Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 10, Dibujar.Y + Dibujar.AlturaRectangulo / 4 - 8, Sprites.Carlos);

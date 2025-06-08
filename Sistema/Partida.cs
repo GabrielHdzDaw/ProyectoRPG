@@ -37,7 +37,7 @@ namespace ProyectoRPG.Sistema
 
         public int CompareTo(Partida other)
         {
-            return this.puntuacion.CompareTo(other.puntuacion);
+            return other.puntuacion.CompareTo(this.puntuacion);
         }
 
         private static string NombreElegido()
@@ -458,6 +458,11 @@ namespace ProyectoRPG.Sistema
             };
             string json = File.ReadAllText("./../../../Recursos/jugadores/" + archivo);
             return JsonSerializer.Deserialize<Partida>(json, options);
+        }
+
+        public override string ToString()
+        {
+            return $"{jugador.Nombre} ({jugador.GetType().Name}) - {puntuacion} pts";
         }
     }
 }

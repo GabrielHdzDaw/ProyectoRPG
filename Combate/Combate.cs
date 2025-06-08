@@ -483,7 +483,7 @@ namespace ProyectoRPG.Combate
 
             }
             Dibujar.LimpiarPantalla();
-            Console.Clear();
+            Console.CursorVisible = false;
             return victoria;
         }
 
