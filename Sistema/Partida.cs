@@ -428,6 +428,9 @@ namespace ProyectoRPG.Sistema
                     {
                         CombateAleatorio combate = new CombateAleatorio(partida);
                         combate.IniciarCombate();
+
+                        if (partida.jugador.Vida <= 0)
+                            tecla = new ConsoleKeyInfo('\u001b', ConsoleKey.Escape, false, false, false);
                     }
 
                     if (mapa[partida.jugador.x, partida.jugador.y] == 'C')
