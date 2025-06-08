@@ -462,6 +462,7 @@ namespace ProyectoRPG.Sistema
                             Dibujar.LimpiarPantalla();
                         }
                     }
+
                     if (victoriaCombateFinal)
                     {
                         Dibujar.LimpiarPantalla();
@@ -473,6 +474,10 @@ namespace ProyectoRPG.Sistema
                         while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
                         Dibujar.LimpiarPantalla();
                         return;
+                    }
+                    else
+                    {
+                        tecla = new ConsoleKeyInfo('\u001b', ConsoleKey.Escape, false, false, false);
                     }
                 }
             }
