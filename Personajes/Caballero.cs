@@ -11,7 +11,7 @@ namespace ProyectoRPG.Personajes
 {
     public class Caballero : Jugador
     {
-
+        public Caballero() { }
         public Caballero(string nombre)
     : base(nombre, Sprites.Caballero, 120, 15, 20, 5)
         {

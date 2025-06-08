@@ -13,6 +13,8 @@ namespace ProyectoRPG.Personajes
 
     public class Picaro:Jugador
     {
+
+        public Picaro() { }
         public Picaro(string nombre) 
             : base(nombre, Sprites.Picaro, 75, 22, 8, 15)
         {

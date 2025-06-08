@@ -18,6 +18,8 @@ namespace ProyectoRPG.Personajes
         public int Velocidad { get; set; }
 
 
+        public Personaje() { }
+
         public Personaje(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad)
         {
             this.Nombre = nombre;

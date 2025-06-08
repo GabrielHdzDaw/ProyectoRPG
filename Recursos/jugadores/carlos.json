@@ -2,6 +2,7 @@
   "$id": "1",
   "jugador": {
     "$id": "2",
+    "$type": "elfo",
     "x": 66,
     "y": 127,
     "ataques": {
@@ -65,7 +66,7 @@
     },
     "ataqueTotal": 28,
     "ataqueCriticoTotal": 36,
-    "nombre": "elfo",
+    "nombre": "carlos",
     "sprite": "\r\n     .      .\r\n     |\\____/|\r\n     | _  _ |\r\n     \\ 0  0 /\r\n      | \u00AF\u00AF |\r\n   ___/\\__/\\____   \\\r\n  /             \\   \\\r\n /  \\         /  \\   \\\r\n|    \\___/___/(   |   |\r\n\\    |  }{  |   \\  )  |--\u003E\r\n \\   |  }{  |    \\  \\ |\r\n  \\  |;;;;;;;\\    \\  /\r\n   \\ /;;;;;;;;|  [,,,]\r\n     |;;;;;;/ |    /\r\n     ||;;|\\   |   /\r\n     ||;;/|   /\r\n     \\_|:||__|\r\n      \\ ;||  /\r\n      /= || =\\\r\n     | = /\\ = |\r\n    /___/  \\___\\\r\n",
     "vida": 85,
     "vidaMaxima": 85,
@@ -73,6 +74,7 @@
     "defensa": 12,
     "velocidad": 18
   },
-  "puntuacion": 0,
-  "terminada": false
+  "puntuacion": 50,
+  "terminada": false,
+  "creacion": "2025-06-08T17:35:09.7940178+02:00"
 }

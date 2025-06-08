@@ -32,6 +32,7 @@ namespace ProyectoRPG.Personajes
             }
         }
 
+        public Jugador() { }
 
         public Jugador(string nombre, string sprite, int vida, int ataque, int defensa, int velocidad) : base(nombre, sprite, vida, ataque, defensa, velocidad)
         {

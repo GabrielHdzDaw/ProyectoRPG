@@ -11,6 +11,8 @@ namespace ProyectoRPG.Personajes
 {
     public class Mago:Jugador
     {
+
+        public Mago() { }
         public Mago(string nombre) 
             : base(nombre, Sprites.Mago, 80, 35, 5, 10)
         {

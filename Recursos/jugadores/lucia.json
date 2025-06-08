@@ -1,0 +1,80 @@
+{
+  "$id": "1",
+  "jugador": {
+    "$id": "2",
+    "$type": "elfo",
+    "x": 66,
+    "y": 127,
+    "ataques": {
+      "$id": "3",
+      "$values": [
+        {
+          "$id": "4",
+          "nombre": "Ataque r\u00E1pido",
+          "dano": 8,
+          "probabilidad": 90
+        },
+        {
+          "$id": "5",
+          "nombre": "Ataque pesado",
+          "dano": 18,
+          "probabilidad": 75
+        },
+        {
+          "$id": "6",
+          "nombre": "Ataque poderoso",
+          "dano": 25,
+          "probabilidad": 50
+        }
+      ]
+    },
+    "inventario": {
+      "$id": "7",
+      "pociones": {
+        "$id": "8",
+        "$values": [
+          {
+            "$id": "9",
+            "curacion": 20,
+            "nombre": "Poci\u00F3n peque\u00F1a",
+            "descripcion": "Poci\u00F3n que cura 20 puntos de vida al que la bebe.",
+            "precio": 10
+          }
+        ]
+      },
+      "armas": {
+        "$id": "10",
+        "$values": [
+          {
+            "$id": "11",
+            "dano": 8,
+            "danoCritico": 12,
+            "probabilidadCritico": 15,
+            "nombre": "Espada corta rota",
+            "descripcion": "Espada que ha visto mejores d\u00EDas",
+            "precio": 0
+          }
+        ]
+      },
+      "objetosClave": {
+        "$id": "12",
+        "$values": []
+      }
+    },
+    "armaEquipada": {
+      "$ref": "11"
+    },
+    "ataqueTotal": 23,
+    "ataqueCriticoTotal": 27,
+    "nombre": "lucia",
+    "sprite": "\r\n  ,   A           {}\r\n / \\, | ,        .--.\r\n|    =|= \u003E      /.--.\\\r\n \\ /\u0060 | \u0060       |====|\r\n  \u0060   |         |\u0060::\u0060|\r\n      |     .-;\u0060\\..../\u0060;_.-^-._\r\n     /\\\\/  /  |...::..|\u0060   :   \u0060|\r\n     |:\u0027\\ |   /\u0027\u0027\u0027::\u0027\u0027|   .:.   |\r\n      \\ /\\;-,/\\   ::  |..:::::..|\r\n      |\\ \u003C\u0060 \u003E  \u003E._::_.| \u0027:::::\u0027 |\r\n      |  \u0060\u0022\u0060  /   ^^  |   \u0027:\u0027   |\r\n      |       |       \\    :    /\r\n      |       |        \\   :   /\r\n      |       |___/\\___|\u0060-.:.-\u0060\r\n      |        \\_ || _/    \u0060\r\n      |        \u003C_ \u003E\u003C _\u003E\r\n      |        |  ||  |\r\n      |        |  ||  |\r\n      |       _\\.:||:./_\r\n      |      /____/\\____\\\r\n",
+    "vida": 120,
+    "vidaMaxima": 120,
+    "ataque": 15,
+    "defensa": 20,
+    "velocidad": 5
+  },
+  "puntuacion": 250,
+  "terminada": true,
+  "creacion": "2025-06-08T17:35:48.9007532+02:00"
+}

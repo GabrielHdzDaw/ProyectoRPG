@@ -81,12 +81,12 @@ namespace ProyectoRPG.Sistema
                     Partida partidaEmpezada = Partida.RenaudarPartida();
                     if (partidaEmpezada != null)
                     {
+                        Dibujar.LimpiarPantalla();
                         partidaEmpezada.Continuar(partidaEmpezada);
                     }
                     else
                     {
-                        Console.WriteLine("No hay partidas guardadas o hubo un error al cargar la partida.");
-                        Console.ReadKey();
+                        Dibujar.LimpiarPantalla();
                     }
                     break;
                 case 1:
@@ -110,23 +110,7 @@ namespace ProyectoRPG.Sistema
         private static void Records()
         {
             Dibujar.LimpiarPantalla();
-            //deserializar las partidas para sacar de ellas la puntuacion¿? --alvaro help!!!
-            List<Partida> partidas = new List<Partida>();
-
-            //esto es prueba
-            Elfo elfo = new Elfo("Peep");
-
-            Random random = new Random();
-
-            for (int i = 0; i < 18; i++)
-            {
-                int numero = random.Next(0, 2);
-                Partida partida = new Partida(elfo);
-                partida.puntuacion = i + 1 * numero;
-                partida.terminada = numero == 1 ? true : false;
-                partidas.Add(partida);
-            }
-
+            List<Partida> partidas = Partida.CargarPartidas();
 
             List<Partida> partidasAcabadas = partidas.FindAll(p => p.terminada);
             

@@ -1,9 +1,4 @@
-﻿using ProyectoRPG.Combate;
-using ProyectoRPG.Interfaz;
-using ProyectoRPG.Minijuegos;
-using ProyectoRPG.Personajes;
-using ProyectoRPG.Recursos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -12,7 +7,13 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
+using ProyectoRPG.Combate;
+using ProyectoRPG.Interfaz;
+using ProyectoRPG.Minijuegos;
+using ProyectoRPG.Personajes;
+using ProyectoRPG.Recursos;
 
 namespace ProyectoRPG.Sistema
 {
@@ -21,6 +22,7 @@ namespace ProyectoRPG.Sistema
         public Jugador jugador { get; set; }
         public int puntuacion { get; set; }
         public bool terminada { get; set; }
+        public DateTime creacion {  get; set; }
 
         private static Random random = new Random();
         private static int pasosDesdeUltimoCombate = 0;
@@ -33,6 +35,7 @@ namespace ProyectoRPG.Sistema
             this.jugador = jugador;
             puntuacion = 0;
             terminada = false;
+            creacion = DateTime.Now;
         }
 
         public int CompareTo(Partida other)
@@ -193,58 +196,59 @@ namespace ProyectoRPG.Sistema
             return indice;
         }
 
-        public static Partida RenaudarPartida()
+        public static Partida? RenaudarPartida()
         {
             Dibujar.LimpiarPantalla();
+            List<Partida> partidas = CargarPartidas();
+
+            List<Partida> partidasNoAcabadas = partidas.FindAll(p => !p.terminada);
+
+            partidasNoAcabadas.Sort((p1, p2) => p2.creacion.CompareTo(p1.creacion));
+
             Console.CursorVisible = false;
 
             int centroX = Dibujar.X + Dibujar.AnchuraRectangulo / 2 - 1;
             int centroY = Dibujar.Y + Dibujar.AlturaRectangulo / 2 - 1;
 
-            string rutaCarpeta = "./../../../Recursos/jugadores";
-            string[] archivosJson = Directory.GetFiles(rutaCarpeta, "*.json");
-
-
-            string[] opciones = new string[archivosJson.Length];
-
-            for (int i = 0; i < archivosJson.Length; i++)
-            {
-                opciones[i] = Path.GetFileNameWithoutExtension(archivosJson[i]);
-            }
-
             int opcion = 0;
+            bool salir = false;
+            bool salir2 = false;
 
             Dibujar.DibujarSpriteCentrado(centroX - 55, centroY - 15, "Selecciona la partida a continuar: ");
 
             ConsoleKeyInfo tecla = new ConsoleKeyInfo();
 
-            string archivo = "";
-
-            // Repetir este bucle hasta que se pulse enter
-            while (tecla.Key != ConsoleKey.Enter)
+            while (!salir && !salir2)
             {
                 int espaciadoVertical = 10;
-                for (int i = 0; i < opciones.Length; i++)
+                int maxPartidasMostrar = Math.Min(10, partidasNoAcabadas.Count());
+                int maxMostrar = maxPartidasMostrar + 1;
+
+                for (int i = 0; i < maxMostrar; i++)
                 {
+                    string simb = "\u2192";
                     if (opcion == i)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + opciones[i]);
-                    espaciadoVertical -= 1;
-                    Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, "");
-                    espaciadoVertical -= 1;
+                    if (i < maxPartidasMostrar)
+                    {
+                        Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical, $"{i + 1}. " + partidasNoAcabadas[i]);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Dibujar.DibujarSpriteCentrado(centroX - 1, centroY - espaciadoVertical + 4, simb + " Salir");
+                        Console.ResetColor();
+                    }
+
+                    espaciadoVertical -= 2;
 
                     if (opcion == i)
                     {
                         Console.ResetColor();
-                    }
-
-                    if (tecla.Key == ConsoleKey.Enter)
-                    {
-                        archivo = opciones[i] + ".json";
                     }
                 }
 
@@ -255,23 +259,32 @@ namespace ProyectoRPG.Sistema
                     switch (tecla.Key)
                     {
                         case ConsoleKey.UpArrow:
-                            if (opcion - 1 >= 0)
+                            if (opcion > 0)
                                 opcion--;
                             break;
                         case ConsoleKey.DownArrow:
-                            if (opcion + 1 < opciones.Length)
+                            if (opcion < maxMostrar - 1)
                                 opcion++;
+                            break;
+                        case ConsoleKey.Enter:
+                            if (opcion == maxMostrar - 1)
+                            {
+                                salir = true;
+                            }
+                            else
+                            {
+                                salir2 = true;
+                            }
                             break;
                     }
                 }
             }
-
-            Console.CursorVisible = true;
-
-
-            Partida continuarPartida = CargarPartida(archivo);
-
-            return continuarPartida;
+            int partidaAContinuar = opcion;
+            if (salir)
+            {
+                return null;
+            }
+            return partidasNoAcabadas[partidaAContinuar];
         }
 
         public static Partida NuevaPartida()
@@ -441,23 +454,88 @@ namespace ProyectoRPG.Sistema
                 WriteIndented = true,
                 ReferenceHandler = ReferenceHandler.Preserve,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                IgnoreReadOnlyProperties = false // Asegura que los getters se incluyan
+                IgnoreReadOnlyProperties = false,
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver
+                {
+                    Modifiers =
+            {
+                typeInfo =>
+                {
+                    if (typeInfo.Type == typeof(Jugador))
+                    {
+                        typeInfo.PolymorphismOptions = new JsonPolymorphismOptions
+                        {
+                            TypeDiscriminatorPropertyName = "$type",
+                            DerivedTypes =
+                            {
+                                new JsonDerivedType(typeof(Caballero), "caballero"),
+                                new JsonDerivedType(typeof(Mago), "mago"),
+                                new JsonDerivedType(typeof(Elfo), "elfo"),
+                                new JsonDerivedType(typeof(Picaro), "picaro")
+                            }
+                        };
+                    }
+                }
+            }
+                }
             };
+
             string json = JsonSerializer.Serialize(this, options);
             File.WriteAllText("./../../../Recursos/jugadores/" + NombreArchivo(), json);
         }
 
-        static Partida CargarPartida(string archivo)
+
+        public static List<Partida> CargarPartidas()
         {
+            string carpeta = "./../../../Recursos/jugadores/";
+            var partidas = new List<Partida>();
+
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true,
                 ReferenceHandler = ReferenceHandler.Preserve,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                IgnoreReadOnlyProperties = false // Asegura que los getters se incluyan
+                IgnoreReadOnlyProperties = false,
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver
+                {
+                    Modifiers =
+            {
+                typeInfo =>
+                {
+                    if (typeInfo.Type == typeof(Jugador))
+                    {
+                        typeInfo.PolymorphismOptions = new JsonPolymorphismOptions
+                        {
+                            TypeDiscriminatorPropertyName = "$type",
+                            DerivedTypes =
+                            {
+                                new JsonDerivedType(typeof(Caballero), "caballero"),
+                                new JsonDerivedType(typeof(Mago), "mago"),
+                                new JsonDerivedType(typeof(Elfo), "elfo"),
+                                new JsonDerivedType(typeof(Picaro), "picaro")
+                            }
+                        };
+                    }
+                }
+            }
+                }
             };
-            string json = File.ReadAllText("./../../../Recursos/jugadores/" + archivo);
-            return JsonSerializer.Deserialize<Partida>(json, options);
+
+            foreach (var archivo in Directory.GetFiles(carpeta, "*.json"))
+            {
+                try
+                {
+                    string json = File.ReadAllText(archivo);
+                    var partida = JsonSerializer.Deserialize<Partida>(json, options);
+                    if (partida != null)
+                        partidas.Add(partida);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al cargar {archivo}: {ex.Message}");
+                }
+            }
+
+            return partidas;
         }
 
         public override string ToString()

@@ -11,6 +11,8 @@ namespace ProyectoRPG.Personajes
 {
     public class Elfo:Jugador
     {
+        public Elfo() { }
+
         public Elfo(string nombre)
     : base(nombre, Sprites.Elfo, 85, 18, 12, 18)
         {
